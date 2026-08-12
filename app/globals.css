@@ -1,0 +1,98 @@
+@import "tailwindcss";
+
+:root {
+  /* Color tokens — warm pastel palette per design reference */
+  --cream: #f2ece0;
+  --cream-dark: #e9dec8;
+  --ink: #2b1810;
+  --brown: #6b4a2f;
+  --lime: #d7e85c;
+  --lime-dark: #b9cc3e;
+  --navy: #33436b;
+  --terracotta: #b85c3e;
+  --pale-yellow: #eef2a0;
+
+  /* Radii */
+  --radius-pill: 999px;
+  --radius-card: 1rem;
+
+  /* Shadows */
+  --shadow-card: 0 12px 24px -12px rgba(43, 24, 16, 0.18);
+  --shadow-soft: 0 4px 14px -4px rgba(43, 24, 16, 0.12);
+
+  /* Container */
+  --container-max: 1360px;
+}
+
+@theme inline {
+  --color-cream: var(--cream);
+  --color-cream-dark: var(--cream-dark);
+  --color-ink: var(--ink);
+  --color-brown: var(--brown);
+  --color-lime: var(--lime);
+  --color-lime-dark: var(--lime-dark);
+  --color-navy: var(--navy);
+  --color-terracotta: var(--terracotta);
+  --color-pale-yellow: var(--pale-yellow);
+
+  --font-display: var(--font-fraunces);
+  --font-sans: var(--font-work-sans);
+
+  --radius-pill: var(--radius-pill);
+  --radius-card: var(--radius-card);
+
+  --shadow-card: var(--shadow-card);
+  --shadow-soft: var(--shadow-soft);
+
+  --animate-marquee: marquee 28s linear infinite;
+  --animate-marquee-slow: marquee 48s linear infinite;
+}
+
+@keyframes marquee {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+html {
+  overflow-x: clip;
+}
+
+body {
+  background: var(--cream);
+  color: var(--ink);
+  font-family: var(--font-sans), ui-sans-serif, system-ui, sans-serif;
+  overflow-x: clip;
+}
+
+* {
+  border-color: rgba(43, 24, 16, 0.12);
+}
+
+:focus-visible {
+  outline: 2px solid var(--navy);
+  outline-offset: 2px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* Hide scrollbar for horizontally-scrollable carousels while keeping scroll behavior */
+.no-scrollbar {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}

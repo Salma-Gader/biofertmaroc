@@ -1,0 +1,79 @@
+import Image from "next/image";
+import Link from "next/link";
+import { Badge } from "@/components/ui/Badge";
+import { Pill } from "@/components/ui/Pill";
+import { StarRating } from "@/components/ui/StarRating";
+import { CheckIcon } from "@/components/ui/Icons";
+import { QuickAddButton } from "./QuickAddButton";
+import { ProductPrice } from "./ProductPrice";
+import type { Product } from "@/lib/types";
+
+const badgeLabels: Record<string, string> = {
+  "best-seller": "Best seller",
+  new: "New",
+  "sans-iode": "Sans iode",
+};
+
+export function ProductCard({ product }: { product: Product }) {
+  return (
+    <Link
+      href={`/products/${product.handle}`}
+      className="group flex w-full flex-col"
+    >
+      <div className="relative aspect-square overflow-hidden rounded-2xl bg-cream p-8">
+        {product.badges.length > 0 && (
+          <div className="absolute left-3 top-3 z-10 flex flex-col items-start gap-1.5">
+            {product.badges.map((badge) => (
+              <Badge key={badge}>{badgeLabels[badge] ?? badge}</Badge>
+            ))}
+          </div>
+        )}
+
+        <Image
+          src={product.featuredImage.src}
+          alt={product.featuredImage.alt}
+          fill
+          sizes="(min-width: 640px) 288px, 256px"
+          className="object-contain p-6 transition-transform duration-300 group-hover:scale-105"
+        />
+      </div>
+
+      <div className="mt-4 flex items-center justify-between gap-2">
+        <StarRating rating={product.rating} reviewCount={product.reviewCount} />
+        <QuickAddButton product={product} />
+      </div>
+
+      <div className="mt-3 flex flex-col gap-2">
+        {product.productLine && (
+          <p className="text-xs uppercase tracking-wide text-ink/50">{product.productLine}</p>
+        )}
+        <h3 className="font-display text-lg font-semibold text-terracotta">
+          {product.subtitle ?? product.title}
+        </h3>
+
+        <ul className="flex flex-col gap-1">
+          {product.features.slice(0, 2).map((feature) => (
+            <li key={feature} className="flex items-center gap-1.5 text-xs text-ink/70">
+              <CheckIcon className="shrink-0 text-lime-dark" />
+              {feature}
+            </li>
+          ))}
+        </ul>
+
+        {product.useCases.length > 0 && (
+          <div className="flex flex-wrap gap-1.5">
+            {product.useCases.map((useCase) => (
+              <Pill key={useCase}>{useCase}</Pill>
+            ))}
+          </div>
+        )}
+
+        <ProductPrice
+          price={product.priceRange.minVariantPrice}
+          compareAtPrice={product.compareAtPriceRange?.minVariantPrice}
+          from
+        />
+      </div>
+    </Link>
+  );
+}
