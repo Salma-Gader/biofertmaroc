@@ -42,6 +42,18 @@ export function Header() {
     };
   }, []);
 
+  useEffect(() => {
+    const header = headerRef.current;
+    if (!header) return;
+    const setHeight = () => {
+      document.documentElement.style.setProperty("--header-height", `${header.offsetHeight}px`);
+    };
+    setHeight();
+    const observer = new ResizeObserver(setHeight);
+    observer.observe(header);
+    return () => observer.disconnect();
+  }, []);
+
   const toggleMenu = (key: MenuKey) => {
     setSearchOpen(false);
     setActiveMenu((prev) => (prev === key ? null : key));

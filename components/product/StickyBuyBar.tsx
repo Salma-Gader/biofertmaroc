@@ -27,8 +27,10 @@ export function StickyBuyBar({ product }: { product: Product }) {
     <>
       <div ref={sentinelRef} aria-hidden="true" />
       <div
-        className={`fixed inset-x-0 bottom-0 z-40 border-t border-ink/10 bg-white/95 backdrop-blur transition-transform duration-300 sm:top-[73px] sm:bottom-auto ${
-          visible ? "translate-y-0" : "translate-y-full sm:-translate-y-full"
+        className={`fixed inset-x-0 bottom-0 z-40 border-t border-ink/10 bg-white/95 backdrop-blur transition-[transform,opacity] duration-300 sm:top-[var(--header-height,73px)] sm:bottom-auto sm:translate-y-0 ${
+          visible
+            ? "translate-y-0 opacity-100"
+            : "translate-y-full opacity-100 sm:opacity-0 sm:pointer-events-none"
         }`}
       >
         <div className="mx-auto flex max-w-[1600px] items-center gap-4 px-5 py-3 sm:px-8 lg:px-12">

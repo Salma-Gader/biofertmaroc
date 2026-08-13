@@ -1,11 +1,16 @@
 @import "tailwindcss";
 
 :root {
-  /* Color tokens — warm pastel palette per design reference */
-  --cream: #f2ece0;
-  --cream-dark: #e9dec8;
-  --ink: #2b1810;
+  /* Color tokens — warm pink/cream palette per design reference:
+     section bg #EFE8E6, cards #FFFFFF (bg-white), CTA blue #E0F2FE,
+     pink accent #E83E82, dark text #2F211B, secondary text ~#81746D
+     (approximated via text-ink/60 composited over cream/white — see --taupe
+     below for the exact hex when a flat, non-opacity value is needed). */
+  --cream: #efe8e6;
+  --cream-dark: #e3dcda;
+  --ink: #2f211b;
   --brown: #6b4a2f;
+  --taupe: #81746d;
   --navy: #33436b;
   --terracotta: #b85c3e;
 
@@ -18,8 +23,8 @@
   --blue: #4c6fe0;
   --blue-dark: #3a56c2;
   --blue-light: #e0f2fe;
-  --pink: #ec4899;
-  --pink-dark: #d6336c;
+  --pink: #e83e82;
+  --pink-dark: #c5356f;
   --pink-light: #ffe0f1;
 
   --lime: var(--pink-light);
@@ -31,8 +36,8 @@
   --radius-card: 1rem;
 
   /* Shadows */
-  --shadow-card: 0 12px 24px -12px rgba(43, 24, 16, 0.18);
-  --shadow-soft: 0 4px 14px -4px rgba(43, 24, 16, 0.12);
+  --shadow-card: 0 12px 24px -12px rgba(47, 33, 27, 0.18);
+  --shadow-soft: 0 4px 14px -4px rgba(47, 33, 27, 0.12);
 
   /* Container */
   --container-max: 1600px;
@@ -43,6 +48,7 @@
   --color-cream-dark: var(--cream-dark);
   --color-ink: var(--ink);
   --color-brown: var(--brown);
+  --color-taupe: var(--taupe);
   --color-lime: var(--lime);
   --color-lime-dark: var(--lime-dark);
   --color-navy: var(--navy);
@@ -89,7 +95,7 @@ body {
 }
 
 * {
-  border-color: rgba(43, 24, 16, 0.12);
+  border-color: rgba(47, 33, 27, 0.12);
 }
 
 :focus-visible {
