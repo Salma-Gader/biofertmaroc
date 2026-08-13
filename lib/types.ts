@@ -85,6 +85,9 @@ export interface BlogPost {
   category: string;
   readingTime: string;
   image: ProductImage;
+  date: string;
+  author: string;
+  content: string[];
 }
 
 export interface NavLink {
