@@ -74,7 +74,7 @@ export interface Review {
   body: string;
   date: string;
   productHandle?: string;
-  source: "Trustpilot" | "Judge.me" | "Google";
+  source: "Trustpilot" | "Judge.me" | "Google" | "Avis vérifié";
 }
 
 export interface BlogPost {
