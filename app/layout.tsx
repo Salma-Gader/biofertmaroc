@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Fraunces, Work_Sans } from "next/font/google";
+import { Fraunces, Playfair_Display, Work_Sans } from "next/font/google";
 import "./globals.css";
 import { AnnouncementBar } from "@/components/layout/AnnouncementBar";
 import { Header } from "@/components/layout/Header";
@@ -8,7 +8,7 @@ import { CartProvider } from "@/context/CartContext";
 import { CartDrawer } from "@/components/layout/CartDrawer";
 import { siteConfig } from "@/lib/site-config";
 
-const fraunces = Fraunces({
+const contentDisplayFont = Playfair_Display({
   variable: "--font-fraunces",
   subsets: ["latin"],
   weight: ["500", "600", "700"],
@@ -50,7 +50,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
     <html
       lang="en"
-      className={`${fraunces.variable} ${frauncesLogo.variable} ${workSans.variable} h-full antialiased`}
+      className={`${contentDisplayFont.variable} ${frauncesLogo.variable} ${workSans.variable} h-full antialiased`}
     >
       <body className="min-h-full flex flex-col bg-cream text-ink">
         <CartProvider>

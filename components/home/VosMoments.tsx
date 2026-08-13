@@ -6,35 +6,35 @@ import { products } from "@/lib/mock-data";
 const categoryContent: Record<string, { title: string; image: string }> = {
   bellafert: {
     title: "Fertilité féminine",
-    image: "/placeholders/category-bellafert.png",
+    image: "/placeholders/Katie-19.webp",
   },
   fertimen: {
     title: "Fertilité masculine",
-    image: "/placeholders/category-fertimen.png",
+    image: "/placeholders/acc6681798d84408f49df7075930f68d.jpg",
   },
   "pack-couple": {
     title: "Duo Fertilité",
-    image: "/placeholders/category-pack-couple.png",
+    image: "/placeholders/JM_SHOOTING_CELINE-0620.webp",
   },
   "ferti-power": {
     title: "Vitalité masculine",
-    image: "/placeholders/category-ferti-power.png",
+    image: "/placeholders/11271a6c6c5659120631072b7da58036.jpg",
   },
   powermen: {
     title: "Énergie & Performance",
-    image: "/placeholders/category-powermen.png",
+    image: "/placeholders/da4159e3377b9b7552fb4ef9e35a3da6.jpg",
   },
   "smokeclean-men": {
     title: "Détox & Respiration",
-    image: "/placeholders/category-smokeclean.png",
+    image: "/placeholders/893ad68020bb0ac7f38673363d0a7d9e.jpg",
   },
   "relaxes-woman": {
     title: "Sérénité féminine",
-    image: "/placeholders/category-relaxeswoman.png",
+    image: "/placeholders/pexels-aliona-zueva-42707571-11554690.jpg",
   },
   cyclecare: {
     title: "Confort menstruel",
-    image: "/placeholders/category-cyclecare.png",
+    image: "/placeholders/143d96aee1fec0c6151129078e6d985e.jpg",
   },
 };
 
@@ -58,7 +58,7 @@ export function VosMoments() {
               <Link
                 key={product.id}
                 href={`/products/${product.handle}`}
-                className="group relative block aspect-[3/4] overflow-hidden rounded-2xl bg-cream"
+                className="group relative block aspect-square overflow-hidden rounded-lg bg-cream"
               >
                 <Image
                   src={content.image}

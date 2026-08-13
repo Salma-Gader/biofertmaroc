@@ -27,13 +27,33 @@ export function StarRating({
   rating,
   reviewCount,
   size = "sm",
+  variant = "row",
 }: {
   rating: number;
   reviewCount?: number;
   size?: "sm" | "md";
+  variant?: "row" | "single";
 }) {
   const uid = useId();
   const stars = [0, 1, 2, 3, 4].map((i) => Math.min(1, Math.max(0, rating - i)));
+
+  if (variant === "single") {
+    return (
+      <div
+        className={`inline-flex items-center gap-1 font-bold ${size === "md" ? "text-base" : "text-sm"}`}
+        aria-label={`Rated ${rating} out of 5${reviewCount ? ` from ${reviewCount} reviews` : ""}`}
+      >
+        <span className="text-ink" aria-hidden="true">
+          ★
+        </span>
+        <span className="text-ink">{rating.toFixed(1).replace(".", ",")}/5</span>
+        {reviewCount !== undefined && (
+          <span className="text-ink/60">({reviewCount})</span>
+        )}
+      </div>
+    );
+  }
+
   return (
     <div
       className={`inline-flex items-center gap-1.5 ${size === "md" ? "text-sm" : "text-xs"}`}

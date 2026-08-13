@@ -39,7 +39,7 @@ export function ProductCard({ product }: { product: Product }) {
       </div>
 
       <div className="mt-4 flex items-center justify-between gap-2">
-        <StarRating rating={product.rating} reviewCount={product.reviewCount} />
+        <StarRating rating={product.rating} reviewCount={product.reviewCount} variant="single" />
         <QuickAddButton product={product} />
       </div>
 

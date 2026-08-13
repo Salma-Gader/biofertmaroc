@@ -35,7 +35,7 @@
   --shadow-soft: 0 4px 14px -4px rgba(43, 24, 16, 0.12);
 
   /* Container */
-  --container-max: 1360px;
+  --container-max: 1600px;
 }
 
 @theme inline {

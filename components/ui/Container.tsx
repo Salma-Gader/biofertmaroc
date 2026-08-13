@@ -15,7 +15,7 @@ export function Container<T extends ElementType = "div">({
   const Tag = as || "div";
   return (
     <Tag
-      className={`mx-auto w-full max-w-[1360px] px-5 sm:px-8 lg:px-12 ${className}`}
+      className={`mx-auto w-full max-w-[1600px] px-5 sm:px-8 lg:px-12 ${className}`}
       {...props}
     >
       {children}

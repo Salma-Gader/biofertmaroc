@@ -12,7 +12,7 @@ export function QuickAddButton({ product }: { product: Product }) {
         e.preventDefault();
         addItem(product, product.variants[0]);
       }}
-      className="rounded-full border border-ink bg-white px-4 py-1.5 text-xs font-semibold text-ink shadow-soft transition-colors hover:bg-ink hover:text-cream"
+      className="rounded-full border border-ink bg-white px-5 py-2 text-sm font-semibold text-ink shadow-soft transition-colors hover:bg-ink hover:text-cream"
       aria-label={`Ajouter ${product.title} au panier`}
     >
       Ajouter

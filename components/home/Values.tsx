@@ -4,33 +4,33 @@ const values = [
   {
     title: "Formules propres",
     description: "Sans charges, ni colorants artificiels.",
-    icon: <CleanIcon />,
+    icon: <CleanIcon className="h-full w-full" />,
   },
   {
     title: "Testé par un tiers",
     description: "Chaque lot est vérifié pour sa pureté.",
-    icon: <TestedIcon />,
+    icon: <TestedIcon className="h-full w-full" />,
   },
   {
     title: "Fabriqué de façon responsable",
     description: "Petits lots, sourcing traçable.",
-    icon: <LeafIcon />,
+    icon: <LeafIcon className="h-full w-full" />,
   },
   {
     title: "Formulé par des experts",
     description: "Développé avec des gynécologues et sages-femmes.",
-    icon: <ExpertIcon />,
+    icon: <ExpertIcon className="h-full w-full" />,
   },
   {
     title: "Approuvé par les mamans",
     description: "Façonné par les retours réels de notre communauté.",
-    icon: <ApprovedIcon />,
+    icon: <ApprovedIcon className="h-full w-full" />,
   },
 ];
 
-function CleanIcon() {
+function CleanIcon({ className }: { className?: string }) {
   return (
-    <svg width="28" height="28" viewBox="0 0 28 28" fill="none" aria-hidden="true">
+    <svg className={className} viewBox="0 0 28 28" fill="none" aria-hidden="true">
       <path
         d="M14 4c3.5 4.2 6 7.7 6 11a6 6 0 1 1-12 0c0-3.3 2.5-6.8 6-11Z"
         stroke="currentColor"
@@ -42,9 +42,9 @@ function CleanIcon() {
   );
 }
 
-function TestedIcon() {
+function TestedIcon({ className }: { className?: string }) {
   return (
-    <svg width="28" height="28" viewBox="0 0 28 28" fill="none" aria-hidden="true">
+    <svg className={className} viewBox="0 0 28 28" fill="none" aria-hidden="true">
       <path
         d="M11 3.5h6M12 4v7.2L7.6 19a2.5 2.5 0 0 0 2.2 3.7h8.4a2.5 2.5 0 0 0 2.2-3.7L16 11.2V4"
         stroke="currentColor"
@@ -57,9 +57,9 @@ function TestedIcon() {
   );
 }
 
-function LeafIcon() {
+function LeafIcon({ className }: { className?: string }) {
   return (
-    <svg width="28" height="28" viewBox="0 0 28 28" fill="none" aria-hidden="true">
+    <svg className={className} viewBox="0 0 28 28" fill="none" aria-hidden="true">
       <path
         d="M6 21C5 12 11 5 21 5c1 8-6 16-15 16Z"
         stroke="currentColor"
@@ -71,18 +71,18 @@ function LeafIcon() {
   );
 }
 
-function ExpertIcon() {
+function ExpertIcon({ className }: { className?: string }) {
   return (
-    <svg width="28" height="28" viewBox="0 0 28 28" fill="none" aria-hidden="true">
+    <svg className={className} viewBox="0 0 28 28" fill="none" aria-hidden="true">
       <circle cx="14" cy="14" r="10" stroke="currentColor" strokeWidth="1.5" />
       <path d="M14 9.5v9M9.5 14h9" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
     </svg>
   );
 }
 
-function ApprovedIcon() {
+function ApprovedIcon({ className }: { className?: string }) {
   return (
-    <svg width="28" height="28" viewBox="0 0 28 28" fill="none" aria-hidden="true">
+    <svg className={className} viewBox="0 0 28 28" fill="none" aria-hidden="true">
       <path
         d="M14 22s-8-4.6-8-10.8A4.7 4.7 0 0 1 14 8.3a4.7 4.7 0 0 1 8 2.9C22 17.4 14 22 14 22Z"
         stroke="currentColor"
@@ -102,7 +102,9 @@ export function Values() {
         <div className="mt-10 grid grid-cols-2 gap-x-6 gap-y-10 sm:grid-cols-5">
           {values.map((value) => (
             <div key={value.title} className="flex flex-col items-center gap-3 text-center">
-              <div className="text-brown">{value.icon}</div>
+              <div className="flex h-10 w-10 items-center justify-center text-brown sm:h-12 sm:w-12">
+                {value.icon}
+              </div>
               <h3 className="font-display text-sm font-semibold text-ink sm:text-base">{value.title}</h3>
               <p className="text-xs text-ink/60">{value.description}</p>
             </div>

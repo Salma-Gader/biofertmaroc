@@ -31,7 +31,7 @@ export function StickyBuyBar({ product }: { product: Product }) {
           visible ? "translate-y-0" : "translate-y-full sm:-translate-y-full"
         }`}
       >
-        <div className="mx-auto flex max-w-[1360px] items-center gap-4 px-5 py-3 sm:px-8 lg:px-12">
+        <div className="mx-auto flex max-w-[1600px] items-center gap-4 px-5 py-3 sm:px-8 lg:px-12">
           <div className="relative hidden h-12 w-12 shrink-0 overflow-hidden rounded-lg bg-cream sm:block">
             <Image src={product.featuredImage.src} alt="" fill sizes="48px" className="object-cover" />
           </div>
