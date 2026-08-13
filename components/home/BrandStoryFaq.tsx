@@ -28,8 +28,8 @@ const faqItems = [
 
 export function BrandStoryFaq() {
   return (
-    <section className="bg-white py-16 sm:py-20">
-      <Container className="grid gap-12 lg:grid-cols-2 lg:items-center">
+    <section className="py-16 sm:py-20" style={{ backgroundColor: "#fbf9f9" }}>
+      <Container className="grid gap-12 lg:grid-cols-[3fr_2fr] lg:items-center">
         <div>
           <Heading size="section" className="mb-4">
             Why we started BioFertMaroc
@@ -48,7 +48,7 @@ export function BrandStoryFaq() {
             src="/placeholders/bd9eb223-2057-4905-9449-5f8c8478d9b1.jpg"
             alt=""
             fill
-            sizes="(min-width: 1024px) 50vw, 100vw"
+            sizes="(min-width: 1024px) 40vw, 100vw"
             className="object-cover"
           />
         </div>

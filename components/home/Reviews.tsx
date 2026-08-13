@@ -24,7 +24,7 @@ export function Reviews() {
   };
 
   return (
-    <section className="bg-pink-light py-16 sm:py-20">
+    <section className="py-16 sm:py-20" style={{ backgroundColor: "#ffffff" }}>
       <Container>
         <div className="mb-10 flex flex-col items-center gap-6 text-center">
           <Heading size="section">+2 000 avis vérifiés, note 4,8/5</Heading>
@@ -49,7 +49,8 @@ export function Reviews() {
             {reviews.map((review) => (
               <div
                 key={review.id}
-                className="flex w-72 shrink-0 snap-start flex-col gap-3 rounded-2xl bg-white p-5 sm:w-80"
+                className="flex w-72 shrink-0 snap-start flex-col gap-3 rounded-2xl p-5 sm:w-80"
+                style={{ backgroundColor: "#f7f3f2" }}
               >
                 <div className="flex items-center gap-3">
                   <div
