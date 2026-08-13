@@ -266,7 +266,11 @@ export const blogPosts: BlogPost[] = [
     excerpt: "Des conseils pratiques et naturels pour soutenir votre fertilité au quotidien.",
     category: "Fertilité Naturelle",
     readingTime: "5 min",
-    image: img("blog-img-1", "/placeholders/blog-1.svg", "Conseils naturels pour la fertilité"),
+    image: img(
+      "blog-img-1",
+      "https://images.unsplash.com/photo-1552650272-b8a34e21bc4b?w=1600&q=80&fit=crop",
+      "Femme s'étirant près d'une fenêtre, tons neutres et lumière douce",
+    ),
     date: "2026-04-12",
     author: "Équipe BioFertMaroc",
     content: [
@@ -283,7 +287,11 @@ export const blogPosts: BlogPost[] = [
     excerpt: "Tout ce qu'il faut savoir pour suivre son cycle et repérer les signaux de son corps.",
     category: "Santé Féminine",
     readingTime: "7 min",
-    image: img("blog-img-2", "/placeholders/blog-2.svg", "Comprendre le cycle d'ovulation"),
+    image: img(
+      "blog-img-2",
+      "https://images.unsplash.com/photo-1435527173128-983b87201f4d?w=1600&q=80&fit=crop",
+      "Agenda ouvert pour suivre son cycle menstruel",
+    ),
     date: "2026-03-28",
     author: "Équipe BioFertMaroc",
     content: [
@@ -300,7 +308,11 @@ export const blogPosts: BlogPost[] = [
     excerpt: "Les facteurs clés qui influencent la fertilité masculine et comment les soutenir.",
     category: "Santé Masculine",
     readingTime: "6 min",
-    image: img("blog-img-3", "/placeholders/blog-3.svg", "Fertilité masculine"),
+    image: img(
+      "blog-img-3",
+      "https://images.unsplash.com/photo-1531403939386-c08a16cd7eef?w=1600&q=80&fit=crop",
+      "Homme s'étirant sur une terrasse, tons neutres et lumineux",
+    ),
     date: "2026-03-10",
     author: "Équipe BioFertMaroc",
     content: [
@@ -317,7 +329,11 @@ export const blogPosts: BlogPost[] = [
     excerpt: "Comprendre le SOPK et les approches naturelles pour soutenir la fertilité.",
     category: "SOPK",
     readingTime: "8 min",
-    image: img("blog-img-4", "/placeholders/blog-4.svg", "SOPK et fertilité"),
+    image: img(
+      "blog-img-4",
+      "https://images.unsplash.com/photo-1759229874709-a8d0de083b91?w=1600&q=80&fit=crop",
+      "Femme sereine en tenue beige, ambiance calme et neutre",
+    ),
     date: "2026-02-19",
     author: "Équipe BioFertMaroc",
     content: [
@@ -334,7 +350,11 @@ export const blogPosts: BlogPost[] = [
     excerpt: "Pourquoi bien préparer son corps avant la conception fait toute la différence.",
     category: "Nutrition",
     readingTime: "5 min",
-    image: img("blog-img-5", "/placeholders/blog-1.svg", "Compléments en préconception"),
+    image: img(
+      "blog-img-5",
+      "https://images.unsplash.com/photo-1543352634-a1c51d9f1fa7?w=1600&q=80&fit=crop",
+      "Bols de nourriture saine sur fond clair et épuré",
+    ),
     date: "2026-01-22",
     author: "Équipe BioFertMaroc",
     content: [
@@ -351,7 +371,11 @@ export const blogPosts: BlogPost[] = [
     excerpt: "Pourquoi les cures de fertilité sont pensées sur 3 mois et comment rester motivé(e).",
     category: "Protocole",
     readingTime: "4 min",
-    image: img("blog-img-6", "/placeholders/blog-2.svg", "Le protocole 3 mois"),
+    image: img(
+      "blog-img-6",
+      "https://images.unsplash.com/photo-1597935258269-c94aca687fbd?w=1600&q=80&fit=crop",
+      "Horloge en marbre blanc, symbole de routine quotidienne",
+    ),
     date: "2026-01-05",
     author: "Équipe BioFertMaroc",
     content: [
