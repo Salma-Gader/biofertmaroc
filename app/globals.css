@@ -6,11 +6,25 @@
   --cream-dark: #e9dec8;
   --ink: #2b1810;
   --brown: #6b4a2f;
-  --lime: #d7e85c;
-  --lime-dark: #b9cc3e;
   --navy: #33436b;
   --terracotta: #b85c3e;
-  --pale-yellow: #eef2a0;
+
+  /* Brand palette — drawn from the BellaFert / FertiMen bottle labels. Blue is the
+     dominant brand color (~60% of accent usage), pink is the secondary accent (~40%).
+     --blue-light / --pink-light are the two exact brand tints; --lime(-dark) and
+     --pale-yellow are aliased to this palette so every existing usage site-wide
+     (buttons, checkmarks, section backgrounds, cart, newsletter) follows suit —
+     no yellow remains anywhere on the site. */
+  --blue: #4c6fe0;
+  --blue-dark: #3a56c2;
+  --blue-light: #e0f2fe;
+  --pink: #ec4899;
+  --pink-dark: #d6336c;
+  --pink-light: #ffe0f1;
+
+  --lime: var(--pink-light);
+  --lime-dark: var(--pink-dark);
+  --pale-yellow: var(--blue-light);
 
   /* Radii */
   --radius-pill: 999px;
@@ -34,6 +48,12 @@
   --color-navy: var(--navy);
   --color-terracotta: var(--terracotta);
   --color-pale-yellow: var(--pale-yellow);
+  --color-blue: var(--blue);
+  --color-blue-dark: var(--blue-dark);
+  --color-blue-light: var(--blue-light);
+  --color-pink: var(--pink);
+  --color-pink-dark: var(--pink-dark);
+  --color-pink-light: var(--pink-light);
 
   --font-display: var(--font-fraunces);
   --font-sans: var(--font-work-sans);

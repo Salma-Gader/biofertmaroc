@@ -18,11 +18,11 @@ export function ProductCard({ product }: { product: Product }) {
   return (
     <Link
       href={`/products/${product.handle}`}
-      className="group flex w-full flex-col"
+      className="group flex w-full flex-col rounded-lg bg-cream p-8"
     >
-      <div className="relative aspect-square overflow-hidden rounded-2xl bg-cream p-8">
+      <div className="relative aspect-square overflow-hidden">
         {product.badges.length > 0 && (
-          <div className="absolute left-3 top-3 z-10 flex flex-col items-start gap-1.5">
+          <div className="absolute right-0 top-0 z-10 flex flex-col items-end gap-1.5">
             {product.badges.map((badge) => (
               <Badge key={badge}>{badgeLabels[badge] ?? badge}</Badge>
             ))}
@@ -34,7 +34,7 @@ export function ProductCard({ product }: { product: Product }) {
           alt={product.featuredImage.alt}
           fill
           sizes="(min-width: 640px) 288px, 256px"
-          className="object-contain p-6 transition-transform duration-300 group-hover:scale-105"
+          className="object-contain mix-blend-multiply transition-transform duration-300 group-hover:scale-105"
         />
       </div>
 
@@ -43,17 +43,17 @@ export function ProductCard({ product }: { product: Product }) {
         <QuickAddButton product={product} />
       </div>
 
-      <div className="mt-3 flex flex-col gap-2">
+      <div className="mt-4 flex flex-col gap-2">
         {product.productLine && (
           <p className="text-xs uppercase tracking-wide text-ink/50">{product.productLine}</p>
         )}
-        <h3 className="font-display text-lg font-semibold text-terracotta">
+        <h3 className="font-display text-xl font-semibold text-[#482012]">
           {product.subtitle ?? product.title}
         </h3>
 
         <ul className="flex flex-col gap-1">
           {product.features.slice(0, 2).map((feature) => (
-            <li key={feature} className="flex items-center gap-1.5 text-xs text-ink/70">
+            <li key={feature} className="flex items-center gap-1.5 text-sm text-ink/70">
               <CheckIcon className="shrink-0 text-lime-dark" />
               {feature}
             </li>
@@ -72,6 +72,7 @@ export function ProductCard({ product }: { product: Product }) {
           price={product.priceRange.minVariantPrice}
           compareAtPrice={product.compareAtPriceRange?.minVariantPrice}
           from
+          size="lg"
         />
       </div>
     </Link>

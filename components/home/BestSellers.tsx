@@ -7,11 +7,11 @@ import { ProductCarousel } from "@/components/product/ProductCarousel";
 import { products } from "@/lib/mock-data";
 
 const tabs = [
-  { label: "Compléments fertilité", tag: "fertility" },
-  { label: "Compléments grossesse", tag: "pregnancy" },
-  { label: "Compléments post-partum", tag: "postpartum" },
-  { label: "Compléments allaitement", tag: "breastfeeding" },
-  { label: "Nos essentiels", tag: null },
+  { label: "Best sellers", tag: "populaire" },
+  { label: "Elle", tag: "femme" },
+  { label: "Lui", tag: "homme" },
+  { label: "Duo", tag: "duo" },
+  { label: "Nos essentiels", tag: "essentiels" },
 ];
 
 export function BestSellers() {
@@ -24,7 +24,7 @@ export function BestSellers() {
   }, [activeTab]);
 
   return (
-    <section className="bg-cream py-16 sm:py-20">
+    <section className="bg-white py-16 sm:py-20">
       <Container>
         <div className="mb-8 flex flex-col gap-6 sm:flex-row sm:items-center sm:justify-between">
           <Heading size="section">Best sellers</Heading>
@@ -35,7 +35,7 @@ export function BestSellers() {
                 onClick={() => setActiveTab(tab.label)}
                 className={`shrink-0 whitespace-nowrap rounded-full border px-4 py-2 text-sm font-medium transition-colors ${
                   activeTab === tab.label
-                    ? "border-ink bg-ink text-cream"
+                    ? "border-[#e0f2fe] bg-[#e0f2fe] text-ink"
                     : "border-ink/20 bg-white text-ink/70 hover:bg-cream-dark"
                 }`}
               >

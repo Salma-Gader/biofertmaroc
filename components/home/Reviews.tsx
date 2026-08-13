@@ -8,9 +8,9 @@ import { ArrowIcon } from "@/components/ui/Icons";
 import { reviews } from "@/lib/mock-data";
 
 const aggregates = [
-  { source: "Trustpilot", rating: 4.8, count: 1240 },
-  { source: "Judge.me", rating: 4.9, count: 860 },
-  { source: "Google", rating: 4.7, count: 540 },
+  { source: "BellaFert", rating: 4.8, count: 1247 },
+  { source: "FertiMen", rating: 4.7, count: 863 },
+  { source: "Pack Couple", rating: 4.9, count: 987 },
 ];
 
 export function Reviews() {
@@ -24,10 +24,10 @@ export function Reviews() {
   };
 
   return (
-    <section className="bg-pale-yellow py-16 sm:py-20">
+    <section className="bg-pink-light py-16 sm:py-20">
       <Container>
         <div className="mb-10 flex flex-col items-center gap-6 text-center">
-          <Heading size="section">+200,000 mamas approve</Heading>
+          <Heading size="section">+2 000 avis vérifiés, note 4,8/5</Heading>
           <div className="flex flex-wrap justify-center gap-8">
             {aggregates.map((a) => (
               <div key={a.source} className="flex flex-col items-center gap-1">

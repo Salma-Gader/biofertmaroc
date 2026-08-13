@@ -45,7 +45,7 @@ export function BrandStoryFaq() {
 
         <div className="relative aspect-[4/5] w-full overflow-hidden rounded-3xl">
           <Image
-            src="/placeholders/lifestyle-6.svg"
+            src="/placeholders/bd9eb223-2057-4905-9449-5f8c8478d9b1.jpg"
             alt=""
             fill
             sizes="(min-width: 1024px) 50vw, 100vw"

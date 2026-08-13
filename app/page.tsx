@@ -7,7 +7,6 @@ import { Values } from "@/components/home/Values";
 import { BrandStoryFaq } from "@/components/home/BrandStoryFaq";
 import { Reviews } from "@/components/home/Reviews";
 import { QuizCta } from "@/components/home/QuizCta";
-import { AboutFounder } from "@/components/home/AboutFounder";
 import { BlogGrid } from "@/components/home/BlogGrid";
 import { TrustBadges } from "@/components/home/TrustBadges";
 
@@ -23,7 +22,6 @@ export default function Home() {
       <BrandStoryFaq />
       <Reviews />
       <QuizCta />
-      <AboutFounder />
       <BlogGrid />
       <TrustBadges />
     </>

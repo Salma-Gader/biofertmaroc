@@ -1,10 +1,11 @@
 import { Container } from "@/components/ui/Container";
 
 const badges = [
-  { title: "Free shipping", body: "On orders over $60" },
-  { title: "Secure payment", body: "Encrypted checkout, every time" },
-  { title: "Pay in installments", body: "Split your order into 3 payments" },
-  { title: "Here to help", body: "Support 7 days a week" },
+  { title: "Livraison 24–48h", body: "Partout au Maroc" },
+  { title: "Paiement flexible", body: "À la livraison ou par carte" },
+  { title: "Satisfait ou remboursé", body: "Garantie de remboursement" },
+  { title: "4,8/5", body: "Plus de 2 000 avis vérifiés" },
+  { title: "Certifié GMP", body: "Fabrication aux normes qualité" },
 ];
 
 function BadgeIcon() {
@@ -18,11 +19,11 @@ function BadgeIcon() {
 
 export function TrustBadges() {
   return (
-    <section className="bg-lime py-10">
-      <Container className="grid grid-cols-2 gap-6 sm:grid-cols-4">
+    <section className="bg-blue-light py-10">
+      <Container className="grid grid-cols-2 gap-6 sm:grid-cols-5">
         {badges.map((badge) => (
           <div key={badge.title} className="flex items-center gap-3">
-            <span className="text-ink">
+            <span className="text-blue">
               <BadgeIcon />
             </span>
             <div>

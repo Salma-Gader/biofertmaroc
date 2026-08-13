@@ -55,7 +55,7 @@ export function MegaMenuProducts({ onNavigate }: { onNavigate: () => void }) {
           </div>
 
           <div className="flex gap-4">
-            {["/placeholders/lifestyle-1.svg", "/placeholders/lifestyle-2.svg"].map(
+            {["/placeholders/lifestyle-1.svg", "/placeholders/lifestyle-6.svg"].map(
               (src) => (
                 <Link
                   key={src}

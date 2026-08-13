@@ -48,20 +48,19 @@ export function TrustpilotStrip() {
             TrustScore 4.8
             {" | "}
             <a href="#" className="underline hover:no-underline">
-              900 avis
+              2 000 avis
             </a>
           </p>
         </div>
 
         <div className="flex max-w-xl flex-col gap-2 text-left">
-          <p className="font-display text-lg font-bold italic text-ink">Super !</p>
+          <p className="font-display text-lg font-bold italic text-ink">Merci BioFert !</p>
           <p className="italic leading-relaxed text-ink/90">
-            J&apos;utilise les produits Jolly mama depuis maintenant plus
-            d&apos;un an, j&apos;ai toujours été très satisfaite ! Le système
-            d&apos;abonnement est super pratique, plus besoin de se soucier de
-            devoir commander chaque mois
+            Après 3 mois avec BellaFert, j&apos;ai enfin eu la plus belle des
+            nouvelles. Un accompagnement naturel qui a vraiment fait la
+            différence.
           </p>
-          <p className="text-xs italic text-ink/50">Marie D. 03/04/2026</p>
+          <p className="text-xs italic text-ink/50">Fatima Z. — cliente vérifiée</p>
         </div>
       </Container>
     </section>

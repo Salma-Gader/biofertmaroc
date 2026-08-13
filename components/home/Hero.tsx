@@ -20,33 +20,33 @@ interface HeroSlide {
 const slides: HeroSlide[] = [
   {
     id: "slide-1",
-    title: "Your ally for every stage of motherhood",
-    description: "Before, during and after pregnancy",
-    primaryCtaLabel: "Shop Now",
-    primaryCtaHref: "/collections/best-sellers",
-    secondaryCtaLabel: "Take the Quiz",
-    secondaryCtaHref: "/quiz",
-    image: "/header/JM-HOME-DESKTOP-202607.webp",
-    badge: "-15%",
+    title: "Devenir Parents.",
+    description: "Boostez votre fertilité naturellement.",
+    primaryCtaLabel: "Découvrir BellaFert",
+    primaryCtaHref: "/products/bellafert",
+    secondaryCtaLabel: "Découvrir FertiMen",
+    secondaryCtaHref: "/products/fertimen",
+    image: "/header/Gemini_Generated_Image_fqu07ofqu07ofqu2.png",
+    badge: "-50%",
   },
   {
     id: "slide-2",
-    title: "Your routine, delivered on your schedule",
-    description: "Subscribe and save 15% on every order",
-    primaryCtaLabel: "Subscribe & Save",
-    primaryCtaHref: "/subscriptions",
-    secondaryCtaLabel: "Learn More",
-    secondaryCtaHref: "/subscriptions",
-    image: "/header/JM-HOME-DESKTOP-202608-15.webp",
+    title: "Le Duo Fertilité",
+    description: "BellaFert + FertiMen, pour les deux partenaires — livraison gratuite.",
+    primaryCtaLabel: "Voir le Pack Couple",
+    primaryCtaHref: "/products/pack-couple",
+    secondaryCtaLabel: "En savoir plus",
+    secondaryCtaHref: "/products/pack-couple",
+    image: "/header/Gemini_Generated_Image_oniuxnoniuxnoniu.png",
   },
   {
     id: "slide-3",
-    title: "Introducing our Hydration Electrolytes",
-    description: "Replenish magnesium and potassium, any stage of motherhood",
-    primaryCtaLabel: "Shop Electrolytes",
+    title: "100% Naturel, Certifié GMP",
+    description: "Plus de 2 000 avis vérifiés, note 4,8/5.",
+    primaryCtaLabel: "Voir nos produits",
     primaryCtaHref: "/collections/best-sellers",
-    secondaryCtaLabel: "Take the Quiz",
-    secondaryCtaHref: "/quiz",
+    secondaryCtaLabel: "Notre histoire",
+    secondaryCtaHref: "/about",
     image: "/header/JM-HOME-DESKTOP-202608-HYDR-MAMA-1.webp",
   },
 ];
@@ -62,7 +62,7 @@ function HeroPillButton({
 }) {
   const styles =
     variant === "accent"
-      ? "bg-[#f4ffaf] text-ink hover:bg-lime-dark"
+      ? "bg-[#e0f2fe] text-ink hover:bg-[#c9e7fb]"
       : "bg-white text-ink hover:bg-cream";
 
   return (

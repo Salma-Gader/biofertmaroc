@@ -93,10 +93,10 @@ export function Header() {
               )}
             </div>
             <Link
-              href="/collections/bundles"
-              className="shrink-0 whitespace-nowrap rounded-none bg-[#f4ffaf] px-2.5 py-1 text-xs font-bold uppercase tracking-wide text-ink"
+              href="/collections/best-sellers"
+              className="shrink-0 whitespace-nowrap rounded-none bg-[#e0f2fe] px-2.5 py-1 text-xs font-bold uppercase tracking-wide text-ink"
             >
-              Abonnement &minus;15%
+              Promo &minus;50%
             </Link>
           </nav>
         </div>

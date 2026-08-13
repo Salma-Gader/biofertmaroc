@@ -5,17 +5,15 @@ import { useEffect, useState } from "react";
 const messages = [
   (
     <>
-      Nouveau !{" "}
-      <strong className="font-semibold">Hydra Mama</strong> : 4 électrolytes
-      pour soutenir l&apos;hydratation 🍯💧💦
+      🚚 Livraison en 24–48h partout au Maroc — Paiement à la livraison
+      disponible
     </>
   ),
   (
     <>
-      🎁 -15% dès 3 produits achetés -{" "}
-      <em className="italic">
-        Offre valable hors lots et packs jusqu&apos;au 09 août
-      </em>
+      🎁 -50% sur <strong className="font-semibold">BellaFert</strong> &{" "}
+      <strong className="font-semibold">FertiMen</strong> — Satisfait ou
+      remboursé
     </>
   ),
 ];

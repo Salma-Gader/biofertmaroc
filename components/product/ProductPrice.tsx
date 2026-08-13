@@ -1,6 +1,10 @@
 import type { Money } from "@/lib/types";
 
 function format(money: Money) {
+  if (money.currencyCode === "MAD") {
+    const amount = money.amount % 1 === 0 ? money.amount.toString() : money.amount.toFixed(2);
+    return `${amount} DH`;
+  }
   return new Intl.NumberFormat("fr-FR", {
     style: "currency",
     currency: money.currencyCode,
