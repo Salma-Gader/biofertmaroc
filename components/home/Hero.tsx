@@ -26,7 +26,7 @@ const slides: HeroSlide[] = [
     primaryCtaHref: "/products/bellafert",
     secondaryCtaLabel: "Découvrir FertiMen",
     secondaryCtaHref: "/products/fertimen",
-    image: "/header/Gemini_Generated_Image_fqu07ofqu07ofqu2.png",
+    image: "/header/ChatGPT Image 13 أغسطس 2026، 01_35_55 م (3).png",
     badge: "-50%",
   },
   {
@@ -37,17 +37,7 @@ const slides: HeroSlide[] = [
     primaryCtaHref: "/products/pack-couple",
     secondaryCtaLabel: "En savoir plus",
     secondaryCtaHref: "/products/pack-couple",
-    image: "/header/Gemini_Generated_Image_oniuxnoniuxnoniu.png",
-  },
-  {
-    id: "slide-3",
-    title: "100% Naturel, Certifié GMP",
-    description: "Plus de 2 000 avis vérifiés, note 4,8/5.",
-    primaryCtaLabel: "Voir nos produits",
-    primaryCtaHref: "/collections/best-sellers",
-    secondaryCtaLabel: "Notre histoire",
-    secondaryCtaHref: "/about",
-    image: "/header/JM-HOME-DESKTOP-202608-HYDR-MAMA-1.webp",
+    image: "/header/ChatGPT Image 13 أغسطس 2026، 01_47_10 م.png",
   },
 ];
 
