@@ -43,7 +43,7 @@ export function CartDrawer() {
         }`}
       >
         <div className="flex items-center justify-between border-b border-ink/10 px-5 py-4">
-          <h2 className="font-display text-xl font-semibold">
+          <h2 className="font-display text-xl font-medium">
             Your Cart {itemCount > 0 && `(${itemCount})`}
           </h2>
           <button

@@ -24,7 +24,7 @@ export function MegaMenuMoments({ onNavigate }: { onNavigate: () => void }) {
                   className="h-full w-full object-cover transition-transform duration-300 group-hover:scale-105"
                 />
               </div>
-              <span className="rounded-full bg-cream px-3 py-1 text-xs font-medium text-ink group-hover:bg-lime">
+              <span className="whitespace-nowrap rounded-full bg-cream px-3 py-1 text-xs font-medium text-ink group-hover:bg-lime">
                 {tile.label}
               </span>
             </Link>

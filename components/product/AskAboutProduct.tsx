@@ -14,7 +14,7 @@ export function AskAboutProduct({ productTitle }: { productTitle: string }) {
 
   return (
     <div className="rounded-3xl bg-cream p-6 sm:p-8">
-      <h2 className="font-display text-lg font-semibold">
+      <h2 className="font-display text-lg font-medium">
         Ask about {productTitle}
       </h2>
       <p className="mt-1 text-sm text-ink/60">

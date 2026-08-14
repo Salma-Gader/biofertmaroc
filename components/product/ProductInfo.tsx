@@ -29,7 +29,7 @@ export function ProductInfo({ product }: { product: Product }) {
 
       <div>
         <StarRating rating={product.rating} reviewCount={product.reviewCount} size="md" />
-        <h1 className="mt-2 font-display text-3xl font-semibold sm:text-4xl">
+        <h1 className="mt-2 font-display text-3xl font-medium sm:text-4xl">
           {product.title}
         </h1>
         {product.subtitle && (

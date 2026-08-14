@@ -27,7 +27,7 @@ export function Heading({
   const Tag: ElementType = as;
   return (
     <Tag
-      className={`font-display font-semibold tracking-tight text-ink ${
+      className={`font-display font-medium tracking-tight text-ink ${
         italic ? "italic" : ""
       } ${sizeStyles[size]} ${className}`}
     >

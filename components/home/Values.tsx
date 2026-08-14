@@ -105,7 +105,7 @@ export function Values() {
               <div className="flex h-10 w-10 items-center justify-center text-brown sm:h-12 sm:w-12">
                 {value.icon}
               </div>
-              <h3 className="font-display text-sm font-semibold text-ink sm:text-base">{value.title}</h3>
+              <h3 className="font-display text-sm font-medium text-ink sm:text-base">{value.title}</h3>
               <p className="text-xs text-ink/60">{value.description}</p>
             </div>
           ))}

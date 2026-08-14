@@ -9,54 +9,53 @@ export const siteConfig = {
 
 export const productMegaMenu: NavCategory[] = [
   {
-    label: "Fertility",
-    href: "/collections/fertility",
+    label: "Elle",
+    href: "/collections/elle",
     links: [
-      { label: "Prenatal Vitamins", href: "/collections/fertility/prenatal-vitamins" },
-      { label: "Ovulation Support", href: "/collections/fertility/ovulation-support" },
-      { label: "For Partners", href: "/collections/fertility/for-partners" },
+      { label: "BellaFert", href: "/products/bellafert" },
+      { label: "Relaxes Woman", href: "/products/relaxes-woman" },
+      { label: "CycleCare", href: "/products/cyclecare" },
     ],
+    images: ["/products/bellafert.png", "/products/cyclecare.png"],
   },
   {
-    label: "Pregnancy",
-    href: "/collections/pregnancy",
+    label: "Lui",
+    href: "/collections/lui",
     links: [
-      { label: "Prenatal Multivitamin", href: "/collections/pregnancy/multivitamin" },
-      { label: "Nausea Relief", href: "/collections/pregnancy/nausea-relief" },
-      { label: "Third Trimester", href: "/collections/pregnancy/third-trimester" },
+      { label: "FertiMen", href: "/products/fertimen" },
+      { label: "Ferti Power", href: "/products/ferti-power" },
+      { label: "PowerMen", href: "/products/powermen" },
+      { label: "SmokeClean Men", href: "/products/smokeclean-men" },
     ],
+    images: ["/products/fertimen.png", "/products/powermen.png"],
   },
   {
-    label: "Postpartum",
-    href: "/collections/postpartum",
-    links: [
-      { label: "Recovery Support", href: "/collections/postpartum/recovery" },
-      { label: "Mood & Energy", href: "/collections/postpartum/mood-energy" },
-    ],
+    label: "Duo",
+    href: "/collections/duo",
+    links: [{ label: "Pack Couple", href: "/products/pack-couple" }],
+    images: ["/products/pack-couple.png", "/products/bellafert.png"],
   },
   {
-    label: "Breastfeeding",
-    href: "/collections/breastfeeding",
+    label: "Nos Essentiels",
+    href: "/collections/essentiels",
     links: [
-      { label: "Milk Supply Support", href: "/collections/breastfeeding/milk-supply" },
-      { label: "Lactation Snacks", href: "/collections/breastfeeding/snacks" },
+      { label: "Ferti Power", href: "/products/ferti-power" },
+      { label: "PowerMen", href: "/products/powermen" },
+      { label: "SmokeClean Men", href: "/products/smokeclean-men" },
+      { label: "Relaxes Woman", href: "/products/relaxes-woman" },
+      { label: "CycleCare", href: "/products/cyclecare" },
     ],
+    images: ["/products/fertipower.png", "/products/relaxeswoman.png"],
   },
   {
-    label: "Menopause",
-    href: "/collections/menopause",
+    label: "Best Sellers",
+    href: "/collections/best-sellers",
     links: [
-      { label: "Hormone Balance", href: "/collections/menopause/hormone-balance" },
-      { label: "Sleep & Calm", href: "/collections/menopause/sleep-calm" },
+      { label: "BellaFert", href: "/products/bellafert" },
+      { label: "FertiMen", href: "/products/fertimen" },
+      { label: "Pack Couple", href: "/products/pack-couple" },
     ],
-  },
-  {
-    label: "Bundles",
-    href: "/collections/bundles",
-    links: [
-      { label: "Starter Bundles", href: "/collections/bundles/starter" },
-      { label: "Best Seller Bundles", href: "/collections/bundles/best-sellers" },
-    ],
+    images: ["/products/bellafert.png", "/products/fertimen.png"],
   },
 ];
 
@@ -69,14 +68,14 @@ export const resourcesMenu: NavLink[] = [
 ];
 
 export const momentTiles: MomentTile[] = [
-  { label: "Fertility", href: "/collections/fertility", image: "/placeholders/moment-1.svg" },
-  { label: "Pregnancy", href: "/collections/pregnancy", image: "/placeholders/moment-2.svg" },
-  { label: "Birth", href: "/collections/birth", image: "/placeholders/moment-3.svg" },
-  { label: "Postpartum", href: "/collections/postpartum", image: "/placeholders/moment-4.svg" },
-  { label: "Breastfeeding", href: "/collections/breastfeeding", image: "/placeholders/moment-5.svg" },
-  { label: "Menopause", href: "/collections/menopause", image: "/placeholders/moment-6.svg" },
-  { label: "Pregnancy Loss", href: "/collections/pregnancy-loss", image: "/placeholders/moment-7.svg" },
-  { label: "General Wellness", href: "/collections/wellness", image: "/placeholders/moment-8.svg" },
+  { label: "Fertilité Elle", href: "/products/bellafert", image: "/placeholders/Katie-19.webp" },
+  { label: "Fertilité Lui", href: "/products/fertimen", image: "/placeholders/acc6681798d84408f49df7075930f68d.jpg" },
+  { label: "Duo Fertilité", href: "/products/pack-couple", image: "/placeholders/JM_SHOOTING_CELINE-0620.webp" },
+  { label: "Vitalité Lui", href: "/products/ferti-power", image: "/placeholders/11271a6c6c5659120631072b7da58036.jpg" },
+  { label: "Performance", href: "/products/powermen", image: "/placeholders/da4159e3377b9b7552fb4ef9e35a3da6.jpg" },
+  { label: "Détox", href: "/products/smokeclean-men", image: "/placeholders/893ad68020bb0ac7f38673363d0a7d9e.jpg" },
+  { label: "Sérénité Elle", href: "/products/relaxes-woman", image: "/placeholders/pexels-aliona-zueva-42707571-11554690.jpg" },
+  { label: "Confort Cycle", href: "/products/cyclecare", image: "/placeholders/143d96aee1fec0c6151129078e6d985e.jpg" },
 ];
 
 export const footerNav = {

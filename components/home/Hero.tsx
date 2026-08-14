@@ -111,7 +111,7 @@ export function Hero() {
 
       <div className="relative flex h-full items-center">
         <div className="ml-20 mr-5 flex max-w-lg flex-col items-start gap-5 sm:ml-24 sm:mr-10 lg:ml-28 lg:mr-16">
-          <h1 className="font-display text-[2.25rem] font-semibold leading-[1.08] text-white sm:text-[3rem] lg:text-[3.5rem]">
+          <h1 className="font-display text-[2.25rem] font-medium leading-[1.08] text-white sm:text-[3rem] lg:text-[3.5rem]">
             {slide.title}
           </h1>
           <p className="text-base text-white/90">{slide.description}</p>

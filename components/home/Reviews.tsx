@@ -65,7 +65,7 @@ export function Reviews() {
                     <StarRating rating={review.rating} />
                   </div>
                 </div>
-                <h3 className="font-display text-base font-semibold">{review.title}</h3>
+                <h3 className="font-display text-base font-medium">{review.title}</h3>
                 <p className="text-sm leading-relaxed text-ink/70">{review.body}</p>
                 <span className="text-xs text-ink/40">via {review.source}</span>
               </div>

@@ -61,8 +61,8 @@
   --color-pink-dark: var(--pink-dark);
   --color-pink-light: var(--pink-light);
 
-  --font-display: var(--font-fraunces);
-  --font-sans: var(--font-work-sans);
+  --font-display: var(--font-montserrat);
+  --font-sans: var(--font-montserrat);
 
   --radius-pill: var(--radius-pill);
   --radius-card: var(--radius-card);

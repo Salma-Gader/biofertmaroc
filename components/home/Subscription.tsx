@@ -89,7 +89,7 @@ export function Subscription() {
             </p>
           </div>
 
-          <h2 className="font-display text-3xl font-bold text-ink sm:text-4xl">
+          <h2 className="font-display text-3xl font-medium text-ink sm:text-4xl">
             Votre abonnement : votre routine livrée tous les mois
           </h2>
 
@@ -97,7 +97,7 @@ export function Subscription() {
             {tiles.map((tile) => (
               <div key={tile.title} className="flex flex-col gap-2 rounded-2xl bg-white p-4">
                 <span className="text-[#D6336C]">{tile.icon}</span>
-                <h3 className="font-display text-sm font-semibold text-ink">{tile.title}</h3>
+                <h3 className="font-display text-sm font-medium text-ink">{tile.title}</h3>
                 <p className="text-xs text-ink/60">{tile.body}</p>
               </div>
             ))}

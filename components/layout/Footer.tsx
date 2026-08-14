@@ -48,7 +48,7 @@ export function Footer() {
       <Container className="relative z-10 py-14 sm:py-16">
         <div className="mb-12 flex flex-col items-start gap-6 border-b border-ink/10 pb-12 sm:flex-row sm:items-center sm:justify-between">
           <div>
-            <h2 className="font-display text-2xl font-semibold">Join the newsletter</h2>
+            <h2 className="font-display text-2xl font-medium">Join the newsletter</h2>
             <p className="mt-1 text-sm text-ink/60">
               Tips for every season of motherhood, straight to your inbox.
             </p>

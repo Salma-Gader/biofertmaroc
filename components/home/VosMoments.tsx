@@ -5,11 +5,11 @@ import { products } from "@/lib/mock-data";
 
 const categoryContent: Record<string, { title: string; image: string }> = {
   bellafert: {
-    title: "Fertilité féminine",
+    title: "Fertilité Elle",
     image: "/placeholders/Katie-19.webp",
   },
   fertimen: {
-    title: "Fertilité masculine",
+    title: "Fertilité Lui",
     image: "/placeholders/acc6681798d84408f49df7075930f68d.jpg",
   },
   "pack-couple": {
@@ -17,23 +17,23 @@ const categoryContent: Record<string, { title: string; image: string }> = {
     image: "/placeholders/JM_SHOOTING_CELINE-0620.webp",
   },
   "ferti-power": {
-    title: "Vitalité masculine",
+    title: "Vitalité Lui",
     image: "/placeholders/11271a6c6c5659120631072b7da58036.jpg",
   },
   powermen: {
-    title: "Énergie & Performance",
+    title: "Performance",
     image: "/placeholders/da4159e3377b9b7552fb4ef9e35a3da6.jpg",
   },
   "smokeclean-men": {
-    title: "Détox & Respiration",
+    title: "Détox",
     image: "/placeholders/893ad68020bb0ac7f38673363d0a7d9e.jpg",
   },
   "relaxes-woman": {
-    title: "Sérénité féminine",
+    title: "Sérénité Elle",
     image: "/placeholders/pexels-aliona-zueva-42707571-11554690.jpg",
   },
   cyclecare: {
-    title: "Confort menstruel",
+    title: "Confort Cycle",
     image: "/placeholders/143d96aee1fec0c6151129078e6d985e.jpg",
   },
 };
@@ -42,7 +42,7 @@ export function VosMoments() {
   return (
     <section className="bg-white py-16 sm:py-20">
       <Container>
-        <h2 className="font-display text-4xl font-bold text-ink sm:text-5xl">
+        <h2 className="font-display text-4xl font-medium text-ink sm:text-5xl">
           Nos catégories
         </h2>
         <p className="mt-3 text-sm text-ink/70">FR</p>

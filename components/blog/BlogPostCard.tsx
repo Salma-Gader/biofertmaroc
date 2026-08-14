@@ -20,7 +20,7 @@ export function BlogPostCard({ post }: { post: BlogPost }) {
           {post.readingTime}
         </span>
       </div>
-      <h3 className="font-display text-base font-semibold leading-snug">
+      <h3 className="font-display text-base font-medium leading-snug">
         {post.title}
       </h3>
       <p className="text-xs text-ink/60">{post.excerpt}</p>

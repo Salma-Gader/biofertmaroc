@@ -97,6 +97,7 @@ export interface NavLink {
 
 export interface NavCategory extends NavLink {
   links: NavLink[];
+  images?: string[];
 }
 
 export interface MomentTile {
