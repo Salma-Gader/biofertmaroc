@@ -19,7 +19,7 @@ export function FilterBar({
     <div className="flex flex-col gap-6">
       <div>
         <h2 className="mb-3 text-xs font-semibold uppercase tracking-wide text-ink/50">
-          Use case
+          Besoin
         </h2>
         <ul className="flex flex-col gap-1">
           <li>
@@ -29,7 +29,7 @@ export function FilterBar({
                 activeUseCase === null ? "bg-cream font-medium text-ink" : "text-ink/70 hover:bg-cream/60"
               }`}
             >
-              All
+              Tous
             </button>
           </li>
           {useCases.map((useCase) => (
@@ -51,17 +51,17 @@ export function FilterBar({
 
       <div>
         <h2 className="mb-3 text-xs font-semibold uppercase tracking-wide text-ink/50">
-          Sort by
+          Trier par
         </h2>
         <select
           value={sort}
           onChange={(e) => onSortChange(e.target.value as SortKey)}
           className="w-full rounded-lg border border-ink/15 bg-white px-3 py-2 text-sm"
         >
-          <option value="featured">Featured</option>
-          <option value="price-asc">Price: low to high</option>
-          <option value="price-desc">Price: high to low</option>
-          <option value="rating">Top rated</option>
+          <option value="featured">En vedette</option>
+          <option value="price-asc">Prix croissant</option>
+          <option value="price-desc">Prix décroissant</option>
+          <option value="rating">Mieux notés</option>
         </select>
       </div>
     </div>

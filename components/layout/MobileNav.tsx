@@ -34,23 +34,23 @@ export function MobileNav({
       <div
         role="dialog"
         aria-modal="true"
-        aria-label="Site navigation"
+        aria-label="Navigation du site"
         className={`fixed left-0 top-0 z-[81] h-full w-full max-w-sm overflow-y-auto bg-white transition-transform duration-300 lg:hidden ${
           isOpen ? "translate-x-0" : "-translate-x-full"
         }`}
       >
         <div className="flex items-center justify-between border-b border-ink/10 px-5 py-4">
           <span className="font-display text-lg font-semibold">Menu</span>
-          <button onClick={onClose} aria-label="Close menu" className="rounded-full p-2 hover:bg-cream">
+          <button onClick={onClose} aria-label="Fermer le menu" className="rounded-full p-2 hover:bg-cream">
             <CloseXIcon />
           </button>
         </div>
 
         <nav className="flex flex-col gap-1 p-5">
           <MobileSection
-            label="Shop"
-            open={openSection === "Shop"}
-            onToggle={() => toggle("Shop")}
+            label="Nos Produits"
+            open={openSection === "Nos Produits"}
+            onToggle={() => toggle("Nos Produits")}
           >
             {productMegaMenu.map((category) => (
               <Link
@@ -65,9 +65,9 @@ export function MobileNav({
           </MobileSection>
 
           <MobileSection
-            label="Life Moments"
-            open={openSection === "Life Moments"}
-            onToggle={() => toggle("Life Moments")}
+            label="Moments de Vie"
+            open={openSection === "Moments de Vie"}
+            onToggle={() => toggle("Moments de Vie")}
           >
             {momentTiles.map((tile) => (
               <Link
@@ -82,9 +82,9 @@ export function MobileNav({
           </MobileSection>
 
           <MobileSection
-            label="Resources"
-            open={openSection === "Resources"}
-            onToggle={() => toggle("Resources")}
+            label="Ressources"
+            open={openSection === "Ressources"}
+            onToggle={() => toggle("Ressources")}
           >
             {resourcesMenu.map((link) => (
               <Link
@@ -99,11 +99,11 @@ export function MobileNav({
           </MobileSection>
 
           <div className="mt-4 flex flex-col gap-3">
-            <Button href="/collections/bundles" variant="accent" size="md" onClick={onClose}>
-              Subscribe & Save 15%
+            <Button href="/collections/best-sellers" variant="accent" size="md" onClick={onClose}>
+              Promo −50%
             </Button>
             <Button href="/account" variant="outline" size="md" onClick={onClose}>
-              Account
+              Mon compte
             </Button>
           </div>
         </nav>

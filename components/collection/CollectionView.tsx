@@ -48,7 +48,7 @@ export function CollectionView({ products }: { products: Product[] }) {
           <ProductGrid products={filtered} />
         ) : (
           <p className="py-16 text-center text-sm text-ink/60">
-            No products match this filter.
+            Aucun produit ne correspond à ce filtre.
           </p>
         )}
       </div>

@@ -9,8 +9,8 @@ import { ProductPrice } from "./ProductPrice";
 import type { Product } from "@/lib/types";
 
 const badgeLabels: Record<string, string> = {
-  "best-seller": "Best seller",
-  new: "New",
+  "best-seller": "Best-seller",
+  new: "Nouveau",
   "sans-iode": "Sans iode",
 };
 

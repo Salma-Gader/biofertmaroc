@@ -20,7 +20,7 @@ export function CollectionHeader({
           <p className="max-w-lg text-sm text-ink/70">{description}</p>
         )}
         <span className="text-xs font-medium uppercase tracking-wide text-ink/50">
-          {count} {count === 1 ? "product" : "products"}
+          {count} {count === 1 ? "produit" : "produits"}
         </span>
       </Container>
     </div>

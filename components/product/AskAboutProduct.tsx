@@ -4,9 +4,9 @@ import { useState } from "react";
 import { SearchIcon } from "@/components/ui/Icons";
 
 const suggestedQuestions = [
-  "Is this safe while breastfeeding?",
-  "How long until I see results?",
-  "Can I take this with other supplements?",
+  "Est-ce sans danger en cas de grossesse ?",
+  "Au bout de combien de temps voit-on des résultats ?",
+  "Puis-je le prendre avec d'autres compléments ?",
 ];
 
 export function AskAboutProduct({ productTitle }: { productTitle: string }) {
@@ -15,10 +15,10 @@ export function AskAboutProduct({ productTitle }: { productTitle: string }) {
   return (
     <div className="rounded-3xl bg-cream p-6 sm:p-8">
       <h2 className="font-display text-lg font-medium">
-        Ask about {productTitle}
+        Une question sur {productTitle} ?
       </h2>
       <p className="mt-1 text-sm text-ink/60">
-        Get quick answers to common questions from our care team.
+        Obtenez rapidement une réponse à vos questions les plus fréquentes.
       </p>
       <form
         onSubmit={(e) => e.preventDefault()}
@@ -29,7 +29,7 @@ export function AskAboutProduct({ productTitle }: { productTitle: string }) {
           type="text"
           value={question}
           onChange={(e) => setQuestion(e.target.value)}
-          placeholder="Type your question…"
+          placeholder="Tapez votre question…"
           className="flex-1 bg-transparent text-sm outline-none placeholder:text-ink/40"
         />
       </form>

@@ -1,4 +1,5 @@
 import { CheckIcon } from "@/components/ui/Icons";
+import { formatMoney } from "./ProductPrice";
 import type { ProductVariant } from "@/lib/types";
 
 function percentOff(price: number, compareAt?: number) {
@@ -18,7 +19,7 @@ export function VariantSelector({
   return (
     <fieldset className="flex flex-col gap-2">
       <legend className="mb-1 text-xs font-semibold uppercase tracking-wide text-ink/50">
-        Purchase option
+        Option d&apos;achat
       </legend>
       {variants.map((variant) => {
         const isSubscription = variant.title.toLowerCase().includes("subscription");
@@ -45,14 +46,14 @@ export function VariantSelector({
                 <span className="block text-sm font-medium">{variant.title}</span>
                 {isSubscription && (
                   <span className="mt-0.5 flex items-center gap-1 text-xs text-lime-dark">
-                    <CheckIcon /> Most economical
+                    <CheckIcon /> Le plus économique
                   </span>
                 )}
               </span>
             </span>
             <span className="text-right">
               <span className="block text-sm font-semibold">
-                ${variant.price.amount.toFixed(2)}
+                {formatMoney(variant.price)}
               </span>
               {discount > 0 && (
                 <span className="text-xs text-terracotta">-{discount}%</span>

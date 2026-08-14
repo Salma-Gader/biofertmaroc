@@ -42,7 +42,7 @@ export const metadata: Metadata = {
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
     <html
-      lang="en"
+      lang="fr"
       className={`${montserrat.variable} ${frauncesLogo.variable} h-full antialiased`}
     >
       <body className="min-h-full flex flex-col bg-cream text-ink">
@@ -51,7 +51,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
             href="#main-content"
             className="sr-only focus:not-sr-only focus:fixed focus:top-2 focus:left-2 focus:z-[100] focus:bg-ink focus:text-cream focus:px-4 focus:py-2 focus:rounded-full"
           >
-            Skip to content
+            Aller au contenu
           </a>
           <AnnouncementBar />
           <Header />

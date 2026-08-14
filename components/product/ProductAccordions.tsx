@@ -4,23 +4,23 @@ import type { Product } from "@/lib/types";
 export function ProductAccordions({ product }: { product: Product }) {
   const items: AccordionItem[] = [
     {
-      question: "Benefits",
-      answer: product.benefits.join(" · ") || "No benefits listed.",
+      question: "Bienfaits",
+      answer: product.benefits.join(" · ") || "Aucun bienfait renseigné.",
     },
     {
-      question: "Ingredients",
-      answer: product.ingredients?.join(", ") || "Full ingredient list available on request.",
+      question: "Ingrédients",
+      answer: product.ingredients?.join(", ") || "Liste complète des ingrédients disponible sur demande.",
     },
     {
-      question: "Usage",
-      answer: product.usage || "Follow the directions on the label.",
+      question: "Utilisation",
+      answer: product.usage || "Suivez les indications sur l'étiquette.",
     },
     {
-      question: "Precautions",
-      answer: product.precautions || "Consult your doctor before use.",
+      question: "Précautions",
+      answer: product.precautions || "Demandez conseil à votre médecin avant utilisation.",
     },
     {
-      question: "Full description",
+      question: "Description complète",
       answer: product.shortDescription || "",
     },
   ];

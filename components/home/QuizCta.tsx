@@ -8,14 +8,14 @@ export function QuizCta() {
       <div className="grid grid-cols-1 lg:grid-cols-2">
         <div className="flex flex-col items-center justify-center gap-5 bg-cream px-6 py-14 text-center sm:px-12 sm:py-16 lg:px-16">
           <Heading as="h2" size="sub">
-            Not sure where to start?
+            Vous ne savez pas par où commencer ?
           </Heading>
           <p className="max-w-md text-sm text-ink/70">
-            Take our 2-minute quiz for a personalized routine based on your
-            season of motherhood.
+            Faites notre bilan personnalisé en 2 minutes pour recevoir une recommandation
+            adaptée à votre parcours de fertilité.
           </p>
           <Button href="/quiz" variant="primary" size="lg">
-            Take the Quiz
+            Faire le bilan
           </Button>
         </div>
 

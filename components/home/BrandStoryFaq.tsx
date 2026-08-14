@@ -5,24 +5,24 @@ import { Accordion } from "@/components/ui/Accordion";
 
 const faqItems = [
   {
-    question: "Are your formulas safe during pregnancy?",
+    question: "Vos formules sont-elles sûres et certifiées ?",
     answer:
-      "Every formula is developed with OB-GYNs and third-party tested for purity. Always check with your care provider before starting anything new.",
+      "Oui. Tous nos compléments sont 100% naturels, fabriqués dans des sites certifiés GMP, sans additifs artificiels.",
   },
   {
-    question: "How is BioFertMaroc different from a standard prenatal?",
+    question: "En quoi BioFertMaroc est différent ?",
     answer:
-      "We formulate for each specific season — fertility, pregnancy, postpartum, breastfeeding and menopause — rather than one catch-all multivitamin.",
+      "Nous formulons pour elle, pour lui, et pour le couple — plutôt qu'un seul complément générique — pour accompagner la fertilité des deux partenaires.",
   },
   {
-    question: "Can I pause or cancel my subscription?",
+    question: "Combien de temps avant de voir des résultats ?",
     answer:
-      "Yes, anytime from your account. Skip a delivery, change your schedule, or cancel with no fees.",
+      "Nos protocoles sont pensés sur 3 mois, le temps que prend un cycle complet de maturation des ovules ou des spermatozoïdes.",
   },
   {
-    question: "Where are your products made?",
+    question: "Où sont fabriqués vos produits ?",
     answer:
-      "In small batches with fully traceable, responsibly sourced ingredients.",
+      "En petits lots, avec des ingrédients responsables et une traçabilité complète.",
   },
 ];
 
@@ -32,13 +32,12 @@ export function BrandStoryFaq() {
       <Container className="grid gap-12 lg:grid-cols-[3fr_2fr] lg:items-center">
         <div>
           <Heading size="section" className="mb-4">
-            Why we started BioFertMaroc
+            Pourquoi BioFertMaroc
           </Heading>
           <p className="mb-8 max-w-md text-sm leading-relaxed text-ink/70">
-            We built the brand we wished existed — one that treats every stage
-            of motherhood with the same care, from the first cycle you track
-            to the years after your last period. No jargon, no shame, just
-            formulas that work.
+            Nous avons créé la marque que nous aurions aimé trouver — pensée pour elle et pour
+            lui, sans tabou et sans jargon, avec des formules naturelles qui accompagnent
+            vraiment votre parcours de fertilité.
           </p>
           <Accordion items={faqItems} />
         </div>

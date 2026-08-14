@@ -2,9 +2,9 @@ import type { NavCategory, NavLink, MomentTile } from "./types";
 
 export const siteConfig = {
   name: "BioFertMaroc",
-  tagline: "Nutrition for every season of motherhood",
+  tagline: "Des compléments naturels pour votre fertilité",
   description:
-    "Fertility, pregnancy, postpartum, breastfeeding and menopause supplements formulated with mamas in mind.",
+    "Compléments alimentaires 100% naturels pour soutenir la fertilité féminine, masculine et de couple, formulés au Maroc.",
 };
 
 export const productMegaMenu: NavCategory[] = [
@@ -63,7 +63,7 @@ export const resourcesMenu: NavLink[] = [
   { label: "Blog", href: "/blog" },
   { label: "Guides", href: "/guides" },
   { label: "FAQ", href: "/faq" },
-  { label: "About Us", href: "/about" },
+  { label: "À propos", href: "/about" },
   { label: "Contact", href: "/contact" },
 ];
 
@@ -80,26 +80,25 @@ export const momentTiles: MomentTile[] = [
 
 export const footerNav = {
   shop: [
-    { label: "Fertility", href: "/collections/fertility" },
-    { label: "Pregnancy", href: "/collections/pregnancy" },
-    { label: "Postpartum", href: "/collections/postpartum" },
-    { label: "Breastfeeding", href: "/collections/breastfeeding" },
-    { label: "Menopause", href: "/collections/menopause" },
+    { label: "Elle", href: "/collections/elle" },
+    { label: "Lui", href: "/collections/lui" },
+    { label: "Duo", href: "/collections/duo" },
+    { label: "Nos Essentiels", href: "/collections/essentiels" },
+    { label: "Best Sellers", href: "/collections/best-sellers" },
   ],
   company: [
-    { label: "About Us", href: "/about" },
+    { label: "À propos", href: "/about" },
     { label: "Blog", href: "/blog" },
-    { label: "Reviews", href: "/reviews" },
+    { label: "Avis clients", href: "/#avis" },
     { label: "Contact", href: "/contact" },
   ],
   help: [
     { label: "FAQ", href: "/faq" },
-    { label: "Shipping & Returns", href: "/shipping-returns" },
-    { label: "Subscriptions", href: "/subscriptions" },
-    { label: "Track Order", href: "/track-order" },
+    { label: "Livraison & Retours", href: "/faq" },
+    { label: "Suivi de commande", href: "/contact" },
   ],
   legal: [
-    { label: "Terms of Service", href: "/terms" },
-    { label: "Privacy Policy", href: "/privacy" },
+    { label: "Conditions Générales de Vente", href: "/terms" },
+    { label: "Politique de Confidentialité", href: "/privacy" },
   ],
 };

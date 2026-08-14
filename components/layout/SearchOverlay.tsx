@@ -33,10 +33,10 @@ export function SearchOverlay({
           <input
             ref={inputRef}
             type="search"
-            placeholder="Search products, guides…"
+            placeholder="Rechercher des produits, guides…"
             className="flex-1 bg-transparent text-lg outline-none placeholder:text-ink/40"
           />
-          <button onClick={onClose} aria-label="Close search" className="rounded-full p-2 hover:bg-cream">
+          <button onClick={onClose} aria-label="Fermer la recherche" className="rounded-full p-2 hover:bg-cream">
             <CloseXIcon />
           </button>
         </div>
@@ -44,7 +44,7 @@ export function SearchOverlay({
         <div className="grid gap-8 sm:grid-cols-[2fr_1fr]">
           <div>
             <p className="mb-3 text-xs font-semibold uppercase tracking-wide text-ink/50">
-              Selection of the moment
+              Sélection du moment
             </p>
             <div className="grid grid-cols-2 gap-4 sm:grid-cols-4">
               {featured.map((product) => (
@@ -71,7 +71,7 @@ export function SearchOverlay({
 
           <div>
             <p className="mb-3 text-xs font-semibold uppercase tracking-wide text-ink/50">
-              Related articles
+              Articles liés
             </p>
             <ul className="flex flex-col gap-3">
               {articles.map((post) => (

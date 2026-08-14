@@ -7,7 +7,7 @@ import { blogPosts } from "@/lib/mock-data";
 export const metadata: Metadata = {
   title: "Blog",
   description:
-    "Guides on fertility, pregnancy, postpartum and menopause from the BioFertMaroc team.",
+    "Conseils sur la fertilité féminine, masculine et le parcours à deux, par l'équipe BioFertMaroc.",
 };
 
 export default function BlogPage() {
@@ -16,11 +16,11 @@ export default function BlogPage() {
       <div className="bg-pale-yellow py-12 sm:py-16">
         <Container className="flex flex-col items-center gap-3 text-center">
           <Heading as="h1" size="section">
-            Our Essential Guides
+            Nos Guides Essentiels
           </Heading>
           <p className="max-w-lg text-sm text-ink/70">
-            Fertility, pregnancy, postpartum and menopause — explained simply,
-            backed by science.
+            La fertilité, expliquée simplement et appuyée par la science — pour elle, pour lui,
+            et pour vous deux.
           </p>
           <span className="text-xs font-medium uppercase tracking-wide text-ink/50">
             {blogPosts.length} {blogPosts.length === 1 ? "guide" : "guides"}

@@ -41,7 +41,7 @@ export function StarRating({
     return (
       <div
         className={`inline-flex items-center gap-1 font-bold ${size === "md" ? "text-base" : "text-sm"}`}
-        aria-label={`Rated ${rating} out of 5${reviewCount ? ` from ${reviewCount} reviews` : ""}`}
+        aria-label={`Note de ${rating} sur 5${reviewCount ? ` (${reviewCount} avis)` : ""}`}
       >
         <span className="text-ink" aria-hidden="true">
           ★
@@ -57,7 +57,7 @@ export function StarRating({
   return (
     <div
       className={`inline-flex items-center gap-1.5 ${size === "md" ? "text-sm" : "text-xs"}`}
-      aria-label={`Rated ${rating} out of 5${reviewCount ? ` from ${reviewCount} reviews` : ""}`}
+      aria-label={`Note de ${rating} sur 5${reviewCount ? ` (${reviewCount} avis)` : ""}`}
     >
       <span className="flex items-center gap-0.5" aria-hidden="true">
         {stars.map((fill, i) => (

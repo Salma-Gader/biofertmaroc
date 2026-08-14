@@ -23,7 +23,7 @@ export function Reviews() {
   };
 
   return (
-    <section className="overflow-hidden py-16 sm:py-20" style={{ backgroundColor: "#ffffff" }}>
+    <section id="avis" className="overflow-hidden py-16 sm:py-20" style={{ backgroundColor: "#ffffff" }}>
       <Container className="mb-10 flex flex-col gap-8 sm:flex-row sm:items-center sm:justify-between">
         <div className="flex flex-col items-start gap-4">
           <Heading as="h2" size="section">
@@ -46,13 +46,7 @@ export function Reviews() {
         </div>
       </Container>
 
-      {/* Breaks out of the constrained Container above to use the full
-          viewport width, so cards can scroll past both the left and right
-          edges of the (width-limited) section rather than being clipped
-          to its max-width. No horizontal padding here — the first card
-          touches the true left edge at rest, and the last card touches the
-          true right edge once fully scrolled. */}
-      <div className="relative left-1/2 w-screen -translate-x-1/2">
+      <Container className="relative">
         <div
           ref={scrollerRef}
           className="no-scrollbar flex snap-x snap-mandatory gap-5 overflow-x-auto scroll-smooth pb-2"
@@ -98,7 +92,7 @@ export function Reviews() {
         <button
           type="button"
           onClick={() => scrollBy("left")}
-          aria-label="Previous reviews"
+          aria-label="Avis précédents"
           className="absolute left-6 top-[38%] z-10 hidden -translate-y-1/2 items-center justify-center rounded-full border border-ink/10 bg-white shadow-md hover:bg-ink hover:text-cream sm:flex"
           style={{ width: 44, height: 44 }}
         >
@@ -107,7 +101,7 @@ export function Reviews() {
         <button
           type="button"
           onClick={() => scrollBy("right")}
-          aria-label="Next reviews"
+          aria-label="Avis suivants"
           className="absolute right-6 top-[38%] z-10 hidden -translate-y-1/2 items-center justify-center rounded-full border border-ink/10 bg-white shadow-md hover:bg-ink hover:text-cream sm:flex"
           style={{ width: 44, height: 44 }}
         >
@@ -118,7 +112,7 @@ export function Reviews() {
           <button
             type="button"
             onClick={() => scrollBy("left")}
-            aria-label="Previous reviews"
+            aria-label="Avis précédents"
             className="flex h-10 w-10 items-center justify-center rounded-full border border-ink/20 bg-white hover:bg-ink hover:text-cream"
           >
             <ArrowIcon direction="left" />
@@ -126,13 +120,13 @@ export function Reviews() {
           <button
             type="button"
             onClick={() => scrollBy("right")}
-            aria-label="Next reviews"
+            aria-label="Avis suivants"
             className="flex h-10 w-10 items-center justify-center rounded-full border border-ink/20 bg-white hover:bg-ink hover:text-cream"
           >
             <ArrowIcon />
           </button>
         </div>
-      </div>
+      </Container>
     </section>
   );
 }

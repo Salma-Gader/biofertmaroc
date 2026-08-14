@@ -4,8 +4,9 @@ import Image from "next/image";
 import { useEffect } from "react";
 import { useCart } from "@/context/CartContext";
 import { Button } from "@/components/ui/Button";
+import { formatMoney } from "@/components/product/ProductPrice";
 
-const FREE_SHIPPING_THRESHOLD = 60;
+const FREE_SHIPPING_THRESHOLD = 600;
 
 export function CartDrawer() {
   const { lines, isOpen, closeCart, removeItem, updateQuantity, subtotal, itemCount } =
@@ -37,18 +38,18 @@ export function CartDrawer() {
       <aside
         role="dialog"
         aria-modal="true"
-        aria-label="Shopping cart"
+        aria-label="Panier"
         className={`fixed right-0 top-0 z-[71] flex h-full w-full max-w-md flex-col bg-white shadow-2xl transition-transform duration-300 ${
           isOpen ? "translate-x-0" : "translate-x-full"
         }`}
       >
         <div className="flex items-center justify-between border-b border-ink/10 px-5 py-4">
           <h2 className="font-display text-xl font-medium">
-            Your Cart {itemCount > 0 && `(${itemCount})`}
+            Votre panier {itemCount > 0 && `(${itemCount})`}
           </h2>
           <button
             onClick={closeCart}
-            aria-label="Close cart"
+            aria-label="Fermer le panier"
             className="rounded-full p-2 hover:bg-cream"
           >
             <CloseIcon />
@@ -59,11 +60,11 @@ export function CartDrawer() {
           <p className="text-xs font-medium text-ink">
             {remaining > 0 ? (
               <>
-                You&apos;re <strong>${remaining.toFixed(2)}</strong> away from free
-                shipping
+                Plus que <strong>{formatMoney({ amount: remaining, currencyCode: "MAD" })}</strong> pour
+                profiter de la livraison gratuite
               </>
             ) : (
-              "You've unlocked free shipping!"
+              "Livraison gratuite débloquée !"
             )}
           </p>
           <div className="mt-2 h-1.5 w-full overflow-hidden rounded-full bg-white/70">
@@ -77,7 +78,7 @@ export function CartDrawer() {
         <div className="flex-1 overflow-y-auto px-5 py-4">
           {lines.length === 0 ? (
             <p className="py-12 text-center text-sm text-ink/60">
-              Your cart is empty.
+              Votre panier est vide.
             </p>
           ) : (
             <ul className="flex flex-col gap-4">
@@ -101,7 +102,7 @@ export function CartDrawer() {
                       <div className="flex items-center rounded-full border border-ink/20">
                         <button
                           className="px-2 py-1 text-sm"
-                          aria-label={`Decrease quantity of ${line.productTitle}`}
+                          aria-label={`Diminuer la quantité de ${line.productTitle}`}
                           onClick={() => updateQuantity(line.lineId, line.quantity - 1)}
                         >
                           −
@@ -109,20 +110,20 @@ export function CartDrawer() {
                         <span className="w-6 text-center text-sm">{line.quantity}</span>
                         <button
                           className="px-2 py-1 text-sm"
-                          aria-label={`Increase quantity of ${line.productTitle}`}
+                          aria-label={`Augmenter la quantité de ${line.productTitle}`}
                           onClick={() => updateQuantity(line.lineId, line.quantity + 1)}
                         >
                           +
                         </button>
                       </div>
                       <span className="text-sm font-semibold">
-                        ${(line.price.amount * line.quantity).toFixed(2)}
+                        {formatMoney({ amount: line.price.amount * line.quantity, currencyCode: line.price.currencyCode })}
                       </span>
                     </div>
                   </div>
                   <button
                     onClick={() => removeItem(line.lineId)}
-                    aria-label={`Remove ${line.productTitle} from cart`}
+                    aria-label={`Retirer ${line.productTitle} du panier`}
                     className="self-start text-xs text-ink/40 hover:text-terracotta"
                   >
                     <CloseIcon small />
@@ -136,28 +137,28 @@ export function CartDrawer() {
         {lines.length > 0 && (
           <div className="border-t border-ink/10 px-5 py-4">
             <label htmlFor="promo-code" className="sr-only">
-              Promo code
+              Code promo
             </label>
             <div className="mb-4 flex gap-2">
               <input
                 id="promo-code"
                 type="text"
-                placeholder="Promo code"
+                placeholder="Code promo"
                 className="flex-1 rounded-full border border-ink/20 px-4 py-2 text-sm focus-visible:outline-2 focus-visible:outline-navy"
               />
               <Button variant="outline" size="sm">
-                Apply
+                Appliquer
               </Button>
             </div>
             <div className="mb-4 flex items-center justify-between text-sm">
-              <span className="text-ink/60">Subtotal</span>
-              <span className="font-semibold">${subtotal.toFixed(2)}</span>
+              <span className="text-ink/60">Sous-total</span>
+              <span className="font-semibold">{formatMoney({ amount: subtotal, currencyCode: "MAD" })}</span>
             </div>
             <Button variant="primary" size="lg" className="w-full">
-              Checkout
+              Commander
             </Button>
             <p className="mt-2 text-center text-[11px] text-ink/50">
-              Taxes and shipping calculated at checkout.
+              Taxes et frais de livraison calculés à la commande.
             </p>
           </div>
         )}

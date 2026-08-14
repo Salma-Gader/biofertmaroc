@@ -41,7 +41,7 @@ export function ProductGallery({ images }: { images: ProductImage[] }) {
               <button
                 key={image.id}
                 onClick={() => setActive(i)}
-                aria-label={`View image ${i + 1}`}
+                aria-label={`Voir l'image ${i + 1}`}
                 aria-current={i === active}
                 className={`relative h-16 w-16 shrink-0 overflow-hidden rounded-xl bg-cream ring-1 transition-all ${
                   i === active ? "ring-2 ring-ink" : "ring-ink/10 hover:ring-ink/30"

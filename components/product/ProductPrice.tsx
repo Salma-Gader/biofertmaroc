@@ -1,6 +1,6 @@
 import type { Money } from "@/lib/types";
 
-function format(money: Money) {
+export function formatMoney(money: Money) {
   if (money.currencyCode === "MAD") {
     const amount = money.amount % 1 === 0 ? money.amount.toString() : money.amount.toFixed(2);
     return `${amount} DH`;
@@ -33,10 +33,10 @@ export function ProductPrice({
     <div className={`flex items-baseline gap-2 ${sizeStyles}`}>
       <span className="font-semibold text-ink">
         {from && <span className="mr-1 font-sans text-xs font-normal text-ink/60">dès</span>}
-        {format(price)}
+        {formatMoney(price)}
       </span>
       {compareAtPrice && compareAtPrice.amount > price.amount && (
-        <span className="text-ink/40 line-through">{format(compareAtPrice)}</span>
+        <span className="text-ink/40 line-through">{formatMoney(compareAtPrice)}</span>
       )}
     </div>
   );

@@ -23,7 +23,7 @@ export function AddToCartButton({
       onClick={() => addItem(product, variant)}
       disabled={!variant.available}
     >
-      {variant.available ? "Add to Cart" : "Sold Out"}
+      {variant.available ? "Ajouter au panier" : "Épuisé"}
     </Button>
   );
 }

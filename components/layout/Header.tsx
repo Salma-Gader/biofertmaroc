@@ -73,7 +73,7 @@ export function Header() {
         <div className="flex items-center gap-1">
           <button
             onClick={() => setMobileNavOpen(true)}
-            aria-label="Open menu"
+            aria-label="Ouvrir le menu"
             className="rounded-full p-2 hover:bg-cream 2xl:hidden"
           >
             <MenuIcon />
@@ -157,18 +157,18 @@ export function Header() {
           </div>
           <button
             onClick={toggleSearch}
-            aria-label="Search"
+            aria-label="Rechercher"
             aria-expanded={searchOpen}
             className="rounded-full p-2 hover:bg-cream"
           >
             <SearchIcon />
           </button>
-          <Link href="/account" aria-label="Account" className="hidden rounded-full p-2 hover:bg-cream sm:inline-flex">
+          <Link href="/account" aria-label="Mon compte" className="hidden rounded-full p-2 hover:bg-cream sm:inline-flex">
             <UserIcon />
           </Link>
           <button
             onClick={openCart}
-            aria-label={`Open cart, ${itemCount} items`}
+            aria-label={`Ouvrir le panier, ${itemCount} articles`}
             className="relative rounded-full p-2 hover:bg-cream"
           >
             <CartIcon size={22} />

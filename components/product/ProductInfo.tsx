@@ -7,17 +7,17 @@ import type { Product } from "@/lib/types";
 export function ProductInfo({ product }: { product: Product }) {
   return (
     <div className="flex flex-col gap-6">
-      <nav aria-label="Breadcrumb" className="text-xs text-ink/50">
+      <nav aria-label="Fil d'Ariane" className="text-xs text-ink/50">
         <ol className="flex flex-wrap items-center gap-1.5">
           <li>
             <Link href="/" className="hover:underline">
-              Home
+              Accueil
             </Link>
           </li>
           <li aria-hidden="true">/</li>
           <li>
             <Link href="/collections/best-sellers" className="hover:underline">
-              {product.productLine ?? "Shop"}
+              {product.productLine ?? "Boutique"}
             </Link>
           </li>
           <li aria-hidden="true">/</li>

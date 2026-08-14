@@ -63,7 +63,7 @@ export default async function ProductPage({
       {related.length > 0 && (
         <Container className="pb-10 sm:pb-14">
           <Heading size="sub" className="mb-6">
-            Complete your routine
+            Complétez votre routine
           </Heading>
           <ProductCarousel products={related} />
         </Container>
@@ -71,7 +71,7 @@ export default async function ProductPage({
 
       <Container className="pb-14 sm:pb-20">
         <Heading size="sub" className="mb-6">
-          Good to know
+          Bon à savoir
         </Heading>
         <ProductAccordions product={product} />
       </Container>

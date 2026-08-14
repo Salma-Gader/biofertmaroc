@@ -19,7 +19,7 @@ export function PurchaseOptions({ product }: { product: Product }) {
       />
       <AddToCartButton product={product} variant={selectedVariant} />
       <p className="text-center text-xs text-ink/50">
-        Free shipping on orders over $60 &middot; Ships in 1&ndash;2 business days
+        Livraison gratuite dès 600 DH &middot; Expédié sous 24 à 48h
       </p>
     </div>
   );

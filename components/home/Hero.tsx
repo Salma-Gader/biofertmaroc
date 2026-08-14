@@ -128,14 +128,14 @@ export function Hero() {
 
       <button
         onClick={() => goTo(index - 1)}
-        aria-label="Previous slide"
+        aria-label="Diapositive précédente"
         className="absolute left-4 top-1/2 flex h-11 w-11 -translate-y-1/2 items-center justify-center text-white transition-opacity hover:opacity-70 sm:left-6"
       >
         <ArrowIcon direction="left" size={20} />
       </button>
       <button
         onClick={() => goTo(index + 1)}
-        aria-label="Next slide"
+        aria-label="Diapositive suivante"
         className="absolute right-4 top-1/2 flex h-11 w-11 -translate-y-1/2 items-center justify-center text-white transition-opacity hover:opacity-70 sm:right-6"
       >
         <ArrowIcon size={20} />
@@ -146,7 +146,7 @@ export function Hero() {
           <button
             key={s.id}
             onClick={() => goTo(i)}
-            aria-label={`Go to slide ${i + 1}`}
+            aria-label={`Aller à la diapositive ${i + 1}`}
             aria-current={i === index}
             className={`h-2 rounded-full transition-all duration-300 ${
               i === index ? "w-6 bg-white" : "w-2 bg-white/50"

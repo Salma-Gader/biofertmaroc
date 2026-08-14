@@ -48,26 +48,26 @@ export function Footer() {
       <Container className="relative z-10 py-14 sm:py-16">
         <div className="mb-12 flex flex-col items-start gap-6 border-b border-ink/10 pb-12 sm:flex-row sm:items-center sm:justify-between">
           <div>
-            <h2 className="font-display text-2xl font-medium">Join the newsletter</h2>
+            <h2 className="font-display text-2xl font-medium">Rejoignez la newsletter</h2>
             <p className="mt-1 text-sm text-ink/60">
-              Tips for every season of motherhood, straight to your inbox.
+              Des conseils fertilité, pour elle et pour lui, directement dans votre boîte mail.
             </p>
           </div>
           <NewsletterForm />
         </div>
 
         <div className="grid grid-cols-2 gap-8 sm:grid-cols-4">
-          <FooterColumn title="Shop" links={footerNav.shop} />
-          <FooterColumn title="Company" links={footerNav.company} />
-          <FooterColumn title="Help" links={footerNav.help} />
+          <FooterColumn title="Nos Produits" links={footerNav.shop} />
+          <FooterColumn title="À propos" links={footerNav.company} />
+          <FooterColumn title="Aide" links={footerNav.help} />
           <div>
             <h3 className="mb-4 text-xs font-semibold uppercase tracking-wide text-ink/50">
               Contact
             </h3>
             <address className="not-italic text-sm leading-relaxed text-ink/80">
-              123 Wellness Ave
+              123 Avenue Wellness
               <br />
-              Casablanca, Morocco
+              Casablanca, Maroc
               <br />
               <a href="mailto:hello@biofertmaroc.com" className="hover:underline underline-offset-4">
                 hello@biofertmaroc.com
@@ -97,7 +97,7 @@ export function Footer() {
                 {link.label}
               </Link>
             ))}
-            <span>&copy; {new Date().getFullYear()} {siteConfig.name}. All rights reserved.</span>
+            <span>&copy; {new Date().getFullYear()} {siteConfig.name}. Tous droits réservés.</span>
           </div>
           <ul className="flex gap-3 text-xs text-ink/50">
             {paymentMethods.map((method) => (
