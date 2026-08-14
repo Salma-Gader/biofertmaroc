@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
 import { Button } from "@/components/ui/Button";
 import { SearchIcon, UserIcon, CartIcon, MenuIcon } from "@/components/ui/Icons";
@@ -19,6 +20,7 @@ export function Header() {
   const [mobileNavOpen, setMobileNavOpen] = useState(false);
   const headerRef = useRef<HTMLElement>(null);
   const { itemCount, openCart } = useCart();
+  const pathname = usePathname();
 
   const closeAll = () => {
     setActiveMenu(null);
@@ -116,6 +118,12 @@ export function Header() {
         {/* Center logo — absolutely centered on the header, independent of left/right content widths */}
         <Link
           href="/"
+          onClick={(e) => {
+            if (pathname === "/") {
+              e.preventDefault();
+              window.location.reload();
+            }
+          }}
           className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 whitespace-nowrap text-xl sm:text-2xl lg:text-3xl 2xl:text-4xl"
           style={{
             fontFamily: "var(--font-logo)",
@@ -133,6 +141,7 @@ export function Header() {
               display: "inline-block",
               fontStyle: "italic",
               transform: "skew(-12deg)",
+              marginLeft: "0.15em",
             }}
           >
             !

@@ -87,6 +87,29 @@ export function CheckIcon({ className = "", size = 14 }: IconProps) {
   );
 }
 
+export function GoogleIcon({ className = "", size = 20 }: IconProps) {
+  return (
+    <svg width={size} height={size} viewBox="0 0 20 20" className={className} aria-hidden="true">
+      <path
+        d="M19.6 10.23c0-.68-.06-1.32-.17-1.94H10v3.9h5.38a4.6 4.6 0 01-2 3.02v2.5h3.23c1.9-1.75 2.99-4.32 2.99-7.48z"
+        fill="#4285F4"
+      />
+      <path
+        d="M10 20c2.7 0 4.96-.9 6.61-2.42l-3.23-2.5c-.9.6-2.04.96-3.38.96-2.6 0-4.8-1.75-5.59-4.12H1.07v2.59A10 10 0 0010 20z"
+        fill="#34A853"
+      />
+      <path
+        d="M4.41 11.92a6 6 0 010-3.84V5.49H1.07a10 10 0 000 9.02l3.34-2.59z"
+        fill="#FBBC05"
+      />
+      <path
+        d="M10 3.96c1.47 0 2.79.5 3.83 1.5l2.87-2.87C14.95.99 12.7 0 10 0A10 10 0 001.07 5.49l3.34 2.59C5.2 5.71 7.4 3.96 10 3.96z"
+        fill="#EA4335"
+      />
+    </svg>
+  );
+}
+
 export function ArrowIcon({ className = "", size = 16, direction = "right" }: IconProps & { direction?: "left" | "right" }) {
   return (
     <svg
