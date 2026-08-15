@@ -111,9 +111,17 @@ export function Footer() {
 
       <span
         aria-hidden="true"
-        className="pointer-events-none absolute -bottom-10 left-1/2 w-full -translate-x-1/2 select-none text-center font-display text-[18vw] font-semibold leading-none text-ink/5 sm:text-[12rem]"
+        className="pointer-events-none absolute top-10 right-0 select-none whitespace-nowrap text-[28vw] font-semibold leading-none text-ink/5 sm:text-[16rem]"
+        style={{
+          fontFamily: "var(--font-logo)",
+          fontVariationSettings: '"SOFT" 60, "WONK" 0, "opsz" 144',
+          transform: "rotate(-8deg) translateX(-20%)",
+        }}
       >
-        {siteConfig.name}
+        BM
+        <span style={{ display: "inline-block", fontStyle: "italic", transform: "skew(-12deg)" }}>
+          !
+        </span>
       </span>
     </footer>
   );
