@@ -18,7 +18,7 @@ export function ProductCard({ product }: { product: Product }) {
   return (
     <Link
       href={`/products/${product.handle}`}
-      className="group flex w-full flex-col rounded-lg bg-cream p-8"
+      className="group flex w-full flex-col rounded-lg bg-cream p-4 sm:p-6 lg:p-8"
     >
       <div className="relative aspect-square overflow-hidden">
         {product.badges.length > 0 && (
@@ -38,7 +38,7 @@ export function ProductCard({ product }: { product: Product }) {
         />
       </div>
 
-      <div className="mt-4 flex items-center justify-between gap-2">
+      <div className="mt-4 flex flex-wrap items-center justify-between gap-2">
         <StarRating rating={product.rating} reviewCount={product.reviewCount} variant="single" />
         <QuickAddButton product={product} />
       </div>

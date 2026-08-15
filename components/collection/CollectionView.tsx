@@ -33,7 +33,7 @@ export function CollectionView({ products }: { products: Product[] }) {
   }, [products, activeUseCase, sort]);
 
   return (
-    <div className="grid gap-10 lg:grid-cols-[220px_1fr]">
+    <div className="grid grid-cols-1 gap-10 lg:grid-cols-[220px_1fr]">
       <aside className="lg:sticky lg:top-24 lg:self-start">
         <FilterBar
           useCases={useCases}
