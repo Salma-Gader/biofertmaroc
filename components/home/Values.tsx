@@ -96,10 +96,26 @@ function ApprovedIcon({ className }: { className?: string }) {
 
 export function Values() {
   return (
-    <section className="bg-cream-dark py-10 sm:py-20">
+    <section className="bg-pink-light py-10 sm:py-20">
       <Container>
-        <h2 className="text-center font-display text-2xl text-ink sm:text-3xl">Nos valeurs</h2>
-        <div className="mt-10 grid grid-cols-2 gap-x-6 gap-y-10 sm:grid-cols-5">
+        <h2 className="text-left font-display text-2xl text-ink lg:text-center lg:text-3xl">
+          Nos valeurs
+        </h2>
+
+        {/* Mobile/tablet: left-aligned icon + label rows, one per row */}
+        <div className="mt-6 flex flex-col gap-6 lg:hidden">
+          {values.map((value) => (
+            <div key={value.title} className="flex items-center gap-4">
+              <div className="flex h-8 w-8 shrink-0 items-center justify-center text-brown">
+                {value.icon}
+              </div>
+              <h3 className="font-display text-sm font-medium text-ink">{value.title}</h3>
+            </div>
+          ))}
+        </div>
+
+        {/* Desktop: centered icon-over-text grid with descriptions */}
+        <div className="mt-10 hidden gap-x-6 gap-y-10 lg:grid lg:grid-cols-5">
           {values.map((value) => (
             <div key={value.title} className="flex flex-col items-center gap-3 text-center">
               <div className="flex h-10 w-10 items-center justify-center text-brown sm:h-12 sm:w-12">
