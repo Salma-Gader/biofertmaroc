@@ -105,9 +105,6 @@ export function MobileNav({
             <Button href="/collections/best-sellers" variant="accent" size="md" onClick={onClose}>
               Promo −50%
             </Button>
-            <Button href="/account" variant="outline" size="md" onClick={onClose}>
-              Mon compte
-            </Button>
           </div>
         </nav>
       </div>

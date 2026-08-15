@@ -29,22 +29,21 @@ function BoxIcon() {
   );
 }
 
-function CalendarIcon() {
+function ClockIcon() {
   return (
     <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true">
-      <rect x="3.5" y="5" width="17" height="15" rx="2" stroke="currentColor" strokeWidth="1.5" />
-      <path d="M3.5 10h17M8 3v4M16 3v4" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
+      <circle cx="12" cy="12" r="8.5" stroke="currentColor" strokeWidth="1.5" />
+      <path d="M12 7.5V12l3 2" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
     </svg>
   );
 }
 
-function GiftIcon() {
+function ExpertIcon() {
   return (
     <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true">
-      <rect x="3.5" y="9" width="17" height="11" rx="1.5" stroke="currentColor" strokeWidth="1.5" />
-      <path d="M3.5 9h17v4h-17z" stroke="currentColor" strokeWidth="1.5" strokeLinejoin="round" />
-      <path d="M12 9v11" stroke="currentColor" strokeWidth="1.5" />
-      <path d="M12 9c0-2.5-1.8-4-3.5-4S6 6.3 6 7.5 7.2 9 8.5 9H12zM12 9c0-2.5 1.8-4 3.5-4S18 6.3 18 7.5 16.8 9 15.5 9H12z" stroke="currentColor" strokeWidth="1.5" strokeLinejoin="round" />
+      <circle cx="12" cy="8" r="3.5" stroke="currentColor" strokeWidth="1.5" />
+      <path d="M4.5 20c1.5-4 4.5-6 7.5-6s6 2 7.5 6" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
+      <path d="M15.5 5.5l1 1 2-2" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
     </svg>
   );
 }
@@ -59,11 +58,11 @@ function DocumentIcon() {
 }
 
 const tiles = [
-  { title: "-15% sur tous les produits", body: "Votre routine à prix doux", icon: <PercentIcon /> },
-  { title: "Livraison offerte", body: "Dès 400 DH tous les 30 jours", icon: <BoxIcon /> },
-  { title: "Abonnement modifiable", body: "Changez de produits à tout moment", icon: <CalendarIcon /> },
-  { title: "Cadeaux et surprises", body: "Glissés régulièrement dans vos commandes", icon: <GiftIcon /> },
-  { title: "Des contenus exclusifs", body: "Accès à nos fiches et conseils", icon: <DocumentIcon /> },
+  { title: "100% gratuit", body: "Sans engagement, aucun frais", icon: <PercentIcon /> },
+  { title: "2 minutes chrono", body: "Un questionnaire rapide et simple", icon: <ClockIcon /> },
+  { title: "Résultat immédiat", body: "Votre recommandation à la fin du bilan", icon: <BoxIcon /> },
+  { title: "Conseils d'experts", body: "Basés sur votre profil de fertilité", icon: <ExpertIcon /> },
+  { title: "100% confidentiel", body: "Vos réponses restent privées", icon: <DocumentIcon /> },
 ];
 
 export function Subscription() {
@@ -90,7 +89,7 @@ export function Subscription() {
           </div>
 
           <h2 className="font-display text-3xl font-medium text-ink sm:text-4xl">
-            Votre abonnement : votre routine livrée tous les mois
+            Votre bilan personnalisé, gratuit en 2 minutes
           </h2>
 
           <div className="grid grid-cols-2 gap-3 sm:grid-cols-3">
@@ -102,13 +101,13 @@ export function Subscription() {
               </div>
             ))}
             <Link
-              href="/subscriptions"
+              href="/quiz"
               className="flex flex-col justify-between gap-2 rounded-2xl bg-[#e0f2fe] p-4 transition-colors hover:bg-[#c9e7fb]"
             >
               <span className="flex h-8 w-8 items-center justify-center rounded-full bg-ink text-white">
                 <ArrowIcon size={14} />
               </span>
-              <span className="font-display text-sm font-semibold text-ink">Je m&apos;abonne</span>
+              <span className="font-display text-sm font-semibold text-ink">Faire le bilan</span>
             </Link>
           </div>
         </div>
