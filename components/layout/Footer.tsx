@@ -20,7 +20,7 @@ function FooterColumn({
 }) {
   return (
     <div>
-      <h3 className="mb-4 text-xs font-semibold uppercase tracking-wide text-ink/50">
+      <h3 className="mb-4 text-xs font-semibold uppercase tracking-wide text-ink">
         {title}
       </h3>
       <ul className="flex flex-col gap-2.5">
@@ -28,7 +28,7 @@ function FooterColumn({
           <li key={link.href}>
             <Link
               href={link.href}
-              className="text-sm text-ink/80 hover:text-ink hover:underline underline-offset-4"
+              className="text-sm text-ink hover:underline underline-offset-4"
             >
               {link.label}
             </Link>
@@ -49,7 +49,7 @@ export function Footer() {
         <div className="mb-12 flex flex-col items-start gap-6 border-b border-ink/10 pb-12 sm:flex-row sm:items-center sm:justify-between">
           <div>
             <h2 className="font-display text-2xl font-medium">Rejoignez la newsletter</h2>
-            <p className="mt-1 text-sm text-ink/60">
+            <p className="mt-1 text-sm text-ink">
               Des conseils fertilité, pour elle et pour lui, directement dans votre boîte mail.
             </p>
           </div>
@@ -61,10 +61,10 @@ export function Footer() {
           <FooterColumn title="À propos" links={footerNav.company} />
           <FooterColumn title="Aide" links={footerNav.help} />
           <div>
-            <h3 className="mb-4 text-xs font-semibold uppercase tracking-wide text-ink/50">
+            <h3 className="mb-4 text-xs font-semibold uppercase tracking-wide text-ink">
               Contact
             </h3>
-            <address className="not-italic text-sm leading-relaxed text-ink/80">
+            <address className="not-italic text-sm leading-relaxed text-ink">
               123 Avenue Wellness
               <br />
               Casablanca, Maroc
@@ -80,7 +80,7 @@ export function Footer() {
                     href={social.href}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="text-sm text-ink/80 hover:text-ink hover:underline underline-offset-4"
+                    className="text-sm text-ink hover:underline underline-offset-4"
                   >
                     {social.label}
                   </a>
@@ -91,7 +91,7 @@ export function Footer() {
         </div>
 
         <div className="mt-12 flex flex-col gap-4 border-t border-ink/10 pt-6 sm:flex-row sm:items-center sm:justify-between">
-          <div className="flex flex-wrap gap-3 text-xs text-ink/50">
+          <div className="flex flex-wrap gap-3 text-xs text-ink">
             {footerNav.legal.map((link) => (
               <Link key={link.href} href={link.href} className="hover:text-ink hover:underline underline-offset-4">
                 {link.label}
@@ -99,7 +99,7 @@ export function Footer() {
             ))}
             <span>&copy; {new Date().getFullYear()} {siteConfig.name}. Tous droits réservés.</span>
           </div>
-          <ul className="flex gap-3 text-xs text-ink/50">
+          <ul className="flex gap-3 text-xs text-ink">
             {paymentMethods.map((method) => (
               <li key={method} className="rounded border border-ink/20 px-2 py-1">
                 {method}

@@ -40,7 +40,7 @@ const categoryContent: Record<string, { title: string; image: string }> = {
 
 export function VosMoments() {
   return (
-    <section className="bg-white py-16 sm:py-20">
+    <section className="bg-white py-10 sm:py-20">
       <Container>
         <h2 className="font-display text-4xl font-medium text-ink sm:text-5xl">
           Nos catégories

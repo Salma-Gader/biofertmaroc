@@ -24,7 +24,7 @@ export function BestSellers() {
   }, [activeTab]);
 
   return (
-    <section className="bg-white py-16 sm:py-20">
+    <section className="bg-white py-10 sm:py-20">
       <Container>
         <div className="mb-8 flex flex-col gap-6 sm:flex-row sm:items-center sm:justify-between">
           <Heading size="section">Best sellers</Heading>

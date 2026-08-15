@@ -67,7 +67,7 @@ function CertifiedIcon({ className }: { className?: string }) {
 
 export function TrustBadges() {
   return (
-    <section className="bg-blue-light py-14 sm:py-16">
+    <section className="bg-blue-light py-8 sm:py-16">
       <Container className="grid grid-cols-2 gap-y-10 gap-x-6 sm:grid-cols-5">
         {badges.map((badge) => (
           <div key={badge.title} className="flex flex-col items-center gap-3 text-center">

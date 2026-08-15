@@ -23,7 +23,7 @@ export function Reviews() {
   };
 
   return (
-    <section id="avis" className="overflow-hidden py-16 sm:py-20" style={{ backgroundColor: "#ffffff" }}>
+    <section id="avis" className="overflow-hidden py-10 sm:py-20" style={{ backgroundColor: "#ffffff" }}>
       <Container className="mb-10 flex flex-col gap-8 sm:flex-row sm:items-center sm:justify-between">
         <div className="flex flex-col items-start gap-4">
           <Heading as="h2" size="section">

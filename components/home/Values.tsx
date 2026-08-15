@@ -96,7 +96,7 @@ function ApprovedIcon({ className }: { className?: string }) {
 
 export function Values() {
   return (
-    <section className="bg-cream-dark py-16 sm:py-20">
+    <section className="bg-cream-dark py-10 sm:py-20">
       <Container>
         <h2 className="text-center font-display text-2xl text-ink sm:text-3xl">Nos valeurs</h2>
         <div className="mt-10 grid grid-cols-2 gap-x-6 gap-y-10 sm:grid-cols-5">

@@ -70,7 +70,7 @@ export function Subscription() {
   return (
     <section className="bg-white">
       <div className="grid lg:min-h-screen lg:grid-cols-2">
-        <div className="flex flex-col justify-center gap-6 bg-[#efe8e6] px-6 py-16 sm:px-12 sm:py-20 lg:px-16">
+        <div className="flex flex-col justify-center gap-6 bg-[#efe8e6] px-6 py-10 sm:px-12 sm:py-20 lg:px-16">
           <div className="flex flex-col items-start gap-2">
             <div className="flex -space-x-2">
               {avatars.map((a) => (

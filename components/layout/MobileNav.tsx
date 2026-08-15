@@ -99,6 +99,9 @@ export function MobileNav({
           </MobileSection>
 
           <div className="mt-4 flex flex-col gap-3">
+            <Button href="/quiz" variant="primary" size="md" onClick={onClose}>
+              Bilan personnalisé
+            </Button>
             <Button href="/collections/best-sellers" variant="accent" size="md" onClick={onClose}>
               Promo −50%
             </Button>

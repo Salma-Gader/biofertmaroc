@@ -32,7 +32,7 @@ function TrustpilotSquareStar() {
 
 export function TrustpilotStrip() {
   return (
-    <section id="trustpilot" className="bg-white py-14 sm:py-16">
+    <section id="trustpilot" className="bg-white py-8 sm:py-16">
       <Container className="mx-auto flex max-w-4xl flex-col items-start gap-10 sm:flex-row sm:items-center sm:justify-between">
         <div className="flex flex-col items-start gap-2">
           <div className="flex items-center gap-2">
