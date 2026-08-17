@@ -9,18 +9,23 @@ import { Reviews } from "@/components/home/Reviews";
 import { QuizCta } from "@/components/home/QuizCta";
 import { BlogGrid } from "@/components/home/BlogGrid";
 import { TrustBadges } from "@/components/home/TrustBadges";
+import { getProducts } from "@/lib/shopify/api";
 
-export default function Home() {
+export default async function Home() {
+  // Fetched once and threaded to every homepage section that needs
+  // products, rather than each section fetching from Shopify separately.
+  const products = await getProducts({ first: 50 }).catch(() => []);
+
   return (
     <>
       <Hero />
       <TrustpilotStrip />
-      <VosMoments />
-      <BestSellers />
+      <VosMoments products={products} />
+      <BestSellers products={products} />
       <Subscription />
       <Values />
       <BrandStoryFaq />
-      <Reviews />
+      <Reviews products={products} />
       <QuizCta />
       <BlogGrid />
       <TrustBadges />

@@ -2,18 +2,28 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Container } from "@/components/ui/Container";
 import { SearchIcon, CloseXIcon } from "@/components/ui/Icons";
-import { products } from "@/lib/mock-data";
 import { blogPosts } from "@/lib/mock-data";
+import { searchProductsAction } from "@/lib/shopify/search-action";
+import type { Product } from "@/lib/types";
 
 export function SearchOverlay({
   onClose,
+  featuredProducts,
 }: {
   onClose: () => void;
+  featuredProducts: Product[];
 }) {
   const inputRef = useRef<HTMLInputElement>(null);
+  const [query, setQuery] = useState("");
+  // Tags each result set with the query it answers, so a query that's been
+  // cleared (or changed again) never renders another query's stale results
+  // — the render below only trusts `searchResults` when it matches `query`.
+  const [searchResults, setSearchResults] = useState<{ query: string; products: Product[] } | null>(
+    null
+  );
 
   useEffect(() => {
     inputRef.current?.focus();
@@ -22,8 +32,30 @@ export function SearchOverlay({
     return () => document.removeEventListener("keydown", onKey);
   }, [onClose]);
 
-  const featured = products.slice(0, 4);
+  const trimmedQuery = query.trim();
+  const isShowingSearch = trimmedQuery.length > 0;
+  // No matching result yet for the current query means a search is either
+  // about to start (debounce) or already in flight — either way, loading.
+  const isSearching = isShowingSearch && searchResults?.query !== trimmedQuery;
+
+  // Live product search against Shopify, debounced while typing. The only
+  // setState call happens inside the promise callback, once the debounce
+  // timer and the request both complete — never synchronously in the
+  // effect body.
+  useEffect(() => {
+    if (!trimmedQuery) return;
+    const timer = setTimeout(() => {
+      searchProductsAction(trimmedQuery).then((products) =>
+        setSearchResults({ query: trimmedQuery, products })
+      );
+    }, 300);
+    return () => clearTimeout(timer);
+  }, [trimmedQuery]);
+
   const articles = blogPosts.slice(0, 2);
+  const currentResults =
+    isShowingSearch && searchResults?.query === trimmedQuery ? searchResults.products : null;
+  const shownProducts = isShowingSearch ? currentResults ?? [] : featuredProducts.slice(0, 4);
 
   return (
     <div className="absolute inset-x-0 top-full z-40 border-t border-ink/10 bg-white shadow-lg">
@@ -33,6 +65,8 @@ export function SearchOverlay({
           <input
             ref={inputRef}
             type="search"
+            value={query}
+            onChange={(e) => setQuery(e.target.value)}
             placeholder="Rechercher des produits, guides…"
             className="flex-1 bg-transparent text-lg outline-none placeholder:text-ink/40"
           />
@@ -44,29 +78,35 @@ export function SearchOverlay({
         <div className="grid gap-8 sm:grid-cols-[2fr_1fr]">
           <div>
             <p className="mb-3 text-xs font-semibold uppercase tracking-wide text-ink/50">
-              Sélection du moment
+              {isShowingSearch ? "Résultats" : "Sélection du moment"}
             </p>
-            <div className="grid grid-cols-2 gap-4 sm:grid-cols-4">
-              {featured.map((product) => (
-                <Link
-                  key={product.id}
-                  href={`/products/${product.handle}`}
-                  onClick={onClose}
-                  className="group"
-                >
-                  <div className="aspect-square overflow-hidden rounded-xl bg-cream">
-                    <Image
-                      src={product.featuredImage.src}
-                      alt={product.featuredImage.alt}
-                      width={200}
-                      height={200}
-                      className="h-full w-full object-cover transition-transform duration-300 group-hover:scale-105"
-                    />
-                  </div>
-                  <p className="mt-2 text-xs font-medium text-ink/80">{product.title}</p>
-                </Link>
-              ))}
-            </div>
+            {isShowingSearch && isSearching ? (
+              <p className="text-sm text-ink/50">Recherche…</p>
+            ) : isShowingSearch && currentResults?.length === 0 ? (
+              <p className="text-sm text-ink/50">Aucun produit ne correspond à &laquo;&nbsp;{query}&nbsp;&raquo;.</p>
+            ) : (
+              <div className="grid grid-cols-2 gap-4 sm:grid-cols-4">
+                {shownProducts.map((product) => (
+                  <Link
+                    key={product.id}
+                    href={`/products/${product.handle}`}
+                    onClick={onClose}
+                    className="group"
+                  >
+                    <div className="aspect-square overflow-hidden rounded-xl bg-cream">
+                      <Image
+                        src={product.featuredImage.src}
+                        alt={product.featuredImage.alt}
+                        width={200}
+                        height={200}
+                        className="h-full w-full object-cover transition-transform duration-300 group-hover:scale-105"
+                      />
+                    </div>
+                    <p className="mt-2 text-xs font-medium text-ink/80">{product.title}</p>
+                  </Link>
+                ))}
+              </div>
+            )}
           </div>
 
           <div>

@@ -1,7 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { Container } from "@/components/ui/Container";
-import { products } from "@/lib/mock-data";
+import type { Product } from "@/lib/types";
 
 const categoryContent: Record<string, { title: string; image: string }> = {
   bellafert: {
@@ -38,7 +38,7 @@ const categoryContent: Record<string, { title: string; image: string }> = {
   },
 };
 
-export function VosMoments() {
+export function VosMoments({ products }: { products: Product[] }) {
   return (
     <section className="bg-white py-10 sm:py-20">
       <Container>

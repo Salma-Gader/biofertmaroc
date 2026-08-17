@@ -4,6 +4,7 @@ import Image from "next/image";
 import { useEffect, useRef, useState } from "react";
 import { StarRating } from "@/components/ui/StarRating";
 import { AddToCartButton } from "./AddToCartButton";
+import { formatMoney } from "./ProductPrice";
 import type { Product } from "@/lib/types";
 
 export function StickyBuyBar({ product }: { product: Product }) {
@@ -42,7 +43,7 @@ export function StickyBuyBar({ product }: { product: Product }) {
             <StarRating rating={product.rating} reviewCount={product.reviewCount} />
           </div>
           <span className="hidden text-sm font-semibold sm:block">
-            ${variant.price.amount.toFixed(2)}
+            {formatMoney(variant.price)}
           </span>
           <div className="w-40 shrink-0">
             <AddToCartButton product={product} variant={variant} />

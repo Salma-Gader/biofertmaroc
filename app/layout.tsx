@@ -7,6 +7,7 @@ import { Footer } from "@/components/layout/Footer";
 import { CartProvider } from "@/context/CartContext";
 import { CartDrawer } from "@/components/layout/CartDrawer";
 import { siteConfig } from "@/lib/site-config";
+import { getProducts } from "@/lib/shopify/api";
 
 const montserrat = Montserrat({
   variable: "--font-montserrat",
@@ -39,7 +40,12 @@ export const metadata: Metadata = {
   },
 };
 
-export default function RootLayout({ children }: LayoutProps<"/">) {
+export default async function RootLayout({ children }: LayoutProps<"/">) {
+  // Small, cheap fetch reused for the search overlay's default "Sélection
+  // du moment" view. Falls back to an empty list if Shopify is unreachable
+  // so a Storefront API outage never takes down the whole site's chrome.
+  const featuredProducts = await getProducts({ first: 4 }).catch(() => []);
+
   return (
     <html
       lang="fr"
@@ -54,7 +60,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
             Aller au contenu
           </a>
           <AnnouncementBar />
-          <Header />
+          <Header featuredProducts={featuredProducts} />
           <main id="main-content" className="flex-1">
             {children}
           </main>

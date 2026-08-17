@@ -8,11 +8,12 @@ import { Heading } from "@/components/ui/Heading";
 import { Button } from "@/components/ui/Button";
 import { StarRating } from "@/components/ui/StarRating";
 import { ArrowIcon, GoogleIcon } from "@/components/ui/Icons";
-import { reviews, getProductByHandle } from "@/lib/mock-data";
+import { reviews } from "@/lib/mock-data";
+import type { Product } from "@/lib/types";
 
 const GOOGLE_RATING = 4.8;
 
-export function Reviews() {
+export function Reviews({ products }: { products: Product[] }) {
   const scrollerRef = useRef<HTMLDivElement>(null);
 
   const scrollBy = (direction: "left" | "right") => {
@@ -52,7 +53,7 @@ export function Reviews() {
           className="no-scrollbar flex snap-x snap-mandatory gap-5 overflow-x-auto scroll-smooth pb-2"
         >
           {reviews.map((review) => {
-            const product = getProductByHandle(review.productHandle ?? "");
+            const product = products.find((p) => p.handle === review.productHandle);
             return (
               <div
                 key={review.id}

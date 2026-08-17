@@ -9,8 +9,18 @@ import { formatMoney } from "@/components/product/ProductPrice";
 const FREE_SHIPPING_THRESHOLD = 600;
 
 export function CartDrawer() {
-  const { lines, isOpen, closeCart, removeItem, updateQuantity, subtotal, itemCount } =
-    useCart();
+  const {
+    lines,
+    isOpen,
+    closeCart,
+    removeItem,
+    updateQuantity,
+    subtotal,
+    itemCount,
+    checkoutUrl,
+    isLoading,
+    error,
+  } = useCart();
 
   useEffect(() => {
     if (!isOpen) return;
@@ -154,9 +164,18 @@ export function CartDrawer() {
               <span className="text-ink/60">Sous-total</span>
               <span className="font-semibold">{formatMoney({ amount: subtotal, currencyCode: "MAD" })}</span>
             </div>
-            <Button variant="primary" size="lg" className="w-full">
-              Commander
-            </Button>
+            {error && (
+              <p className="mb-3 text-center text-xs text-terracotta">{error}</p>
+            )}
+            {checkoutUrl && !isLoading ? (
+              <Button href={checkoutUrl} variant="primary" size="lg" className="w-full">
+                Commander
+              </Button>
+            ) : (
+              <Button variant="primary" size="lg" className="w-full" disabled>
+                {isLoading ? "Mise à jour…" : "Commander"}
+              </Button>
+            )}
             <p className="mt-2 text-center text-[11px] text-ink/50">
               Taxes et frais de livraison calculés à la commande.
             </p>

@@ -9,11 +9,11 @@ import { AskAboutProduct } from "@/components/product/AskAboutProduct";
 import { StickyBuyBar } from "@/components/product/StickyBuyBar";
 import { ProductCarousel } from "@/components/product/ProductCarousel";
 import { TrustBadges } from "@/components/home/TrustBadges";
-import { getProductByHandle, products } from "@/lib/mock-data";
+import { getProductByHandle, getProductRecommendations } from "@/lib/shopify/api";
 
-export function generateStaticParams() {
-  return products.map((p) => ({ handle: p.handle }));
-}
+// Rendered on-demand per request (no build-time Shopify calls), so a
+// missing/invalid Storefront token never breaks `next build`.
+export const dynamicParams = true;
 
 export async function generateMetadata({
   params,
@@ -21,7 +21,7 @@ export async function generateMetadata({
   params: Promise<{ handle: string }>;
 }): Promise<Metadata> {
   const { handle } = await params;
-  const product = getProductByHandle(handle);
+  const product = await getProductByHandle(handle).catch(() => null);
   if (!product) return {};
   return {
     title: product.title,
@@ -38,12 +38,10 @@ export default async function ProductPage({
   params: Promise<{ handle: string }>;
 }) {
   const { handle } = await params;
-  const product = getProductByHandle(handle);
+  const product = await getProductByHandle(handle);
   if (!product) notFound();
 
-  const related = products
-    .filter((p) => p.id !== product.id && p.tags.some((tag) => product.tags.includes(tag)))
-    .slice(0, 4);
+  const related = await getProductRecommendations(product.id).catch(() => []);
 
   return (
     <>
@@ -65,7 +63,7 @@ export default async function ProductPage({
           <Heading size="sub" className="mb-6">
             Complétez votre routine
           </Heading>
-          <ProductCarousel products={related} />
+          <ProductCarousel products={related.slice(0, 4)} />
         </Container>
       )}
 

@@ -11,10 +11,11 @@ import { ResourcesMenu } from "./ResourcesMenu";
 import { SearchOverlay } from "./SearchOverlay";
 import { MobileNav } from "./MobileNav";
 import { useCart } from "@/context/CartContext";
+import type { Product } from "@/lib/types";
 
 type MenuKey = "products" | "moments" | "resources" | null;
 
-export function Header() {
+export function Header({ featuredProducts }: { featuredProducts: Product[] }) {
   const [activeMenu, setActiveMenu] = useState<MenuKey>(null);
   const [searchOpen, setSearchOpen] = useState(false);
   const [mobileNavOpen, setMobileNavOpen] = useState(false);
@@ -183,7 +184,7 @@ export function Header() {
 
       {activeMenu === "products" && <MegaMenuProducts onNavigate={closeAll} />}
       {activeMenu === "moments" && <MegaMenuMoments onNavigate={closeAll} />}
-      {searchOpen && <SearchOverlay onClose={closeAll} />}
+      {searchOpen && <SearchOverlay onClose={closeAll} featuredProducts={featuredProducts} />}
 
       <MobileNav isOpen={mobileNavOpen} onClose={() => setMobileNavOpen(false)} />
     </header>

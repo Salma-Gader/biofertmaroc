@@ -3,17 +3,14 @@ import { notFound } from "next/navigation";
 import { CollectionHeader } from "@/components/collection/CollectionHeader";
 import { CollectionView } from "@/components/collection/CollectionView";
 import { Container } from "@/components/ui/Container";
-import { collections, getProductsForCollection } from "@/lib/mock-data";
+import { getCollectionByHandle } from "@/lib/shopify/api";
 
-export function generateStaticParams() {
-  return collections.map((c) => ({ slug: [c.handle] }));
-}
+// Rendered on-demand per request (no build-time Shopify calls), so a
+// missing/invalid Storefront token never breaks `next build`.
+export const dynamicParams = true;
 
-function resolveCollection(slug: string[]) {
-  return (
-    collections.find((c) => c.handle === slug[slug.length - 1]) ??
-    collections.find((c) => c.handle === slug[0])
-  );
+function resolveHandle(slug: string[]) {
+  return slug[slug.length - 1];
 }
 
 export async function generateMetadata({
@@ -22,11 +19,11 @@ export async function generateMetadata({
   params: Promise<{ slug: string[] }>;
 }): Promise<Metadata> {
   const { slug } = await params;
-  const collection = resolveCollection(slug);
-  if (!collection) return {};
+  const result = await getCollectionByHandle(resolveHandle(slug)).catch(() => null);
+  if (!result) return {};
   return {
-    title: collection.title,
-    description: collection.description,
+    title: result.collection.title,
+    description: result.collection.description,
   };
 }
 
@@ -36,10 +33,10 @@ export default async function CollectionPage({
   params: Promise<{ slug: string[] }>;
 }) {
   const { slug } = await params;
-  const collection = resolveCollection(slug);
-  if (!collection) notFound();
+  const result = await getCollectionByHandle(resolveHandle(slug));
+  if (!result) notFound();
 
-  const products = getProductsForCollection(collection.handle);
+  const { collection, products } = result;
 
   return (
     <>

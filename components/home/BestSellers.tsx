@@ -4,7 +4,7 @@ import { useMemo, useState } from "react";
 import { Container } from "@/components/ui/Container";
 import { Heading } from "@/components/ui/Heading";
 import { ProductCarousel } from "@/components/product/ProductCarousel";
-import { products } from "@/lib/mock-data";
+import type { Product } from "@/lib/types";
 
 const tabs = [
   { label: "Best sellers", tag: "populaire" },
@@ -14,14 +14,14 @@ const tabs = [
   { label: "Nos essentiels", tag: "essentiels" },
 ];
 
-export function BestSellers() {
+export function BestSellers({ products }: { products: Product[] }) {
   const [activeTab, setActiveTab] = useState(tabs[0].label);
 
   const filtered = useMemo(() => {
     const tab = tabs.find((t) => t.label === activeTab);
     if (!tab?.tag) return products;
     return products.filter((p) => p.tags.includes(tab.tag as string));
-  }, [activeTab]);
+  }, [activeTab, products]);
 
   return (
     <section className="bg-white py-10 sm:py-20">
