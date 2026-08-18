@@ -72,7 +72,7 @@ export function TrustBadges() {
   return (
     <section className="bg-pink-pale py-10 sm:py-20">
       <Container>
-        <div className="grid grid-cols-2 gap-x-4 gap-y-8 sm:flex sm:flex-nowrap sm:items-center sm:gap-0 sm:divide-x sm:divide-ink/10">
+        <div className="grid grid-cols-1 gap-y-6 sm:flex sm:flex-nowrap sm:items-center sm:gap-0 sm:divide-x sm:divide-ink/10">
           {badges.map((badge) => (
             <div key={badge.title} className="flex items-center gap-3 sm:flex-1 sm:justify-center sm:px-4">
               <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full bg-white text-rose">
