@@ -24,7 +24,7 @@ export function Reviews({ products }: { products: Product[] }) {
   };
 
   return (
-    <section id="avis" className="overflow-hidden py-10 sm:py-20" style={{ backgroundColor: "#ffffff" }}>
+    <section id="avis" className="overflow-hidden bg-white py-10 sm:py-20">
       <Container className="mb-10 flex flex-col gap-8 sm:flex-row sm:items-center sm:justify-between">
         <div className="flex flex-col items-start gap-4">
           <Heading as="h2" size="section">
@@ -37,7 +37,7 @@ export function Reviews({ products }: { products: Product[] }) {
           </Button>
         </div>
 
-        <div className="flex flex-col items-center gap-2 rounded-2xl px-8 py-6" style={{ backgroundColor: "#f7f3f2" }}>
+        <div className="flex flex-col items-center gap-2 rounded-2xl bg-cream px-8 py-6">
           <span className="flex items-center gap-2 text-sm font-medium text-ink/70">
             <GoogleIcon />
             Google
@@ -57,8 +57,7 @@ export function Reviews({ products }: { products: Product[] }) {
             return (
               <div
                 key={review.id}
-                className="flex w-96 shrink-0 snap-start flex-col gap-3 rounded-2xl p-5 sm:w-[28rem]"
-                style={{ backgroundColor: "#f7f3f2" }}
+                className="flex w-96 shrink-0 snap-start flex-col gap-3 rounded-2xl bg-cream p-5 sm:w-[28rem]"
               >
                 <StarRating rating={review.rating} />
                 <h3 className="font-display text-base font-medium">{review.title}</h3>

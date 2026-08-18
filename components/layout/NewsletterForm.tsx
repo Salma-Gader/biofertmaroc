@@ -29,9 +29,9 @@ export function NewsletterForm() {
         type="email"
         required
         placeholder="Votre adresse email"
-        className="w-full flex-1 rounded-full border border-ink/20 bg-transparent px-4 py-2.5 text-sm text-ink placeholder:text-ink/40 focus-visible:outline-2 focus-visible:outline-lime"
+        className="w-full flex-1 rounded-full border border-ink/10 bg-white px-4 py-2.5 text-sm text-ink placeholder:text-ink/40 focus-visible:outline-2 focus-visible:outline-pink"
       />
-      <Button type="submit" variant="accent" size="sm">
+      <Button type="submit" variant="primary" size="sm" className="bg-pink text-white hover:bg-pink-dark">
         S&apos;inscrire
       </Button>
     </form>

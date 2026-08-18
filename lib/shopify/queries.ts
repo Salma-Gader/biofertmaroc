@@ -1,12 +1,24 @@
 /**
  * GraphQL documents for the Shopify Storefront API.
  *
- * The `rating`/`reviewCount` metafields are read from a `reviews` namespace
- * (`reviews.rating`, `reviews.rating_count`) as a best-effort default. If
- * your store uses a different reviews app/namespace, update
- * `RATING_METAFIELD` and `RATING_COUNT_METAFIELD` below — fields simply
- * come back null if the metafield doesn't exist, which the mapper already
- * handles.
+ * `rating` is read from `custom.rating` (a merchant-owned decimal
+ * metafield) rather than `reviews.rating` — the latter is a
+ * Shopify-reserved standard metafield expecting the structured `rating`
+ * type ({ value, scale_min, scale_max }), not a bare decimal, so writing
+ * or defining a plain-decimal metafield there risks a type conflict.
+ * `reviewCount` has no such reserved structured type, so it stays under
+ * `reviews.rating_count` as originally set up. If your store uses a
+ * different reviews app/namespace for either, update the aliases below —
+ * fields simply come back null if the metafield doesn't exist, which the
+ * mapper already handles.
+ *
+ * `features`/`benefits`/`ingredients`/`claims` are `custom` namespace
+ * metafields written by `scripts/shopify-migration/migrate.ts` as JSON
+ * arrays (`list.single_line_text_field`); `usage`/`precautions` are plain
+ * strings (`multi_line_text_field`). Each metafield only resolves here if
+ * it also has a metafield **definition** granting Storefront API read
+ * access — a value can exist via the Admin API yet still come back `null`
+ * from this query without one.
  */
 
 const MONEY_FIELDS = `amount currencyCode`;
@@ -58,10 +70,28 @@ const PRODUCT_FRAGMENT = `
         }
       }
     }
-    ratingMetafield: metafield(namespace: "reviews", key: "rating") {
+    ratingMetafield: metafield(namespace: "custom", key: "rating") {
       value
     }
     ratingCountMetafield: metafield(namespace: "reviews", key: "rating_count") {
+      value
+    }
+    featuresMetafield: metafield(namespace: "custom", key: "features") {
+      value
+    }
+    benefitsMetafield: metafield(namespace: "custom", key: "benefits") {
+      value
+    }
+    ingredientsMetafield: metafield(namespace: "custom", key: "ingredients") {
+      value
+    }
+    usageMetafield: metafield(namespace: "custom", key: "usage") {
+      value
+    }
+    precautionsMetafield: metafield(namespace: "custom", key: "precautions") {
+      value
+    }
+    claimsMetafield: metafield(namespace: "custom", key: "claims") {
       value
     }
   }

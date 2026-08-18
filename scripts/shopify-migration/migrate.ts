@@ -103,8 +103,23 @@ function buildMetafields(product: (typeof products)[number]) {
       value: JSON.stringify(product.benefits),
     });
   }
-  // Matches the namespace/key lib/shopify/queries.ts reads for star ratings.
+  // The app reads ratings from `custom.rating` (a namespace we fully own),
+  // NOT `reviews.rating` — the latter is a Shopify-reserved standard
+  // metafield expecting the structured `rating` type ({ value, scale_min,
+  // scale_max }), not a bare decimal, so writing a plain number there risks
+  // a type conflict with Shopify's own standard definition.
+  fields.push({ namespace: "custom", key: "rating", type: "number_decimal", value: String(product.rating) });
+  // IMPORTANT: `productSet`'s `metafields` input is a full-replace list —
+  // any existing metafield whose namespace/key isn't included here gets
+  // DELETED, not left alone (confirmed against Shopify's own docs). So
+  // `reviews.rating` — pre-existing on every product from before this field
+  // was renamed — MUST stay listed here (with its original, unchanged
+  // value) or the next `productSet` run would silently wipe it out even
+  // though nothing in the app reads it anymore.
   fields.push({ namespace: "reviews", key: "rating", type: "number_decimal", value: String(product.rating) });
+  // `rating_count` has no such reserved structured type — the plain
+  // decimal/integer form is what Shopify's own standard definition expects
+  // here, so this one stays under `reviews` as before.
   fields.push({
     namespace: "reviews",
     key: "rating_count",

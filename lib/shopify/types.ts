@@ -60,6 +60,12 @@ export interface ShopifyProduct {
   variants: { edges: { node: ShopifyVariant }[] };
   ratingMetafield: ShopifyMetafield | null;
   ratingCountMetafield: ShopifyMetafield | null;
+  featuresMetafield: ShopifyMetafield | null;
+  benefitsMetafield: ShopifyMetafield | null;
+  ingredientsMetafield: ShopifyMetafield | null;
+  usageMetafield: ShopifyMetafield | null;
+  precautionsMetafield: ShopifyMetafield | null;
+  claimsMetafield: ShopifyMetafield | null;
 }
 
 export interface ShopifyCollection {

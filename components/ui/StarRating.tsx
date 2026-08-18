@@ -11,12 +11,12 @@ function Star({ fill, id }: { fill: number; id: string }) {
       <path
         d="M10 1.5l2.59 5.25 5.79.84-4.19 4.08.99 5.77L10 14.7l-5.18 2.72.99-5.77L1.62 7.6l5.79-.84L10 1.5z"
         fill="none"
-        stroke="var(--terracotta)"
+        stroke="var(--rose)"
         strokeWidth="1"
       />
       <path
         d="M10 1.5l2.59 5.25 5.79.84-4.19 4.08.99 5.77L10 14.7l-5.18 2.72.99-5.77L1.62 7.6l5.79-.84L10 1.5z"
-        fill="var(--terracotta)"
+        fill="var(--rose)"
         clipPath={`url(#${id})`}
       />
     </svg>
@@ -43,7 +43,7 @@ export function StarRating({
         className={`inline-flex items-center gap-1 font-bold ${size === "md" ? "text-base" : "text-sm"}`}
         aria-label={`Note de ${rating} sur 5${reviewCount ? ` (${reviewCount} avis)` : ""}`}
       >
-        <span className="text-ink" aria-hidden="true">
+        <span className="text-rose" aria-hidden="true">
           ★
         </span>
         <span className="text-ink">{rating.toFixed(1).replace(".", ",")}/5</span>

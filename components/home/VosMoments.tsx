@@ -1,6 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { Container } from "@/components/ui/Container";
+import { Heading } from "@/components/ui/Heading";
 import type { Product } from "@/lib/types";
 
 const categoryContent: Record<string, { title: string; image: string }> = {
@@ -40,13 +41,12 @@ const categoryContent: Record<string, { title: string; image: string }> = {
 
 export function VosMoments({ products }: { products: Product[] }) {
   return (
-    <section className="bg-white py-10 sm:py-20">
+    <section className="bg-pink-pale py-10 sm:py-20">
       <Container>
-        <h2 className="font-display text-4xl font-medium text-ink sm:text-5xl">
+        <Heading as="h2" size="section">
           Nos catégories
-        </h2>
-        <p className="mt-3 text-sm text-ink/70">FR</p>
-        <p className="mt-2 max-w-2xl text-base font-semibold text-brown sm:text-lg">
+        </Heading>
+        <p className="mt-3 max-w-2xl text-base font-semibold text-brown sm:text-lg">
           Un accompagnement naturel pour elle, pour lui, et pour vous deux.
         </p>
 

@@ -1,12 +1,14 @@
 import Image from "next/image";
 import Link from "next/link";
+import { Heading } from "@/components/ui/Heading";
+import { StarRating } from "@/components/ui/StarRating";
 import { ArrowIcon } from "@/components/ui/Icons";
 
 const avatars = [
   { initials: "ZL", color: "var(--pink)" },
-  { initials: "IB", color: "var(--blue)" },
+  { initials: "IB", color: "var(--rose)" },
   { initials: "YO", color: "var(--pink-dark)" },
-  { initials: "RA", color: "var(--blue-dark)" },
+  { initials: "RA", color: "var(--terracotta)" },
 ];
 
 function PercentIcon() {
@@ -67,42 +69,42 @@ const tiles = [
 
 export function Subscription() {
   return (
-    <section className="bg-white">
-      <div className="grid lg:min-h-screen lg:grid-cols-2">
-        <div className="flex flex-col justify-center gap-6 bg-[#efe8e6] px-6 py-10 sm:px-12 sm:py-20 lg:px-16">
+    <section className="bg-pink-pale">
+      <div className="grid lg:grid-cols-2 lg:items-stretch">
+        <div className="flex flex-col justify-center gap-6 px-5 py-10 sm:px-8 sm:py-16 lg:px-12 lg:py-20">
           <div className="flex flex-col items-start gap-2">
             <div className="flex -space-x-2">
               {avatars.map((a) => (
                 <span
                   key={a.initials}
-                  className="flex h-9 w-9 items-center justify-center rounded-full border-2 border-[#efe8e6] text-xs font-semibold text-white"
+                  className="flex h-9 w-9 items-center justify-center rounded-full border-2 border-white text-xs font-semibold text-white"
                   style={{ backgroundColor: a.color }}
                 >
                   {a.initials}
                 </span>
               ))}
             </div>
-            <span className="text-[#D6336C]" aria-hidden="true">★★★★★</span>
+            <StarRating rating={5} />
             <p className="text-sm font-medium text-ink/70">
               + de 2 000 clients nous font confiance !
             </p>
           </div>
 
-          <h2 className="font-display text-3xl font-medium text-ink sm:text-4xl">
+          <Heading as="h2" size="section">
             Votre bilan personnalisé, gratuit en 2 minutes
-          </h2>
+          </Heading>
 
           <div className="grid grid-cols-2 gap-3 sm:grid-cols-3">
             {tiles.map((tile) => (
-              <div key={tile.title} className="flex flex-col gap-2 rounded-2xl bg-white p-4">
-                <span className="text-[#D6336C]">{tile.icon}</span>
+              <div key={tile.title} className="flex flex-col gap-2 rounded-2xl bg-white p-4 shadow-soft">
+                <span className="text-rose">{tile.icon}</span>
                 <h3 className="font-display text-sm font-medium text-ink">{tile.title}</h3>
                 <p className="text-xs text-ink/60">{tile.body}</p>
               </div>
             ))}
             <Link
               href="/quiz"
-              className="flex flex-col justify-between gap-2 rounded-2xl bg-[#e0f2fe] p-4 transition-colors hover:bg-[#c9e7fb]"
+              className="flex flex-col justify-between gap-2 rounded-2xl bg-pink-light p-4 shadow-soft transition-colors hover:bg-pink-light/70"
             >
               <span className="flex h-8 w-8 items-center justify-center rounded-full bg-ink text-white">
                 <ArrowIcon size={14} />

@@ -4,6 +4,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
 import { Button } from "@/components/ui/Button";
+import { Logo } from "@/components/ui/Logo";
 import { SearchIcon, UserIcon, CartIcon, MenuIcon } from "@/components/ui/Icons";
 import { MegaMenuProducts } from "./MegaMenuProducts";
 import { MegaMenuMoments } from "./MegaMenuMoments";
@@ -109,7 +110,7 @@ export function Header({ featuredProducts }: { featuredProducts: Product[] }) {
             </div>
             <Link
               href="/collections/best-sellers"
-              className="shrink-0 whitespace-nowrap rounded-none bg-[#e0f2fe] px-2.5 py-1 text-xs font-bold uppercase tracking-wide text-ink"
+              className="shrink-0 whitespace-nowrap rounded-none bg-blue-light px-2.5 py-1 text-xs font-bold uppercase tracking-wide text-ink"
             >
               Promo &minus;50%
             </Link>
@@ -125,28 +126,9 @@ export function Header({ featuredProducts }: { featuredProducts: Product[] }) {
               window.location.reload();
             }
           }}
-          className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 whitespace-nowrap text-xl sm:text-2xl lg:text-3xl 2xl:text-4xl"
-          style={{
-            fontFamily: "var(--font-logo)",
-            fontWeight: 600,
-            fontStyle: "normal",
-            letterSpacing: "-0.03em",
-            wordSpacing: "0.15em",
-            color: "#2B1008",
-            fontVariationSettings: '"SOFT" 60, "WONK" 0, "opsz" 144',
-          }}
+          className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2"
         >
-          Biofert Maroc
-          <span
-            style={{
-              display: "inline-block",
-              fontStyle: "italic",
-              transform: "skew(-12deg)",
-              marginLeft: "0.15em",
-            }}
-          >
-            !
-          </span>
+          <Logo className="text-xl sm:text-2xl lg:text-3xl 2xl:text-4xl" />
         </Link>
 
         {/* Right cluster */}

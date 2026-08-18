@@ -11,9 +11,11 @@ const badges = [
 function DeliveryIcon({ className }: { className?: string }) {
   return (
     <svg className={className} viewBox="0 0 28 28" fill="none" aria-hidden="true">
-      <path d="M14 3.5l9 5v11l-9 5-9-5v-11l9-5Z" stroke="currentColor" strokeWidth="1.5" strokeLinejoin="round" />
-      <path d="M5 8.5L14 13.5l9-5" stroke="currentColor" strokeWidth="1.5" strokeLinejoin="round" />
-      <path d="M14 13.5V24.5" stroke="currentColor" strokeWidth="1.5" strokeLinejoin="round" />
+      <path d="M2 8.5h12.5v10.5H2z" stroke="currentColor" strokeWidth="1.5" strokeLinejoin="round" />
+      <path d="M14.5 12.5h5l4 4v2.5h-9z" stroke="currentColor" strokeWidth="1.5" strokeLinejoin="round" />
+      <circle cx="8" cy="21" r="2.2" stroke="currentColor" strokeWidth="1.5" />
+      <circle cx="20" cy="21" r="2.2" stroke="currentColor" strokeWidth="1.5" />
+      <path d="M2 4.5h3.5M1 6.7h5.5" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
     </svg>
   );
 }
@@ -21,9 +23,10 @@ function DeliveryIcon({ className }: { className?: string }) {
 function PaymentIcon({ className }: { className?: string }) {
   return (
     <svg className={className} viewBox="0 0 28 28" fill="none" aria-hidden="true">
-      <rect x="3" y="6.5" width="22" height="15" rx="2.5" stroke="currentColor" strokeWidth="1.5" />
-      <path d="M3 11.5h22" stroke="currentColor" strokeWidth="1.5" />
-      <path d="M7 16.5h6" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
+      <path d="M9 4h13.5a1.5 1.5 0 011.5 1.5V14" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+      <rect x="3" y="9" width="18" height="14" rx="2.5" stroke="currentColor" strokeWidth="1.5" />
+      <path d="M3 13.8h18" stroke="currentColor" strokeWidth="1.5" />
+      <path d="M6.5 18.6h5.5" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
     </svg>
   );
 }
@@ -67,19 +70,21 @@ function CertifiedIcon({ className }: { className?: string }) {
 
 export function TrustBadges() {
   return (
-    <section className="bg-blue-light py-8 sm:py-16">
-      <Container className="grid grid-cols-2 gap-y-10 gap-x-6 sm:grid-cols-5">
-        {badges.map((badge) => (
-          <div key={badge.title} className="flex flex-col items-center gap-3 text-center">
-            <div className="flex h-12 w-12 items-center justify-center text-blue sm:h-14 sm:w-14">
-              {badge.icon}
+    <section className="bg-pink-pale py-10 sm:py-20">
+      <Container>
+        <div className="grid grid-cols-2 gap-x-4 gap-y-8 sm:flex sm:flex-nowrap sm:items-center sm:gap-0 sm:divide-x sm:divide-ink/10">
+          {badges.map((badge) => (
+            <div key={badge.title} className="flex items-center gap-3 sm:flex-1 sm:justify-center sm:px-4">
+              <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full bg-white text-rose">
+                <span className="flex h-6 w-6 items-center justify-center">{badge.icon}</span>
+              </div>
+              <div>
+                <p className="text-sm font-semibold text-ink">{badge.title}</p>
+                <p className="text-xs text-ink/60">{badge.body}</p>
+              </div>
             </div>
-            <div>
-              <p className="text-base font-semibold text-ink">{badge.title}</p>
-              <p className="mt-1 text-sm text-ink/70">{badge.body}</p>
-            </div>
-          </div>
-        ))}
+          ))}
+        </div>
       </Container>
     </section>
   );

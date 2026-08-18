@@ -47,7 +47,7 @@ export function ProductCard({ product }: { product: Product }) {
         {product.productLine && (
           <p className="text-xs uppercase tracking-wide text-ink/50">{product.productLine}</p>
         )}
-        <h3 className="font-display text-xl font-medium text-[#482012]">
+        <h3 className="font-display text-xl font-medium text-ink">
           {product.subtitle ?? product.title}
         </h3>
 

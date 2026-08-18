@@ -28,7 +28,7 @@ const faqItems = [
 
 export function BrandStoryFaq() {
   return (
-    <section className="py-10 sm:py-20" style={{ backgroundColor: "#fbf9f9" }}>
+    <section className="bg-pink-pale py-10 sm:py-20">
       <Container className="grid gap-12 lg:grid-cols-[3fr_2fr] lg:items-center">
         <div>
           <Heading size="section" className="mb-4">

@@ -2,14 +2,14 @@ import Link from "next/link";
 import { Container } from "@/components/ui/Container";
 import { NewsletterForm } from "./NewsletterForm";
 import { footerNav, siteConfig } from "@/lib/site-config";
+import { WhatsAppIcon, FacebookIcon, InstagramIcon } from "@/components/ui/Icons";
+import { PaymentLogos } from "@/components/ui/PaymentLogos";
 
 const socialLinks = [
-  { label: "Instagram", href: "https://instagram.com" },
-  { label: "TikTok", href: "https://tiktok.com" },
-  { label: "Pinterest", href: "https://pinterest.com" },
+  { label: "WhatsApp", href: "https://wa.me/", Icon: WhatsAppIcon },
+  { label: "Facebook", href: "https://facebook.com", Icon: FacebookIcon },
+  { label: "Instagram", href: "https://instagram.com", Icon: InstagramIcon },
 ];
-
-const paymentMethods = ["Visa", "Mastercard", "Amex", "PayPal", "Alma"];
 
 function FooterColumn({
   title,
@@ -41,12 +41,11 @@ function FooterColumn({
 
 export function Footer() {
   return (
-    <footer
-      className="relative overflow-hidden text-ink"
-      style={{ backgroundColor: "#f7f3f2" }}
-    >
+    <footer className="relative overflow-hidden bg-pink-pale text-ink">
       <Container className="relative z-10 py-14 sm:py-16">
-        <div className="mb-12 flex flex-col items-start gap-6 border-b border-ink/10 pb-12 sm:flex-row sm:items-center sm:justify-between">
+        <div
+          className="mb-12 flex flex-col items-start gap-6 rounded-3xl bg-pink-light/40 p-6 sm:flex-row sm:items-center sm:justify-between sm:p-10"
+        >
           <div>
             <h2 className="font-display text-2xl font-medium">Rejoignez la newsletter</h2>
             <p className="mt-1 text-sm text-ink">
@@ -73,16 +72,17 @@ export function Footer() {
                 hello@biofertmaroc.com
               </a>
             </address>
-            <ul className="mt-4 flex gap-4">
-              {socialLinks.map((social) => (
-                <li key={social.href}>
+            <ul className="mt-4 flex gap-3">
+              {socialLinks.map(({ label, href, Icon }) => (
+                <li key={href}>
                   <a
-                    href={social.href}
+                    href={href}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="text-sm text-ink hover:underline underline-offset-4"
+                    aria-label={label}
+                    className="block text-pink-dark transition-colors hover:text-pink"
                   >
-                    {social.label}
+                    <Icon size={26} />
                   </a>
                 </li>
               ))}
@@ -99,13 +99,7 @@ export function Footer() {
             ))}
             <span>&copy; {new Date().getFullYear()} {siteConfig.name}. Tous droits réservés.</span>
           </div>
-          <ul className="flex gap-3 text-xs text-ink">
-            {paymentMethods.map((method) => (
-              <li key={method} className="rounded border border-ink/20 px-2 py-1">
-                {method}
-              </li>
-            ))}
-          </ul>
+          <PaymentLogos />
         </div>
       </Container>
 

@@ -110,6 +110,92 @@ export function GoogleIcon({ className = "", size = 20 }: IconProps) {
   );
 }
 
+export function WhatsAppIcon({ className = "", size = 18 }: IconProps) {
+  return (
+    <svg width={size} height={size} viewBox="0 0 20 20" fill="none" className={className} aria-hidden="true">
+      <path
+        d="M10 17.5c-1.1 0-2.15-.24-3.1-.68L3.5 17.5l.72-3.3A7.5 7.5 0 1110 17.5z"
+        stroke="currentColor"
+        strokeWidth="1.4"
+        strokeLinejoin="round"
+      />
+      <path
+        d="M7.3 7.55c.13-.3.27-.3.4-.3h.32c.1 0 .24 0 .34.27.13.3.4 1.02.43 1.1.04.08.06.17.01.27-.05.1-.07.16-.15.25-.07.09-.15.2-.22.26-.07.07-.14.15-.06.29.08.14.36.62.78 1 .54.49.99.64 1.14.71.15.07.24.06.32-.03.09-.1.38-.44.48-.6.1-.14.2-.12.33-.07.13.05.81.38.96.45.14.07.22.1.26.16.04.06.04.36-.08.71-.12.35-.68.65-.95.7-.25.03-.55.06-.89-.05a8 8 0 01-.81-.3c-1.43-.62-2.36-2.06-2.44-2.16-.07-.1-.59-.78-.59-1.49 0-.71.37-1.05.5-1.2z"
+        fill="currentColor"
+        transform="translate(10 10) scale(1.5) translate(-10 -10)"
+      />
+    </svg>
+  );
+}
+
+export function FacebookIcon({ className = "", size = 18 }: IconProps) {
+  return (
+    <svg width={size} height={size} viewBox="0 0 20 20" fill="none" className={className} aria-hidden="true">
+      <path
+        d="M11.6 10.2h1.6l.25-2h-1.85V6.9c0-.58.16-.97 1-.97h1.06V4.14C13.44 4.1 12.83 4 12.13 4c-1.47 0-2.48.9-2.48 2.55v1.65H8v2h1.65v5.7h2v-5.7z"
+        fill="currentColor"
+      />
+    </svg>
+  );
+}
+
+export function InstagramIcon({ className = "", size = 18 }: IconProps) {
+  return (
+    <svg width={size} height={size} viewBox="0 0 20 20" fill="none" className={className} aria-hidden="true">
+      <rect x="3" y="3" width="14" height="14" rx="4" stroke="currentColor" strokeWidth="1.4" />
+      <circle cx="10" cy="10" r="3.4" stroke="currentColor" strokeWidth="1.4" />
+      <circle cx="13.6" cy="6.4" r="1" fill="currentColor" />
+    </svg>
+  );
+}
+
+export function LinkedInIcon({ className = "", size = 18 }: IconProps) {
+  return (
+    <svg width={size} height={size} viewBox="0 0 20 20" fill="none" className={className} aria-hidden="true">
+      <rect x="3" y="3" width="14" height="14" rx="2.5" stroke="currentColor" strokeWidth="1.4" />
+      <circle cx="7" cy="7.3" r="0.9" fill="currentColor" />
+      <path d="M7 9.5v5" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round" />
+      <path
+        d="M10 14.5v-3.2c0-1 .6-1.8 1.7-1.8s1.6.8 1.6 1.8v3.2"
+        stroke="currentColor"
+        strokeWidth="1.4"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+      <path d="M10 9.5v5" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round" />
+    </svg>
+  );
+}
+
+export function TikTokIcon({ className = "", size = 18 }: IconProps) {
+  return (
+    <svg width={size} height={size} viewBox="0 0 20 20" fill="none" className={className} aria-hidden="true">
+      <path
+        d="M11.2 3v8.7a1.9 1.9 0 11-1.7-1.88"
+        stroke="currentColor"
+        strokeWidth="1.4"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+      <path
+        d="M11.2 3.1c.25 1.7 1.5 3 3.2 3.2"
+        stroke="currentColor"
+        strokeWidth="1.4"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+    </svg>
+  );
+}
+
+export function XIcon({ className = "", size = 18 }: IconProps) {
+  return (
+    <svg width={size} height={size} viewBox="0 0 20 20" fill="none" className={className} aria-hidden="true">
+      <path d="M4.5 4.5l11 11M15.5 4.5l-11 11" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
+    </svg>
+  );
+}
+
 export function ArrowIcon({ className = "", size = 16, direction = "right" }: IconProps & { direction?: "left" | "right" }) {
   return (
     <svg

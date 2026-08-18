@@ -6,7 +6,7 @@ export function QuizCta() {
   return (
     <section className="w-full">
       <div className="grid grid-cols-1 lg:grid-cols-2">
-        <div className="flex flex-col items-center justify-center gap-5 bg-cream px-6 py-8 text-center sm:px-12 sm:py-16 lg:px-16">
+        <div className="flex flex-col items-center justify-center gap-5 bg-pink-pale px-6 py-8 text-center sm:px-12 sm:py-16 lg:px-16">
           <Heading as="h2" size="sub">
             Vous ne savez pas par où commencer ?
           </Heading>
@@ -19,7 +19,7 @@ export function QuizCta() {
           </Button>
         </div>
 
-        <div className="flex items-center justify-center bg-cream">
+        <div className="flex items-center justify-center bg-pink-pale">
           <Image
             src="/placeholders/Gemini_Generated_Image_axtykyaxtykyaxty.png"
             alt=""

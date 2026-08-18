@@ -52,7 +52,7 @@ function HeroPillButton({
 }) {
   const styles =
     variant === "accent"
-      ? "bg-[#e0f2fe] text-ink hover:bg-[#c9e7fb]"
+      ? "bg-blue-light text-ink hover:bg-blue-light/70"
       : "bg-white text-ink hover:bg-cream";
 
   return (

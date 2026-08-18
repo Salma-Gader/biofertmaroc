@@ -35,7 +35,7 @@ export function BestSellers({ products }: { products: Product[] }) {
                 onClick={() => setActiveTab(tab.label)}
                 className={`shrink-0 whitespace-nowrap rounded-full border px-4 py-2 text-sm font-medium transition-colors ${
                   activeTab === tab.label
-                    ? "border-[#e0f2fe] bg-[#e0f2fe] text-ink"
+                    ? "border-blue-light bg-blue-light text-ink"
                     : "border-ink/20 bg-white text-ink/70 hover:bg-cream-dark"
                 }`}
               >

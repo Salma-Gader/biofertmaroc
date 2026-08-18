@@ -26,6 +26,17 @@ function toImage(image: ShopifyImage, id: string): ProductImage {
   };
 }
 
+/** Parses a `list.single_line_text_field` metafield's JSON-array value; missing/invalid input yields []. */
+function parseListMetafield(metafield: { value: string } | null): string[] {
+  if (!metafield) return [];
+  try {
+    const parsed = JSON.parse(metafield.value);
+    return Array.isArray(parsed) ? parsed.filter((v): v is string => typeof v === "string") : [];
+  } catch {
+    return [];
+  }
+}
+
 function toVariant(variant: ShopifyVariant): ProductVariant {
   return {
     id: variant.id,
@@ -72,8 +83,12 @@ export function mapShopifyProduct(product: ShopifyProduct): Product {
     badges: product.tags.filter((tag) => BADGE_TAGS.has(tag.toLowerCase())),
     rating: Number.isFinite(rating) ? rating : 0,
     reviewCount: Number.isFinite(reviewCount) ? reviewCount : 0,
-    features: [],
-    benefits: [],
+    features: parseListMetafield(product.featuresMetafield),
+    benefits: parseListMetafield(product.benefitsMetafield),
+    ingredients: parseListMetafield(product.ingredientsMetafield),
+    usage: product.usageMetafield?.value,
+    precautions: product.precautionsMetafield?.value,
+    claims: parseListMetafield(product.claimsMetafield),
   };
 }
 

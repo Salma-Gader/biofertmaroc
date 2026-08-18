@@ -1,4 +1,5 @@
 import { Container } from "@/components/ui/Container";
+import { Heading } from "@/components/ui/Heading";
 
 const values = [
   {
@@ -96,18 +97,18 @@ function ApprovedIcon({ className }: { className?: string }) {
 
 export function Values() {
   return (
-    <section className="bg-pink-light py-10 sm:py-20">
+    <section className="bg-white py-10 sm:py-20">
       <Container>
-        <h2 className="text-left font-display text-2xl text-ink lg:text-center lg:text-3xl">
+        <Heading as="h2" size="sub" className="text-left lg:text-center">
           Nos valeurs
-        </h2>
+        </Heading>
 
         {/* Mobile/tablet: left-aligned icon + label rows, one per row */}
         <div className="mt-6 flex flex-col gap-6 lg:hidden">
           {values.map((value) => (
             <div key={value.title} className="flex items-center gap-4">
-              <div className="flex h-8 w-8 shrink-0 items-center justify-center text-brown">
-                {value.icon}
+              <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-pink-pale text-rose">
+                <span className="flex h-5 w-5 items-center justify-center">{value.icon}</span>
               </div>
               <h3 className="font-display text-sm font-medium text-ink">{value.title}</h3>
             </div>
@@ -118,8 +119,8 @@ export function Values() {
         <div className="mt-10 hidden gap-x-6 gap-y-10 lg:grid lg:grid-cols-5">
           {values.map((value) => (
             <div key={value.title} className="flex flex-col items-center gap-3 text-center">
-              <div className="flex h-10 w-10 items-center justify-center text-brown sm:h-12 sm:w-12">
-                {value.icon}
+              <div className="flex h-14 w-14 items-center justify-center rounded-full bg-pink-pale text-rose sm:h-16 sm:w-16">
+                <span className="flex h-6 w-6 items-center justify-center sm:h-7 sm:w-7">{value.icon}</span>
               </div>
               <h3 className="font-display text-sm font-medium text-ink sm:text-base">{value.title}</h3>
               <p className="text-xs text-ink/60">{value.description}</p>
