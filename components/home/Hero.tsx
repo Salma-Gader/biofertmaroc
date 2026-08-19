@@ -91,9 +91,12 @@ export function Hero() {
         />
       ))}
 
+      {/* Darkens the left side for the always-left-anchored text above —
+          deliberately not RTL-flipped (no rtl:bg-gradient-to-l), since it
+          has to stay under the text regardless of locale. */}
       <div
         aria-hidden="true"
-        className="absolute inset-0 bg-gradient-to-r from-ink/25 via-ink/5 to-transparent rtl:bg-gradient-to-l"
+        className="absolute inset-0 bg-gradient-to-r from-ink/25 via-ink/5 to-transparent"
       />
 
       {slide.badge && (
@@ -102,8 +105,15 @@ export function Hero() {
         </span>
       )}
 
-      <div className="relative flex h-full items-center">
-        <div className="ms-20 me-5 flex max-w-lg flex-col items-start gap-5 sm:ms-24 sm:me-10 lg:ms-28 lg:me-16">
+      {/* dir="ltr" here (not just physical ml-/mr- on the child) because the
+          row's own `justify-content: flex-start` default is itself
+          direction-aware — under the page's rtl, flex-start resolves to the
+          right edge no matter what margins the child carries. Forcing this
+          row to ltr pins the child to the left unconditionally, matching
+          the fixed left/right composition of the source images in every
+          locale. */}
+      <div dir="ltr" className="relative flex h-full items-center">
+        <div className="ml-20 mr-5 flex max-w-lg flex-col items-start gap-5 sm:ml-24 sm:mr-10 lg:ml-28 lg:mr-16">
           <h1 className="font-display text-[2.25rem] font-medium leading-[1.08] text-white sm:text-[3rem] lg:text-[3.5rem]">
             {t(`${slide.messageKey}.title`)}
           </h1>
