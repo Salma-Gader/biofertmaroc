@@ -1,17 +1,15 @@
 "use client";
 
 import Image from "next/image";
-import Link from "next/link";
+import { useTranslations } from "next-intl";
+import { Link } from "@/i18n/navigation";
 import { useCallback, useEffect, useState } from "react";
 import { ArrowIcon } from "@/components/ui/Icons";
 
 interface HeroSlide {
   id: string;
-  title: string;
-  description: string;
-  primaryCtaLabel: string;
+  messageKey: "slide1" | "slide2";
   primaryCtaHref: string;
-  secondaryCtaLabel: string;
   secondaryCtaHref: string;
   image: string;
   badge?: string;
@@ -20,22 +18,16 @@ interface HeroSlide {
 const slides: HeroSlide[] = [
   {
     id: "slide-1",
-    title: "Devenir Parents.",
-    description: "Boostez votre fertilité naturellement.",
-    primaryCtaLabel: "Découvrir BellaFert",
+    messageKey: "slide1",
     primaryCtaHref: "/products/bellafert",
-    secondaryCtaLabel: "Découvrir FertiMen",
     secondaryCtaHref: "/products/fertimen",
     image: "/header/ChatGPT Image 13 أغسطس 2026، 01_35_55 م (3).png",
     badge: "-50%",
   },
   {
     id: "slide-2",
-    title: "Le Duo Fertilité",
-    description: "BellaFert + FertiMen, pour les deux partenaires — livraison gratuite.",
-    primaryCtaLabel: "Voir le Pack Couple",
+    messageKey: "slide2",
     primaryCtaHref: "/products/pack-couple",
-    secondaryCtaLabel: "En savoir plus",
     secondaryCtaHref: "/products/pack-couple",
     image: "/header/ChatGPT Image 13 أغسطس 2026، 01_47_10 م.png",
   },
@@ -58,7 +50,7 @@ function HeroPillButton({
   return (
     <Link
       href={href}
-      className={`inline-flex items-center gap-4 rounded-full py-1.5 pl-6 pr-1.5 text-sm font-semibold transition-colors ${styles}`}
+      className={`inline-flex items-center gap-4 rounded-full py-1.5 ps-6 pe-1.5 text-sm font-semibold transition-colors ${styles}`}
     >
       {children}
       <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-ink text-white">
@@ -69,6 +61,7 @@ function HeroPillButton({
 }
 
 export function Hero() {
+  const t = useTranslations("home.hero");
   const [index, setIndex] = useState(0);
 
   const goTo = useCallback((i: number) => {
@@ -100,27 +93,27 @@ export function Hero() {
 
       <div
         aria-hidden="true"
-        className="absolute inset-0 bg-gradient-to-r from-ink/25 via-ink/5 to-transparent"
+        className="absolute inset-0 bg-gradient-to-r from-ink/25 via-ink/5 to-transparent rtl:bg-gradient-to-l"
       />
 
       {slide.badge && (
-        <span className="absolute right-6 top-6 flex h-16 w-16 items-center justify-center rounded-full bg-navy font-display text-lg font-bold text-white sm:right-10 sm:top-10">
+        <span className="absolute end-6 top-6 flex h-16 w-16 items-center justify-center rounded-full bg-navy font-display text-lg font-bold text-white sm:end-10 sm:top-10">
           {slide.badge}
         </span>
       )}
 
       <div className="relative flex h-full items-center">
-        <div className="ml-20 mr-5 flex max-w-lg flex-col items-start gap-5 sm:ml-24 sm:mr-10 lg:ml-28 lg:mr-16">
+        <div className="ms-20 me-5 flex max-w-lg flex-col items-start gap-5 sm:ms-24 sm:me-10 lg:ms-28 lg:me-16">
           <h1 className="font-display text-[2.25rem] font-medium leading-[1.08] text-white sm:text-[3rem] lg:text-[3.5rem]">
-            {slide.title}
+            {t(`${slide.messageKey}.title`)}
           </h1>
-          <p className="text-base text-white/90">{slide.description}</p>
+          <p className="text-base text-white/90">{t(`${slide.messageKey}.description`)}</p>
           <div className="flex flex-wrap items-center gap-3">
             <HeroPillButton href={slide.primaryCtaHref} variant="accent">
-              {slide.primaryCtaLabel}
+              {t(`${slide.messageKey}.primaryCta`)}
             </HeroPillButton>
             <HeroPillButton href={slide.secondaryCtaHref} variant="outline">
-              {slide.secondaryCtaLabel}
+              {t(`${slide.messageKey}.secondaryCta`)}
             </HeroPillButton>
           </div>
         </div>
@@ -128,17 +121,17 @@ export function Hero() {
 
       <button
         onClick={() => goTo(index - 1)}
-        aria-label="Diapositive précédente"
-        className="absolute left-4 top-1/2 flex h-11 w-11 -translate-y-1/2 items-center justify-center text-white transition-opacity hover:opacity-70 sm:left-6"
+        aria-label={t("previousSlide")}
+        className="absolute start-4 top-1/2 flex h-11 w-11 -translate-y-1/2 items-center justify-center text-white transition-opacity hover:opacity-70 sm:start-6"
       >
-        <ArrowIcon direction="left" size={20} />
+        <ArrowIcon direction="prev" size={20} />
       </button>
       <button
         onClick={() => goTo(index + 1)}
-        aria-label="Diapositive suivante"
-        className="absolute right-4 top-1/2 flex h-11 w-11 -translate-y-1/2 items-center justify-center text-white transition-opacity hover:opacity-70 sm:right-6"
+        aria-label={t("nextSlide")}
+        className="absolute end-4 top-1/2 flex h-11 w-11 -translate-y-1/2 items-center justify-center text-white transition-opacity hover:opacity-70 sm:end-6"
       >
-        <ArrowIcon size={20} />
+        <ArrowIcon direction="next" size={20} />
       </button>
 
       <div className="absolute bottom-5 left-1/2 flex -translate-x-1/2 gap-2 sm:bottom-8">
@@ -146,7 +139,7 @@ export function Hero() {
           <button
             key={s.id}
             onClick={() => goTo(i)}
-            aria-label={`Aller à la diapositive ${i + 1}`}
+            aria-label={t("goToSlide", { index: i + 1 })}
             aria-current={i === index}
             className={`h-2 rounded-full transition-all duration-300 ${
               i === index ? "w-6 bg-white" : "w-2 bg-white/50"

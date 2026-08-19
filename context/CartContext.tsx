@@ -9,7 +9,10 @@ import {
   useState,
   ReactNode,
 } from "react";
+import { useLocale } from "next-intl";
 import type { Money, Product, ProductVariant } from "@/lib/types";
+import { toShopifyLanguage } from "@/lib/shopify/locale";
+import type { Locale } from "@/i18n/routing";
 import {
   addToCartAction,
   createCartAction,
@@ -29,6 +32,9 @@ export interface CartLine {
   quantity: number;
 }
 
+/** Keys into the `cart.errors` translation namespace, resolved at render time by CartDrawer. */
+export type CartErrorKey = "addToCart" | "removeFromCart" | "updateQuantity";
+
 interface CartContextValue {
   lines: CartLine[];
   isOpen: boolean;
@@ -43,8 +49,8 @@ interface CartContextValue {
   checkoutUrl: string | null;
   /** True while a cart mutation is in flight. */
   isLoading: boolean;
-  /** Message from the last failed cart operation, if any. */
-  error: string | null;
+  /** Translation key for the last failed cart operation, if any. */
+  error: CartErrorKey | null;
 }
 
 const CartContext = createContext<CartContextValue | null>(null);
@@ -52,6 +58,9 @@ const CartContext = createContext<CartContextValue | null>(null);
 const CART_ID_STORAGE_KEY = "biofertmaroc_shopify_cart_id";
 
 export function CartProvider({ children }: { children: ReactNode }) {
+  const locale = useLocale() as Locale;
+  const language = toShopifyLanguage(locale);
+
   const [cartId, setCartId] = useState<string | null>(null);
   const [lines, setLines] = useState<CartLine[]>([]);
   const [checkoutUrl, setCheckoutUrl] = useState<string | null>(null);
@@ -59,7 +68,7 @@ export function CartProvider({ children }: { children: ReactNode }) {
   const [itemCount, setItemCount] = useState(0);
   const [isOpen, setIsOpen] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
-  const [error, setError] = useState<string | null>(null);
+  const [error, setError] = useState<CartErrorKey | null>(null);
 
   const openCart = useCallback(() => setIsOpen(true), []);
   const closeCart = useCallback(() => setIsOpen(false), []);
@@ -94,7 +103,7 @@ export function CartProvider({ children }: { children: ReactNode }) {
   useEffect(() => {
     const storedId = window.localStorage.getItem(CART_ID_STORAGE_KEY);
     if (!storedId) return;
-    getCartAction(storedId)
+    getCartAction(storedId, language)
       .then((cart) => {
         // A null cart means it was completed or expired on Shopify's side.
         if (cart) applyCart(cart);
@@ -104,6 +113,9 @@ export function CartProvider({ children }: { children: ReactNode }) {
         // Stale/invalid cart id — drop it silently and start fresh on next add.
         window.localStorage.removeItem(CART_ID_STORAGE_KEY);
       });
+    // Only re-hydrate on mount; the language used here only affects the
+    // shape of the returned cart, not whether hydration should re-run.
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [applyCart]);
 
   const addItem = useCallback(
@@ -112,16 +124,14 @@ export function CartProvider({ children }: { children: ReactNode }) {
       setIsLoading(true);
       setError(null);
       const run = cartId
-        ? addToCartAction(cartId, variant.id, quantity)
-        : createCartAction(variant.id, quantity);
+        ? addToCartAction(cartId, variant.id, quantity, language)
+        : createCartAction(variant.id, quantity, language);
       run
         .then(applyCart)
-        .catch((err: unknown) => {
-          setError(err instanceof Error ? err.message : "Impossible d'ajouter ce produit au panier.");
-        })
+        .catch(() => setError("addToCart"))
         .finally(() => setIsLoading(false));
     },
-    [cartId, applyCart]
+    [cartId, applyCart, language]
   );
 
   const removeItem = useCallback(
@@ -129,14 +139,12 @@ export function CartProvider({ children }: { children: ReactNode }) {
       if (!cartId) return;
       setIsLoading(true);
       setError(null);
-      removeFromCartAction(cartId, lineId)
+      removeFromCartAction(cartId, lineId, language)
         .then(applyCart)
-        .catch((err: unknown) => {
-          setError(err instanceof Error ? err.message : "Impossible de retirer ce produit.");
-        })
+        .catch(() => setError("removeFromCart"))
         .finally(() => setIsLoading(false));
     },
-    [cartId, applyCart]
+    [cartId, applyCart, language]
   );
 
   const updateQuantity = useCallback(
@@ -146,16 +154,14 @@ export function CartProvider({ children }: { children: ReactNode }) {
       setError(null);
       const run =
         quantity <= 0
-          ? removeFromCartAction(cartId, lineId)
-          : updateCartLineAction(cartId, lineId, quantity);
+          ? removeFromCartAction(cartId, lineId, language)
+          : updateCartLineAction(cartId, lineId, quantity, language);
       run
         .then(applyCart)
-        .catch((err: unknown) => {
-          setError(err instanceof Error ? err.message : "Impossible de mettre à jour la quantité.");
-        })
+        .catch(() => setError("updateQuantity"))
         .finally(() => setIsLoading(false));
     },
-    [cartId, applyCart]
+    [cartId, applyCart, language]
   );
 
   const value = useMemo(

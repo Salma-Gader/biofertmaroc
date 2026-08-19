@@ -1,14 +1,35 @@
-import type { BlogPost, Collection, Product, Review } from "./types";
+import type { BlogPost, Collection, Product, ProductImage, Review } from "./types";
+import type { Locale } from "@/i18n/routing";
+import blogContentFr from "@/content/blog/fr.json";
+import blogContentEn from "@/content/blog/en.json";
+import blogContentAr from "@/content/blog/ar.json";
+import reviewsContentFr from "@/content/reviews/fr.json";
+import reviewsContentEn from "@/content/reviews/en.json";
+import reviewsContentAr from "@/content/reviews/ar.json";
+
+/**
+ * Locale-invariant demo content (ids, handles, images, dates) — the
+ * translatable title/excerpt/body/category text lives in
+ * `content/blog/{locale}.json` and `content/reviews/{locale}.json` and is
+ * merged in by locale below, so this stays the single source of truth for
+ * ordering and non-text fields across all three locales.
+ */
+
+function img(id: string, src: string, alt: string, size = 800): ProductImage {
+  return { id, src, alt, width: size, height: size };
+}
 
 const dh = (amount: number): { amount: number; currencyCode: string } => ({
   amount,
   currencyCode: "MAD",
 });
 
-function img(id: string, src: string, alt: string, size = 800): Product["featuredImage"] {
-  return { id, src, alt, width: size, height: size };
-}
-
+/**
+ * Seed catalog for `scripts/shopify-migration/migrate.ts` and `verify.ts`
+ * only — a one-time source used to populate the real Shopify store, French
+ * only by design (admin tooling, not rendered by the site, which always
+ * reads live product/collection data from Shopify via lib/shopify/api.ts).
+ */
 export const products: Product[] = [
   {
     id: "prod-bellafert",
@@ -249,166 +270,164 @@ export const collections: Collection[] = [
   { id: "col-best-sellers", handle: "best-sellers", title: "Best Sellers", description: "Nos formules les plus populaires.", productIds: ["prod-bellafert", "prod-fertimen", "prod-pack-couple"] },
 ];
 
-export const reviews: Review[] = [
-  { id: "rev-1", author: "Zinab L.", initials: "ZL", avatarColor: "var(--pink)", rating: 5, title: "Un vrai soulagement", body: "Je souffrais de règles irrégulières à cause du SOPK. Depuis que j'ai commencé BellaFert, tout est beaucoup plus régulier. Merci !", date: "2026-05-20", productHandle: "bellafert", source: "Avis vérifié" },
-  { id: "rev-2", author: "Imane B.", initials: "IB", avatarColor: "var(--blue)", rating: 5, title: "Ça a aidé mon mari", body: "Mon mari avait un souci de fertilité depuis un moment. Avec FertiMen, la situation s'est enfin résolue. On est très reconnaissants.", date: "2026-05-08", productHandle: "fertimen", source: "Avis vérifié" },
-  { id: "rev-6", author: "Khadija E.", initials: "KE", avatarColor: "var(--blue)", rating: 5, title: "Beaucoup de femmes ont vu une amélioration", body: "On a suivi le programme en couple avec le Pack Couple. Beaucoup de femmes autour de moi qui ont essayé ont vu une vraie amélioration.", date: "2026-02-19", productHandle: "pack-couple", source: "Avis vérifié" },
-  { id: "rev-7", author: "Nassim T.", initials: "NT", avatarColor: "var(--blue-dark)", rating: 4, title: "Une vraie différence au quotidien", body: "Ferti Power m'a aidé à retrouver de l'énergie et de la confiance. Je le recommande à tous les hommes qui cherchent un coup de pouce naturel.", date: "2026-06-02", productHandle: "ferti-power", source: "Avis vérifié" },
-  { id: "rev-8", author: "Hamza L.", initials: "HL", avatarColor: "var(--pink-dark)", rating: 5, title: "Performance et énergie au top", body: "PowerMen fait vraiment ce qu'il promet. Je sens une nette différence sur mon énergie pendant la journée, surtout en fin d'après-midi.", date: "2026-05-28", productHandle: "powermen", source: "Avis vérifié" },
-  { id: "rev-9", author: "Youssef K.", initials: "YK", avatarColor: "var(--blue)", rating: 4, title: "Je respire mieux", body: "J'essaie d'arrêter de fumer depuis un moment, et SmokeClean Men m'a vraiment aidé à mieux respirer et à me sentir plus léger.", date: "2026-04-15", productHandle: "smokeclean-men", source: "Avis vérifié" },
-  { id: "rev-10", author: "Salma D.", initials: "SD", avatarColor: "var(--pink)", rating: 5, title: "Un vrai moment de calme", body: "Relaxes Woman m'a aidée à mieux gérer mon stress et à retrouver un sommeil plus paisible. Je le prends chaque soir maintenant.", date: "2026-03-20", productHandle: "relaxes-woman", source: "Avis vérifié" },
-  { id: "rev-11", author: "Nadia F.", initials: "NF", avatarColor: "var(--pink-dark)", rating: 4, title: "Mon cycle est plus régulier", body: "Depuis que je prends CycleCare, mes règles sont beaucoup moins douloureuses et plus régulières. Un vrai soulagement chaque mois.", date: "2026-01-10", productHandle: "cyclecare", source: "Avis vérifié" },
-];
+interface BlogPostMeta {
+  id: string;
+  handle: string;
+  image: ProductImage;
+  date: string;
+  readingTime: string;
+}
 
-export const blogPosts: BlogPost[] = [
+const blogPostMeta: BlogPostMeta[] = [
   {
     id: "blog-1",
     handle: "10-conseils-naturels-fertilite",
-    title: "10 Conseils Naturels pour Booster Votre Fertilité",
-    excerpt: "Des conseils pratiques et naturels pour soutenir votre fertilité au quotidien.",
-    category: "Fertilité Naturelle",
-    readingTime: "5 min",
     image: img(
       "blog-img-1",
       "https://images.unsplash.com/photo-1552650272-b8a34e21bc4b?w=1600&q=80&fit=crop",
-      "Femme s'étirant près d'une fenêtre, tons neutres et lumière douce",
+      "Femme s'étirant près d'une fenêtre, tons neutres et lumière douce"
     ),
     date: "2026-04-12",
-    author: "Équipe BioFertMaroc",
-    content: [
-      "La fertilité ne dépend pas d'un seul facteur, mais d'un ensemble d'habitudes qui, mises bout à bout, font une vraie différence. Avant de penser compléments ou traitements, il est utile de revenir aux fondamentaux : sommeil, alimentation, gestion du stress et activité physique modérée.",
-      "1. Priorisez un sommeil régulier — viser 7 à 9 heures par nuit aide à stabiliser les hormones reproductives. 2. Réduisez le sucre raffiné et les aliments ultra-transformés, qui favorisent l'inflammation. 3. Intégrez des graisses saines (huile d'olive, avocat, oléagineux). 4. Limitez l'alcool et le tabac. 5. Bougez modérément : 30 minutes de marche par jour suffisent, l'excès d'exercice intense peut au contraire perturber le cycle.",
-      "6. Hydratez-vous suffisamment. 7. Gérez votre stress avec des routines simples (respiration, journaling, temps sans écran). 8. Suivez votre cycle pour mieux connaître votre fenêtre de fertilité. 9. Faites le point sur vos apports en micronutriments clés (zinc, vitamine D, acide folique). 10. Consultez un professionnel de santé si vous essayez de concevoir depuis plus de 12 mois (ou 6 mois après 35 ans).",
-      "Ces gestes simples ne remplacent pas un avis médical, mais ils créent un terrain favorable. Chez BioFertMaroc, nos formules sont pensées comme un complément à ces habitudes, pas comme un raccourci.",
-    ],
+    readingTime: "5 min",
   },
   {
     id: "blog-2",
     handle: "comprendre-cycle-ovulation",
-    title: "Comprendre le Cycle d'Ovulation : Guide Complet",
-    excerpt: "Tout ce qu'il faut savoir pour suivre son cycle et repérer les signaux de son corps.",
-    category: "Santé Féminine",
-    readingTime: "7 min",
     image: img(
       "blog-img-2",
       "https://images.unsplash.com/photo-1435527173128-983b87201f4d?w=1600&q=80&fit=crop",
-      "Agenda ouvert pour suivre son cycle menstruel",
+      "Agenda ouvert pour suivre son cycle menstruel"
     ),
     date: "2026-03-28",
-    author: "Équipe BioFertMaroc",
-    content: [
-      "Le cycle menstruel dure en moyenne 28 jours, mais peut varier entre 21 et 35 jours selon les personnes — les deux sont considérés comme normaux. Il se divise en deux grandes phases séparées par l'ovulation : la phase folliculaire et la phase lutéale.",
-      "Pendant la phase folliculaire, les ovaires préparent un ou plusieurs follicules sous l'effet de la FSH (hormone folliculo-stimulante). Le taux d'œstrogènes augmente progressivement, épaississant la muqueuse utérine. Vers le milieu du cycle, un pic de LH (hormone lutéinisante) déclenche l'ovulation : la libération de l'ovule.",
-      "L'ovule reste fécondable pendant environ 12 à 24 heures, mais les spermatozoïdes peuvent survivre jusqu'à 5 jours dans les voies génitales — ce qui porte la fenêtre de fertilité réelle à environ 6 jours par cycle. Repérer cette fenêtre passe par plusieurs signaux : glaire cervicale plus fluide et transparente, légère hausse de la température basale après l'ovulation, parfois une douleur ovulatoire discrète.",
-      "Des outils simples (calendrier, courbe de température, tests d'ovulation en pharmacie) aident à mieux connaître son cycle. Si vos cycles sont très irréguliers ou absents, un avis médical permet d'écarter une cause sous-jacente (SOPK, troubles thyroïdiens, etc.) et d'adapter l'accompagnement.",
-    ],
+    readingTime: "7 min",
   },
   {
     id: "blog-3",
     handle: "fertilite-masculine-guide",
-    title: "Fertilité Masculine : Ce Que Chaque Homme Devrait Savoir",
-    excerpt: "Les facteurs clés qui influencent la fertilité masculine et comment les soutenir.",
-    category: "Santé Masculine",
-    readingTime: "6 min",
     image: img(
       "blog-img-3",
       "https://images.unsplash.com/photo-1531403939386-c08a16cd7eef?w=1600&q=80&fit=crop",
-      "Homme s'étirant sur une terrasse, tons neutres et lumineux",
+      "Homme s'étirant sur une terrasse, tons neutres et lumineux"
     ),
     date: "2026-03-10",
-    author: "Équipe BioFertMaroc",
-    content: [
-      "La fertilité masculine est encore trop souvent laissée de côté dans les conversations sur la conception, alors qu'elle est impliquée dans près d'un cas d'infertilité sur deux au sein d'un couple. Trois paramètres sont généralement évalués : la concentration, la mobilité et la morphologie des spermatozoïdes.",
-      "La production de spermatozoïdes (spermatogenèse) dure environ 74 jours, ce qui veut dire que les habitudes des deux à trois derniers mois ont un impact direct et mesurable. La chaleur excessive (bains chauds prolongés, ordinateur portable sur les genoux, vêtements très serrés), le tabac, l'alcool et le stress chronique figurent parmi les facteurs les plus documentés.",
-      "Côté nutrition, le zinc, la vitamine C, la vitamine E et le sélénium jouent un rôle dans la protection des spermatozoïdes contre le stress oxydatif. Une activité physique régulière et modérée, un poids stable et un sommeil de qualité complètent une base solide.",
-      "Comme pour la fertilité féminine, ces leviers du quotidien s'inscrivent dans la durée : mieux vaut voir cela comme un entretien continu plutôt qu'une solution ponctuelle avant une tentative de conception.",
-    ],
+    readingTime: "6 min",
   },
   {
     id: "blog-4",
     handle: "sopk-fertilite-solutions",
-    title: "SOPK et Fertilité : Solutions Naturelles",
-    excerpt: "Comprendre le SOPK et les approches naturelles pour soutenir la fertilité.",
-    category: "SOPK",
-    readingTime: "8 min",
     image: img(
       "blog-img-4",
       "https://images.unsplash.com/photo-1759229874709-a8d0de083b91?w=1600&q=80&fit=crop",
-      "Femme sereine en tenue beige, ambiance calme et neutre",
+      "Femme sereine en tenue beige, ambiance calme et neutre"
     ),
     date: "2026-02-19",
-    author: "Équipe BioFertMaroc",
-    content: [
-      "Le syndrome des ovaires polykystiques (SOPK) touche environ une femme sur dix en âge de procréer. Il se caractérise par un déséquilibre hormonal qui peut perturber l'ovulation, provoquer des cycles irréguliers et, dans certains cas, compliquer la conception.",
-      "Le SOPK est souvent associé à une résistance à l'insuline. C'est pourquoi une alimentation à index glycémique modéré (limitant les pics de sucre dans le sang) est fréquemment recommandée : privilégier les fibres, les protéines à chaque repas, et réduire les sucres rapides.",
-      "L'activité physique régulière améliore la sensibilité à l'insuline et peut, chez certaines femmes, favoriser un retour de cycles plus réguliers. Le stress chronique aggrave souvent les symptômes hormonaux du SOPK — des routines de gestion du stress ne sont donc pas un simple confort, mais un vrai levier.",
-      "Le SOPK se manifeste différemment d'une personne à l'autre : il n'existe pas de protocole universel. Un suivi gynécologique permet d'adapter l'accompagnement (alimentation, activité, compléments, traitement si besoin) à votre profil hormonal spécifique.",
-    ],
+    readingTime: "8 min",
   },
   {
     id: "blog-5",
     handle: "complements-preconception",
-    title: "L'Importance des Compléments Alimentaires en Préconception",
-    excerpt: "Pourquoi bien préparer son corps avant la conception fait toute la différence.",
-    category: "Nutrition",
-    readingTime: "5 min",
     image: img(
       "blog-img-5",
       "https://images.unsplash.com/photo-1543352634-a1c51d9f1fa7?w=1600&q=80&fit=crop",
-      "Bols de nourriture saine sur fond clair et épuré",
+      "Bols de nourriture saine sur fond clair et épuré"
     ),
     date: "2026-01-22",
-    author: "Équipe BioFertMaroc",
-    content: [
-      "La période de préconception — les quelques mois avant d'essayer de concevoir — est souvent sous-estimée. C'est pourtant à ce moment que se posent les bases nutritionnelles qui accompagneront la fécondation, puis les premières semaines de grossesse.",
-      "L'acide folique (vitamine B9) est le plus documenté : une supplémentation avant la conception réduit le risque d'anomalies du tube neural chez le futur bébé. D'autres nutriments comme la vitamine D, le fer, l'iode et les oméga-3 sont également associés à un meilleur terrain hormonal et reproductif.",
-      "Une alimentation variée reste la base, mais elle ne couvre pas toujours l'ensemble des besoins — notamment en cas de régime restrictif, de cycles irréguliers ou de carences déjà identifiées. C'est là qu'un complément ciblé, formulé spécifiquement pour la période de préconception, peut faire la différence.",
-      "L'idéal est de commencer trois mois avant l'arrêt de la contraception, le temps que les nutriments s'accumulent et que le corps se prépare pleinement.",
-    ],
+    readingTime: "5 min",
   },
   {
     id: "blog-6",
     handle: "protocole-3-mois",
-    title: "Le Protocole 3 Mois : Pourquoi la Patience Paie",
-    excerpt: "Pourquoi les cures de fertilité sont pensées sur 3 mois et comment rester motivé(e).",
-    category: "Protocole",
-    readingTime: "4 min",
     image: img(
       "blog-img-6",
       "https://images.unsplash.com/photo-1597935258269-c94aca687fbd?w=1600&q=80&fit=crop",
-      "Horloge en marbre blanc, symbole de routine quotidienne",
+      "Horloge en marbre blanc, symbole de routine quotidienne"
     ),
     date: "2026-01-05",
-    author: "Équipe BioFertMaroc",
-    content: [
-      "Une question revient souvent : « Pourquoi vos formules sont-elles pensées sur 3 mois et pas 3 semaines ? » La réponse tient en un chiffre biologique : un cycle complet de maturation des cellules reproductives — ovules comme spermatozoïdes — dure environ 90 jours.",
-      "Chez la femme, les follicules qui seront recrutés pour l'ovulation commencent leur développement plusieurs mois à l'avance. Chez l'homme, la spermatogenèse suit un cycle d'environ 74 jours. Dans les deux cas, les apports nutritionnels d'aujourd'hui influencent surtout la qualité des cellules qui seront libérées dans deux à trois mois.",
-      "C'est pour cette raison que les résultats d'une cure de fertilité s'évaluent rarement avant la fin du premier cycle de trois mois. Arrêter après quelques semaines, c'est souvent arrêter juste avant que les effets ne deviennent visibles.",
-      "Rester régulier, même sans changement immédiat perceptible, est la clé. C'est aussi pour cela que nos formules sont conçues pour s'intégrer facilement dans une routine quotidienne, sur la durée.",
-    ],
+    readingTime: "4 min",
   },
 ];
 
-export function getProductByHandle(handle: string): Product | undefined {
-  return products.find((p) => p.handle === handle);
+interface ReviewMeta {
+  id: string;
+  author: string;
+  initials: string;
+  avatarColor: string;
+  rating: number;
+  date: string;
+  productHandle?: string;
+  source: Review["source"];
 }
 
-export function getCollectionByHandle(handle: string): Collection | undefined {
-  return collections.find((c) => c.handle === handle);
+const reviewMeta: ReviewMeta[] = [
+  { id: "rev-1", author: "Zinab L.", initials: "ZL", avatarColor: "var(--pink)", rating: 5, date: "2026-05-20", productHandle: "bellafert", source: "Avis vérifié" },
+  { id: "rev-2", author: "Imane B.", initials: "IB", avatarColor: "var(--blue)", rating: 5, date: "2026-05-08", productHandle: "fertimen", source: "Avis vérifié" },
+  { id: "rev-6", author: "Khadija E.", initials: "KE", avatarColor: "var(--blue)", rating: 5, date: "2026-02-19", productHandle: "pack-couple", source: "Avis vérifié" },
+  { id: "rev-7", author: "Nassim T.", initials: "NT", avatarColor: "var(--blue-dark)", rating: 4, date: "2026-06-02", productHandle: "ferti-power", source: "Avis vérifié" },
+  { id: "rev-8", author: "Hamza L.", initials: "HL", avatarColor: "var(--pink-dark)", rating: 5, date: "2026-05-28", productHandle: "powermen", source: "Avis vérifié" },
+  { id: "rev-9", author: "Youssef K.", initials: "YK", avatarColor: "var(--blue)", rating: 4, date: "2026-04-15", productHandle: "smokeclean-men", source: "Avis vérifié" },
+  { id: "rev-10", author: "Salma D.", initials: "SD", avatarColor: "var(--pink)", rating: 5, date: "2026-03-20", productHandle: "relaxes-woman", source: "Avis vérifié" },
+  { id: "rev-11", author: "Nadia F.", initials: "NF", avatarColor: "var(--pink-dark)", rating: 4, date: "2026-01-10", productHandle: "cyclecare", source: "Avis vérifié" },
+];
+
+interface BlogContent {
+  author: string;
+  posts: Record<string, { title: string; excerpt: string; category: string; content: string[] }>;
 }
 
-export function getBlogPostByHandle(handle: string): BlogPost | undefined {
-  return blogPosts.find((p) => p.handle === handle);
+interface ReviewsContent {
+  reviews: Record<string, { title: string; body: string }>;
 }
 
-export function getProductsForCollection(handle: string): Product[] {
-  const collection = getCollectionByHandle(handle);
-  if (!collection) return [];
-  return collection.productIds
-    .map((id) => products.find((p) => p.id === id))
-    .filter((p): p is Product => Boolean(p));
+const blogContent: Record<Locale, BlogContent> = {
+  fr: blogContentFr,
+  en: blogContentEn,
+  ar: blogContentAr,
+};
+
+const reviewsContent: Record<Locale, ReviewsContent> = {
+  fr: reviewsContentFr,
+  en: reviewsContentEn,
+  ar: reviewsContentAr,
+};
+
+export function getBlogPosts(locale: Locale): BlogPost[] {
+  const content = blogContent[locale];
+  return blogPostMeta.map((meta) => {
+    const text = content.posts[meta.handle];
+    return {
+      id: meta.id,
+      handle: meta.handle,
+      image: meta.image,
+      date: meta.date,
+      readingTime: meta.readingTime,
+      author: content.author,
+      title: text.title,
+      excerpt: text.excerpt,
+      category: text.category,
+      content: text.content,
+    };
+  });
 }
 
-export function getReviewsForProduct(handle: string): Review[] {
-  return reviews.filter((r) => r.productHandle === handle);
+export function getBlogPostByHandle(handle: string, locale: Locale): BlogPost | undefined {
+  return getBlogPosts(locale).find((p) => p.handle === handle);
+}
+
+export function getReviews(locale: Locale): Review[] {
+  const content = reviewsContent[locale];
+  return reviewMeta.map((meta) => {
+    const text = content.reviews[meta.id];
+    return {
+      id: meta.id,
+      author: meta.author,
+      initials: meta.initials,
+      avatarColor: meta.avatarColor,
+      rating: meta.rating,
+      date: meta.date,
+      productHandle: meta.productHandle,
+      source: meta.source,
+      title: text.title,
+      body: text.body,
+    };
+  });
 }

@@ -1,33 +1,8 @@
+import { useTranslations } from "next-intl";
 import { Container } from "@/components/ui/Container";
 import { Heading } from "@/components/ui/Heading";
 
-const values = [
-  {
-    title: "Formules propres",
-    description: "Sans charges, ni colorants artificiels.",
-    icon: <CleanIcon className="h-full w-full" />,
-  },
-  {
-    title: "Testé par un tiers",
-    description: "Chaque lot est vérifié pour sa pureté.",
-    icon: <TestedIcon className="h-full w-full" />,
-  },
-  {
-    title: "Fabriqué de façon responsable",
-    description: "Petits lots, sourcing traçable.",
-    icon: <LeafIcon className="h-full w-full" />,
-  },
-  {
-    title: "Formulé par des experts",
-    description: "Développé avec des gynécologues et sages-femmes.",
-    icon: <ExpertIcon className="h-full w-full" />,
-  },
-  {
-    title: "Approuvé par les mamans",
-    description: "Façonné par les retours réels de notre communauté.",
-    icon: <ApprovedIcon className="h-full w-full" />,
-  },
-];
+const valueKeys = ["clean", "tested", "responsible", "expert", "approved"] as const;
 
 function CleanIcon({ className }: { className?: string }) {
   return (
@@ -95,35 +70,45 @@ function ApprovedIcon({ className }: { className?: string }) {
   );
 }
 
+const valueIcons: Record<(typeof valueKeys)[number], React.ReactNode> = {
+  clean: <CleanIcon className="h-full w-full" />,
+  tested: <TestedIcon className="h-full w-full" />,
+  responsible: <LeafIcon className="h-full w-full" />,
+  expert: <ExpertIcon className="h-full w-full" />,
+  approved: <ApprovedIcon className="h-full w-full" />,
+};
+
 export function Values() {
+  const t = useTranslations("home.values");
+
   return (
     <section className="bg-white py-10 sm:py-20">
       <Container>
-        <Heading as="h2" size="sub" className="text-left lg:text-center">
-          Nos valeurs
+        <Heading as="h2" size="sub" className="text-start lg:text-center">
+          {t("title")}
         </Heading>
 
-        {/* Mobile/tablet: left-aligned icon + label rows, one per row */}
+        {/* Mobile/tablet: start-aligned icon + label rows, one per row */}
         <div className="mt-6 flex flex-col gap-6 lg:hidden">
-          {values.map((value) => (
-            <div key={value.title} className="flex items-center gap-4">
+          {valueKeys.map((key) => (
+            <div key={key} className="flex items-center gap-4">
               <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-pink-pale text-rose">
-                <span className="flex h-5 w-5 items-center justify-center">{value.icon}</span>
+                <span className="flex h-5 w-5 items-center justify-center">{valueIcons[key]}</span>
               </div>
-              <h3 className="font-display text-sm font-medium text-ink">{value.title}</h3>
+              <h3 className="font-display text-sm font-medium text-ink">{t(`items.${key}.title`)}</h3>
             </div>
           ))}
         </div>
 
         {/* Desktop: centered icon-over-text grid with descriptions */}
         <div className="mt-10 hidden gap-x-6 gap-y-10 lg:grid lg:grid-cols-5">
-          {values.map((value) => (
-            <div key={value.title} className="flex flex-col items-center gap-3 text-center">
+          {valueKeys.map((key) => (
+            <div key={key} className="flex flex-col items-center gap-3 text-center">
               <div className="flex h-14 w-14 items-center justify-center rounded-full bg-pink-pale text-rose sm:h-16 sm:w-16">
-                <span className="flex h-6 w-6 items-center justify-center sm:h-7 sm:w-7">{value.icon}</span>
+                <span className="flex h-6 w-6 items-center justify-center sm:h-7 sm:w-7">{valueIcons[key]}</span>
               </div>
-              <h3 className="font-display text-sm font-medium text-ink sm:text-base">{value.title}</h3>
-              <p className="text-xs text-ink/60">{value.description}</p>
+              <h3 className="font-display text-sm font-medium text-ink sm:text-base">{t(`items.${key}.title`)}</h3>
+              <p className="text-xs text-ink/60">{t(`items.${key}.description`)}</p>
             </div>
           ))}
         </div>

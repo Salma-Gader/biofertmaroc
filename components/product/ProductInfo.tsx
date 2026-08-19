@@ -1,23 +1,26 @@
-import Link from "next/link";
+import { useTranslations } from "next-intl";
+import { Link } from "@/i18n/navigation";
 import { StarRating } from "@/components/ui/StarRating";
 import { CheckIcon } from "@/components/ui/Icons";
 import { PurchaseOptions } from "./PurchaseOptions";
 import type { Product } from "@/lib/types";
 
 export function ProductInfo({ product }: { product: Product }) {
+  const t = useTranslations("product");
+
   return (
     <div className="flex flex-col gap-6">
-      <nav aria-label="Fil d'Ariane" className="text-xs text-ink/50">
+      <nav aria-label={t("breadcrumbAriaLabel")} className="text-xs text-ink/50">
         <ol className="flex flex-wrap items-center gap-1.5">
           <li>
             <Link href="/" className="hover:underline">
-              Accueil
+              {t("breadcrumbHome")}
             </Link>
           </li>
           <li aria-hidden="true">/</li>
           <li>
             <Link href="/collections/best-sellers" className="hover:underline">
-              {product.productLine ?? "Boutique"}
+              {product.productLine ?? t("breadcrumbShop")}
             </Link>
           </li>
           <li aria-hidden="true">/</li>

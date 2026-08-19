@@ -1,12 +1,15 @@
 "use client";
 
 import Image from "next/image";
-import Link from "next/link";
+import { useLocale, useTranslations } from "next-intl";
+import { Link } from "@/i18n/navigation";
 import { useEffect, useRef, useState } from "react";
 import { Container } from "@/components/ui/Container";
 import { SearchIcon, CloseXIcon } from "@/components/ui/Icons";
-import { blogPosts } from "@/lib/mock-data";
+import { getBlogPosts } from "@/lib/mock-data";
 import { searchProductsAction } from "@/lib/shopify/search-action";
+import { toShopifyLanguage } from "@/lib/shopify/locale";
+import type { Locale } from "@/i18n/routing";
 import type { Product } from "@/lib/types";
 
 export function SearchOverlay({
@@ -16,6 +19,8 @@ export function SearchOverlay({
   onClose: () => void;
   featuredProducts: Product[];
 }) {
+  const t = useTranslations("search");
+  const locale = useLocale() as Locale;
   const inputRef = useRef<HTMLInputElement>(null);
   const [query, setQuery] = useState("");
   // Tags each result set with the query it answers, so a query that's been
@@ -45,14 +50,14 @@ export function SearchOverlay({
   useEffect(() => {
     if (!trimmedQuery) return;
     const timer = setTimeout(() => {
-      searchProductsAction(trimmedQuery).then((products) =>
+      searchProductsAction(trimmedQuery, toShopifyLanguage(locale)).then((products) =>
         setSearchResults({ query: trimmedQuery, products })
       );
     }, 300);
     return () => clearTimeout(timer);
-  }, [trimmedQuery]);
+  }, [trimmedQuery, locale]);
 
-  const articles = blogPosts.slice(0, 2);
+  const articles = getBlogPosts(locale).slice(0, 2);
   const currentResults =
     isShowingSearch && searchResults?.query === trimmedQuery ? searchResults.products : null;
   const shownProducts = isShowingSearch ? currentResults ?? [] : featuredProducts.slice(0, 4);
@@ -67,10 +72,10 @@ export function SearchOverlay({
             type="search"
             value={query}
             onChange={(e) => setQuery(e.target.value)}
-            placeholder="Rechercher des produits, guides…"
+            placeholder={t("placeholder")}
             className="flex-1 bg-transparent text-lg outline-none placeholder:text-ink/40"
           />
-          <button onClick={onClose} aria-label="Fermer la recherche" className="rounded-full p-2 hover:bg-cream">
+          <button onClick={onClose} aria-label={t("close")} className="rounded-full p-2 hover:bg-cream">
             <CloseXIcon />
           </button>
         </div>
@@ -78,12 +83,12 @@ export function SearchOverlay({
         <div className="grid gap-8 sm:grid-cols-[2fr_1fr]">
           <div>
             <p className="mb-3 text-xs font-semibold uppercase tracking-wide text-ink/50">
-              {isShowingSearch ? "Résultats" : "Sélection du moment"}
+              {isShowingSearch ? t("results") : t("featured")}
             </p>
             {isShowingSearch && isSearching ? (
-              <p className="text-sm text-ink/50">Recherche…</p>
+              <p className="text-sm text-ink/50">{t("searching")}</p>
             ) : isShowingSearch && currentResults?.length === 0 ? (
-              <p className="text-sm text-ink/50">Aucun produit ne correspond à &laquo;&nbsp;{query}&nbsp;&raquo;.</p>
+              <p className="text-sm text-ink/50">{t("noResults", { query })}</p>
             ) : (
               <div className="grid grid-cols-2 gap-4 sm:grid-cols-4">
                 {shownProducts.map((product) => (
@@ -111,7 +116,7 @@ export function SearchOverlay({
 
           <div>
             <p className="mb-3 text-xs font-semibold uppercase tracking-wide text-ink/50">
-              Articles liés
+              {t("relatedArticles")}
             </p>
             <ul className="flex flex-col gap-3">
               {articles.map((post) => (

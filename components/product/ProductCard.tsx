@@ -1,5 +1,6 @@
+import { useTranslations } from "next-intl";
 import Image from "next/image";
-import Link from "next/link";
+import { Link } from "@/i18n/navigation";
 import { Badge } from "@/components/ui/Badge";
 import { Pill } from "@/components/ui/Pill";
 import { StarRating } from "@/components/ui/StarRating";
@@ -8,13 +9,9 @@ import { QuickAddButton } from "./QuickAddButton";
 import { ProductPrice } from "./ProductPrice";
 import type { Product } from "@/lib/types";
 
-const badgeLabels: Record<string, string> = {
-  "best-seller": "Best-seller",
-  new: "Nouveau",
-  "sans-iode": "Sans iode",
-};
-
 export function ProductCard({ product }: { product: Product }) {
+  const t = useTranslations("product.badges");
+
   return (
     <Link
       href={`/products/${product.handle}`}
@@ -22,9 +19,9 @@ export function ProductCard({ product }: { product: Product }) {
     >
       <div className="relative aspect-square overflow-hidden">
         {product.badges.length > 0 && (
-          <div className="absolute right-0 top-0 z-10 flex flex-col items-end gap-1.5">
+          <div className="absolute end-0 top-0 z-10 flex flex-col items-end gap-1.5">
             {product.badges.map((badge) => (
-              <Badge key={badge}>{badgeLabels[badge] ?? badge}</Badge>
+              <Badge key={badge}>{t.has(badge) ? t(badge) : badge}</Badge>
             ))}
           </div>
         )}

@@ -1,5 +1,6 @@
 "use client";
 
+import { useTranslations } from "next-intl";
 import { useCart } from "@/context/CartContext";
 import { Button } from "@/components/ui/Button";
 import type { Product, ProductVariant } from "@/lib/types";
@@ -13,6 +14,7 @@ export function AddToCartButton({
   variant: ProductVariant;
   className?: string;
 }) {
+  const t = useTranslations("product");
   const { addItem } = useCart();
 
   return (
@@ -23,7 +25,7 @@ export function AddToCartButton({
       onClick={() => addItem(product, variant)}
       disabled={!variant.available}
     >
-      {variant.available ? "Ajouter au panier" : "Épuisé"}
+      {variant.available ? t("addToCart") : t("outOfStock")}
     </Button>
   );
 }

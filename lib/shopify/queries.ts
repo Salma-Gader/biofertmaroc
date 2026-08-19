@@ -137,7 +137,8 @@ const CART_FRAGMENT = `
 
 export const GET_PRODUCTS_QUERY = `
   ${PRODUCT_FRAGMENT}
-  query GetProducts($first: Int = 50, $query: String) {
+  query GetProducts($first: Int = 50, $query: String, $language: LanguageCode)
+  @inContext(language: $language) {
     products(first: $first, query: $query) {
       edges {
         node { ...ProductFragment }
@@ -148,21 +149,24 @@ export const GET_PRODUCTS_QUERY = `
 
 export const GET_PRODUCT_BY_HANDLE_QUERY = `
   ${PRODUCT_FRAGMENT}
-  query GetProductByHandle($handle: String!) {
+  query GetProductByHandle($handle: String!, $language: LanguageCode)
+  @inContext(language: $language) {
     product(handle: $handle) { ...ProductFragment }
   }
 `;
 
 export const GET_PRODUCT_RECOMMENDATIONS_QUERY = `
   ${PRODUCT_FRAGMENT}
-  query GetProductRecommendations($productId: ID!) {
+  query GetProductRecommendations($productId: ID!, $language: LanguageCode)
+  @inContext(language: $language) {
     productRecommendations(productId: $productId) { ...ProductFragment }
   }
 `;
 
 export const SEARCH_PRODUCTS_QUERY = `
   ${PRODUCT_FRAGMENT}
-  query SearchProducts($query: String!, $first: Int = 8) {
+  query SearchProducts($query: String!, $first: Int = 8, $language: LanguageCode)
+  @inContext(language: $language) {
     products(first: $first, query: $query) {
       edges {
         node { ...ProductFragment }
@@ -172,7 +176,8 @@ export const SEARCH_PRODUCTS_QUERY = `
 `;
 
 export const GET_COLLECTIONS_QUERY = `
-  query GetCollections($first: Int = 50) {
+  query GetCollections($first: Int = 50, $language: LanguageCode)
+  @inContext(language: $language) {
     collections(first: $first) {
       edges {
         node {
@@ -189,7 +194,8 @@ export const GET_COLLECTIONS_QUERY = `
 
 export const GET_COLLECTION_BY_HANDLE_QUERY = `
   ${PRODUCT_FRAGMENT}
-  query GetCollectionByHandle($handle: String!, $first: Int = 50) {
+  query GetCollectionByHandle($handle: String!, $first: Int = 50, $language: LanguageCode)
+  @inContext(language: $language) {
     collection(handle: $handle) {
       id
       handle
@@ -207,7 +213,8 @@ export const GET_COLLECTION_BY_HANDLE_QUERY = `
 
 export const CART_CREATE_MUTATION = `
   ${CART_FRAGMENT}
-  mutation CartCreate($lines: [CartLineInput!]) {
+  mutation CartCreate($lines: [CartLineInput!], $language: LanguageCode)
+  @inContext(language: $language) {
     cartCreate(input: { lines: $lines }) {
       cart { ...CartFragment }
       userErrors { field message }
@@ -217,14 +224,15 @@ export const CART_CREATE_MUTATION = `
 
 export const GET_CART_QUERY = `
   ${CART_FRAGMENT}
-  query GetCart($cartId: ID!) {
+  query GetCart($cartId: ID!, $language: LanguageCode) @inContext(language: $language) {
     cart(id: $cartId) { ...CartFragment }
   }
 `;
 
 export const CART_LINES_ADD_MUTATION = `
   ${CART_FRAGMENT}
-  mutation CartLinesAdd($cartId: ID!, $lines: [CartLineInput!]!) {
+  mutation CartLinesAdd($cartId: ID!, $lines: [CartLineInput!]!, $language: LanguageCode)
+  @inContext(language: $language) {
     cartLinesAdd(cartId: $cartId, lines: $lines) {
       cart { ...CartFragment }
       userErrors { field message }
@@ -234,7 +242,8 @@ export const CART_LINES_ADD_MUTATION = `
 
 export const CART_LINES_UPDATE_MUTATION = `
   ${CART_FRAGMENT}
-  mutation CartLinesUpdate($cartId: ID!, $lines: [CartLineUpdateInput!]!) {
+  mutation CartLinesUpdate($cartId: ID!, $lines: [CartLineUpdateInput!]!, $language: LanguageCode)
+  @inContext(language: $language) {
     cartLinesUpdate(cartId: $cartId, lines: $lines) {
       cart { ...CartFragment }
       userErrors { field message }
@@ -244,7 +253,8 @@ export const CART_LINES_UPDATE_MUTATION = `
 
 export const CART_LINES_REMOVE_MUTATION = `
   ${CART_FRAGMENT}
-  mutation CartLinesRemove($cartId: ID!, $lineIds: [ID!]!) {
+  mutation CartLinesRemove($cartId: ID!, $lineIds: [ID!]!, $language: LanguageCode)
+  @inContext(language: $language) {
     cartLinesRemove(cartId: $cartId, lineIds: $lineIds) {
       cart { ...CartFragment }
       userErrors { field message }

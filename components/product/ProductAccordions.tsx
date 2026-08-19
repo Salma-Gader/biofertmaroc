@@ -1,26 +1,29 @@
+import { useTranslations } from "next-intl";
 import { Accordion, type AccordionItem } from "@/components/ui/Accordion";
 import type { Product } from "@/lib/types";
 
 export function ProductAccordions({ product }: { product: Product }) {
+  const t = useTranslations("product.accordions");
+
   const items: AccordionItem[] = [
     {
-      question: "Bienfaits",
-      answer: product.benefits.join(" · ") || "Aucun bienfait renseigné.",
+      question: t("benefits"),
+      answer: product.benefits.join(" · ") || t("benefitsFallback"),
     },
     {
-      question: "Ingrédients",
-      answer: product.ingredients?.join(", ") || "Liste complète des ingrédients disponible sur demande.",
+      question: t("ingredients"),
+      answer: product.ingredients?.join(", ") || t("ingredientsFallback"),
     },
     {
-      question: "Utilisation",
-      answer: product.usage || "Suivez les indications sur l'étiquette.",
+      question: t("usage"),
+      answer: product.usage || t("usageFallback"),
     },
     {
-      question: "Précautions",
-      answer: product.precautions || "Demandez conseil à votre médecin avant utilisation.",
+      question: t("precautions"),
+      answer: product.precautions || t("precautionsFallback"),
     },
     {
-      question: "Description complète",
+      question: t("description"),
       answer: product.shortDescription || "",
     },
   ];

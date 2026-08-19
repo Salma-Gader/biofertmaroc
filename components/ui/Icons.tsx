@@ -196,15 +196,20 @@ export function XIcon({ className = "", size = 18 }: IconProps) {
   );
 }
 
-export function ArrowIcon({ className = "", size = 16, direction = "right" }: IconProps & { direction?: "left" | "right" }) {
+/**
+ * `direction` is semantic ("prev"/"next"), not visual — `next` points at
+ * the reading-end (right in LTR, flipped to left in RTL via `rtl:rotate-180`)
+ * and `prev` is its mirror, so every call site stays correct across
+ * directions without branching on the current locale.
+ */
+export function ArrowIcon({ className = "", size = 16, direction = "next" }: IconProps & { direction?: "prev" | "next" }) {
   return (
     <svg
       width={size}
       height={size}
       viewBox="0 0 16 16"
       fill="none"
-      className={className}
-      style={{ transform: direction === "left" ? "rotate(180deg)" : undefined }}
+      className={`${direction === "prev" ? "rotate-180 rtl:rotate-0" : "rtl:rotate-180"} ${className}`}
       aria-hidden="true"
     >
       <path d="M2 8h12M9 3l5 5-5 5" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />

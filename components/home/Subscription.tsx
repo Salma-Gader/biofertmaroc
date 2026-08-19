@@ -1,5 +1,6 @@
 import Image from "next/image";
-import Link from "next/link";
+import { useTranslations } from "next-intl";
+import { Link } from "@/i18n/navigation";
 import { Heading } from "@/components/ui/Heading";
 import { StarRating } from "@/components/ui/StarRating";
 import { ArrowIcon } from "@/components/ui/Icons";
@@ -59,21 +60,24 @@ function DocumentIcon() {
   );
 }
 
-const tiles = [
-  { title: "100% gratuit", body: "Sans engagement, aucun frais", icon: <PercentIcon /> },
-  { title: "2 minutes chrono", body: "Un questionnaire rapide et simple", icon: <ClockIcon /> },
-  { title: "Résultat immédiat", body: "Votre recommandation à la fin du bilan", icon: <BoxIcon /> },
-  { title: "Conseils d'experts", body: "Basés sur votre profil de fertilité", icon: <ExpertIcon /> },
-  { title: "100% confidentiel", body: "Vos réponses restent privées", icon: <DocumentIcon /> },
-];
+const tileKeys = ["free", "fast", "instant", "expert", "private"] as const;
+const tileIcons: Record<(typeof tileKeys)[number], React.ReactNode> = {
+  free: <PercentIcon />,
+  fast: <ClockIcon />,
+  instant: <BoxIcon />,
+  expert: <ExpertIcon />,
+  private: <DocumentIcon />,
+};
 
 export function Subscription() {
+  const t = useTranslations("home.subscription");
+
   return (
     <section className="bg-pink-pale">
       <div className="grid lg:grid-cols-2 lg:items-stretch">
         <div className="flex flex-col justify-center gap-6 px-5 py-10 sm:px-8 sm:py-16 lg:px-12 lg:py-20">
           <div className="flex flex-col items-start gap-2">
-            <div className="flex -space-x-2">
+            <div className="flex -space-x-2 rtl:space-x-reverse">
               {avatars.map((a) => (
                 <span
                   key={a.initials}
@@ -85,21 +89,19 @@ export function Subscription() {
               ))}
             </div>
             <StarRating rating={5} />
-            <p className="text-sm font-medium text-ink/70">
-              + de 2 000 clients nous font confiance !
-            </p>
+            <p className="text-sm font-medium text-ink/70">{t("socialProof")}</p>
           </div>
 
           <Heading as="h2" size="section">
-            Votre bilan personnalisé, gratuit en 2 minutes
+            {t("title")}
           </Heading>
 
           <div className="grid grid-cols-2 gap-3 sm:grid-cols-3">
-            {tiles.map((tile) => (
-              <div key={tile.title} className="flex flex-col gap-2 rounded-2xl bg-white p-4 shadow-soft">
-                <span className="text-rose">{tile.icon}</span>
-                <h3 className="font-display text-sm font-medium text-ink">{tile.title}</h3>
-                <p className="text-xs text-ink/60">{tile.body}</p>
+            {tileKeys.map((key) => (
+              <div key={key} className="flex flex-col gap-2 rounded-2xl bg-white p-4 shadow-soft">
+                <span className="text-rose">{tileIcons[key]}</span>
+                <h3 className="font-display text-sm font-medium text-ink">{t(`tiles.${key}.title`)}</h3>
+                <p className="text-xs text-ink/60">{t(`tiles.${key}.body`)}</p>
               </div>
             ))}
             <Link
@@ -109,7 +111,7 @@ export function Subscription() {
               <span className="flex h-8 w-8 items-center justify-center rounded-full bg-ink text-white">
                 <ArrowIcon size={14} />
               </span>
-              <span className="font-display text-sm font-semibold text-ink">Faire le bilan</span>
+              <span className="font-display text-sm font-semibold text-ink">{t("cta")}</span>
             </Link>
           </div>
         </div>
@@ -117,7 +119,7 @@ export function Subscription() {
         <div className="relative min-h-[420px] w-full overflow-hidden lg:min-h-full">
           <Image
             src="https://images.unsplash.com/photo-1651663303138-4dc283e15992?w=1000&q=80&fit=crop"
-            alt="Femme enceinte tenant un flacon BioFert"
+            alt={t("imageAlt")}
             fill
             sizes="(min-width: 1024px) 50vw, 100vw"
             className="object-cover"

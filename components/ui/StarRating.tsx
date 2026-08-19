@@ -1,4 +1,5 @@
 import { useId } from "react";
+import { useLocale, useTranslations } from "next-intl";
 
 function Star({ fill, id }: { fill: number; id: string }) {
   return (
@@ -34,19 +35,31 @@ export function StarRating({
   size?: "sm" | "md";
   variant?: "row" | "single";
 }) {
+  const t = useTranslations("common");
+  const locale = useLocale();
   const uid = useId();
+  const formattedRating = new Intl.NumberFormat(locale, {
+    minimumFractionDigits: 1,
+    maximumFractionDigits: 1,
+  }).format(rating);
   const stars = [0, 1, 2, 3, 4].map((i) => Math.min(1, Math.max(0, rating - i)));
+  const ariaLabel =
+    reviewCount !== undefined
+      ? t("ratingOutOf5WithCount", { rating, count: reviewCount })
+      : t("ratingOutOf5", { rating });
 
   if (variant === "single") {
     return (
       <div
         className={`inline-flex items-center gap-1 font-bold ${size === "md" ? "text-base" : "text-sm"}`}
-        aria-label={`Note de ${rating} sur 5${reviewCount ? ` (${reviewCount} avis)` : ""}`}
+        aria-label={ariaLabel}
       >
         <span className="text-rose" aria-hidden="true">
           ★
         </span>
-        <span className="text-ink">{rating.toFixed(1).replace(".", ",")}/5</span>
+        <span className="text-ink">
+          <bdi>{formattedRating}</bdi>/5
+        </span>
         {reviewCount !== undefined && (
           <span className="text-ink/60">({reviewCount})</span>
         )}
@@ -57,7 +70,7 @@ export function StarRating({
   return (
     <div
       className={`inline-flex items-center gap-1.5 ${size === "md" ? "text-sm" : "text-xs"}`}
-      aria-label={`Note de ${rating} sur 5${reviewCount ? ` (${reviewCount} avis)` : ""}`}
+      aria-label={ariaLabel}
     >
       <span className="flex items-center gap-0.5" aria-hidden="true">
         {stars.map((fill, i) => (

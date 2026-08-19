@@ -1,49 +1,54 @@
 "use client";
 
 import Image from "next/image";
-import Link from "next/link";
+import { useLocale, useTranslations } from "next-intl";
+import { Link } from "@/i18n/navigation";
 import { useRef } from "react";
 import { Container } from "@/components/ui/Container";
 import { Heading } from "@/components/ui/Heading";
 import { Button } from "@/components/ui/Button";
 import { StarRating } from "@/components/ui/StarRating";
 import { ArrowIcon, GoogleIcon } from "@/components/ui/Icons";
-import { reviews } from "@/lib/mock-data";
+import { getReviews } from "@/lib/mock-data";
+import type { Locale } from "@/i18n/routing";
 import type { Product } from "@/lib/types";
 
 const GOOGLE_RATING = 4.8;
 
 export function Reviews({ products }: { products: Product[] }) {
+  const t = useTranslations("home.reviews");
+  const locale = useLocale() as Locale;
+  const reviews = getReviews(locale);
   const scrollerRef = useRef<HTMLDivElement>(null);
 
-  const scrollBy = (direction: "left" | "right") => {
+  const scrollBy = (direction: "prev" | "next") => {
     const el = scrollerRef.current;
     if (!el) return;
     const amount = el.clientWidth * 0.8;
-    el.scrollBy({ left: direction === "left" ? -amount : amount, behavior: "smooth" });
+    const rtl = getComputedStyle(el).direction === "rtl";
+    const sign = direction === "prev" ? -1 : 1;
+    el.scrollBy({ left: (rtl ? -sign : sign) * amount, behavior: "smooth" });
   };
 
   return (
     <section id="avis" className="overflow-hidden bg-white py-10 sm:py-20">
       <Container className="mb-10 flex flex-col gap-8 sm:flex-row sm:items-center sm:justify-between">
         <div className="flex flex-col items-start gap-4">
-          <Heading as="h2" size="section">
-            +2 000 clients
-            <br />
-            nous font confiance
+          <Heading as="h2" size="section" className="whitespace-pre-line">
+            {t("title")}
           </Heading>
           <Button href="/faq" variant="outline" size="sm">
-            Lire tous les avis
+            {t("readAll")}
           </Button>
         </div>
 
         <div className="flex flex-col items-center gap-2 rounded-2xl bg-cream px-8 py-6">
           <span className="flex items-center gap-2 text-sm font-medium text-ink/70">
             <GoogleIcon />
-            Google
+            {t("google")}
           </span>
           <span className="font-display text-4xl font-medium text-ink">{GOOGLE_RATING}</span>
-          <span className="text-xs font-semibold uppercase tracking-wide text-ink/50">Sur 5</span>
+          <span className="text-xs font-semibold uppercase tracking-wide text-ink/50">{t("outOf5")}</span>
         </div>
       </Container>
 
@@ -91,39 +96,39 @@ export function Reviews({ products }: { products: Product[] }) {
 
         <button
           type="button"
-          onClick={() => scrollBy("left")}
-          aria-label="Avis précédents"
-          className="absolute left-6 top-[38%] z-10 hidden -translate-y-1/2 items-center justify-center rounded-full border border-ink/10 bg-white shadow-md hover:bg-ink hover:text-cream sm:flex"
+          onClick={() => scrollBy("prev")}
+          aria-label={t("previous")}
+          className="absolute start-6 top-[38%] z-10 hidden -translate-y-1/2 items-center justify-center rounded-full border border-ink/10 bg-white shadow-md hover:bg-ink hover:text-cream sm:flex"
           style={{ width: 44, height: 44 }}
         >
-          <ArrowIcon direction="left" />
+          <ArrowIcon direction="prev" />
         </button>
         <button
           type="button"
-          onClick={() => scrollBy("right")}
-          aria-label="Avis suivants"
-          className="absolute right-6 top-[38%] z-10 hidden -translate-y-1/2 items-center justify-center rounded-full border border-ink/10 bg-white shadow-md hover:bg-ink hover:text-cream sm:flex"
+          onClick={() => scrollBy("next")}
+          aria-label={t("next")}
+          className="absolute end-6 top-[38%] z-10 hidden -translate-y-1/2 items-center justify-center rounded-full border border-ink/10 bg-white shadow-md hover:bg-ink hover:text-cream sm:flex"
           style={{ width: 44, height: 44 }}
         >
-          <ArrowIcon />
+          <ArrowIcon direction="next" />
         </button>
 
         <div className="mt-6 flex justify-end gap-2 px-5 sm:hidden">
           <button
             type="button"
-            onClick={() => scrollBy("left")}
-            aria-label="Avis précédents"
+            onClick={() => scrollBy("prev")}
+            aria-label={t("previous")}
             className="flex h-10 w-10 items-center justify-center rounded-full border border-ink/20 bg-white hover:bg-ink hover:text-cream"
           >
-            <ArrowIcon direction="left" />
+            <ArrowIcon direction="prev" />
           </button>
           <button
             type="button"
-            onClick={() => scrollBy("right")}
-            aria-label="Avis suivants"
+            onClick={() => scrollBy("next")}
+            aria-label={t("next")}
             className="flex h-10 w-10 items-center justify-center rounded-full border border-ink/20 bg-white hover:bg-ink hover:text-cream"
           >
-            <ArrowIcon />
+            <ArrowIcon direction="next" />
           </button>
         </div>
       </Container>

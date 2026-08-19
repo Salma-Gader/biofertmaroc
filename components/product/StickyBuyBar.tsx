@@ -1,13 +1,16 @@
 "use client";
 
 import Image from "next/image";
+import { useLocale } from "next-intl";
 import { useEffect, useRef, useState } from "react";
 import { StarRating } from "@/components/ui/StarRating";
 import { AddToCartButton } from "./AddToCartButton";
 import { formatMoney } from "./ProductPrice";
 import type { Product } from "@/lib/types";
+import type { Locale } from "@/i18n/routing";
 
 export function StickyBuyBar({ product }: { product: Product }) {
+  const locale = useLocale() as Locale;
   const [visible, setVisible] = useState(false);
   const sentinelRef = useRef<HTMLDivElement>(null);
 
@@ -43,7 +46,7 @@ export function StickyBuyBar({ product }: { product: Product }) {
             <StarRating rating={product.rating} reviewCount={product.reviewCount} />
           </div>
           <span className="hidden text-sm font-semibold sm:block">
-            {formatMoney(variant.price)}
+            <bdi>{formatMoney(variant.price, locale)}</bdi>
           </span>
           <div className="w-40 shrink-0">
             <AddToCartButton product={product} variant={variant} />

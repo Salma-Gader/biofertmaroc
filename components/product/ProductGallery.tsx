@@ -1,6 +1,7 @@
 "use client";
 
 import Image from "next/image";
+import { useTranslations } from "next-intl";
 import { useState } from "react";
 import type { ProductImage } from "@/lib/types";
 
@@ -17,6 +18,7 @@ function hasVignetteBackground(src: string) {
 }
 
 export function ProductGallery({ images }: { images: ProductImage[] }) {
+  const t = useTranslations("product");
   const [active, setActive] = useState(0);
   const current = images[active] ?? images[0];
   const currentFit = hasVignetteBackground(current.src) ? "object-cover" : "object-contain";
@@ -41,7 +43,7 @@ export function ProductGallery({ images }: { images: ProductImage[] }) {
               <button
                 key={image.id}
                 onClick={() => setActive(i)}
-                aria-label={`Voir l'image ${i + 1}`}
+                aria-label={t("viewImage", { index: i + 1 })}
                 aria-current={i === active}
                 className={`relative h-16 w-16 shrink-0 overflow-hidden rounded-xl bg-cream ring-1 transition-all ${
                   i === active ? "ring-2 ring-ink" : "ring-ink/10 hover:ring-ink/30"

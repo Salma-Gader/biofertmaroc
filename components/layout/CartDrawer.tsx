@@ -1,14 +1,18 @@
 "use client";
 
 import Image from "next/image";
+import { useLocale, useTranslations } from "next-intl";
 import { useEffect } from "react";
 import { useCart } from "@/context/CartContext";
 import { Button } from "@/components/ui/Button";
 import { formatMoney } from "@/components/product/ProductPrice";
+import type { Locale } from "@/i18n/routing";
 
 const FREE_SHIPPING_THRESHOLD = 600;
 
 export function CartDrawer() {
+  const t = useTranslations("cart");
+  const locale = useLocale() as Locale;
   const {
     lines,
     isOpen,
@@ -45,21 +49,25 @@ export function CartDrawer() {
         onClick={closeCart}
         aria-hidden="true"
       />
+      {/* Deliberately stays anchored to the physical right edge in every
+          locale, including RTL — a common e-commerce convention (the cart
+          "drops in" from a fixed side rather than following reading
+          direction), so this is not mirrored like MobileNav. */}
       <aside
         role="dialog"
         aria-modal="true"
-        aria-label="Panier"
+        aria-label={t("title")}
         className={`fixed right-0 top-0 z-[71] flex h-full w-full max-w-md flex-col bg-white shadow-2xl transition-transform duration-300 ${
           isOpen ? "translate-x-0" : "translate-x-full"
         }`}
       >
         <div className="flex items-center justify-between border-b border-ink/10 px-5 py-4">
           <h2 className="font-display text-xl font-medium">
-            Votre panier {itemCount > 0 && `(${itemCount})`}
+            {itemCount > 0 ? t("titleWithCount", { count: itemCount }) : t("title")}
           </h2>
           <button
             onClick={closeCart}
-            aria-label="Fermer le panier"
+            aria-label={t("close")}
             className="rounded-full p-2 hover:bg-cream"
           >
             <CloseIcon />
@@ -68,14 +76,15 @@ export function CartDrawer() {
 
         <div className="border-b border-ink/10 bg-pale-yellow px-5 py-3">
           <p className="text-xs font-medium text-ink">
-            {remaining > 0 ? (
-              <>
-                Plus que <strong>{formatMoney({ amount: remaining, currencyCode: "MAD" })}</strong> pour
-                profiter de la livraison gratuite
-              </>
-            ) : (
-              "Livraison gratuite débloquée !"
-            )}
+            {remaining > 0
+              ? t.rich("freeShippingRemaining", {
+                  amount: () => (
+                    <strong>
+                      <bdi>{formatMoney({ amount: remaining, currencyCode: "MAD" }, locale)}</bdi>
+                    </strong>
+                  ),
+                })
+              : t("freeShippingUnlocked")}
           </p>
           <div className="mt-2 h-1.5 w-full overflow-hidden rounded-full bg-white/70">
             <div
@@ -87,9 +96,7 @@ export function CartDrawer() {
 
         <div className="flex-1 overflow-y-auto px-5 py-4">
           {lines.length === 0 ? (
-            <p className="py-12 text-center text-sm text-ink/60">
-              Votre panier est vide.
-            </p>
+            <p className="py-12 text-center text-sm text-ink/60">{t("empty")}</p>
           ) : (
             <ul className="flex flex-col gap-4">
               {lines.map((line) => (
@@ -112,7 +119,7 @@ export function CartDrawer() {
                       <div className="flex items-center rounded-full border border-ink/20">
                         <button
                           className="px-2 py-1 text-sm"
-                          aria-label={`Diminuer la quantité de ${line.productTitle}`}
+                          aria-label={t("decreaseQuantity", { product: line.productTitle })}
                           onClick={() => updateQuantity(line.lineId, line.quantity - 1)}
                         >
                           −
@@ -120,20 +127,25 @@ export function CartDrawer() {
                         <span className="w-6 text-center text-sm">{line.quantity}</span>
                         <button
                           className="px-2 py-1 text-sm"
-                          aria-label={`Augmenter la quantité de ${line.productTitle}`}
+                          aria-label={t("increaseQuantity", { product: line.productTitle })}
                           onClick={() => updateQuantity(line.lineId, line.quantity + 1)}
                         >
                           +
                         </button>
                       </div>
                       <span className="text-sm font-semibold">
-                        {formatMoney({ amount: line.price.amount * line.quantity, currencyCode: line.price.currencyCode })}
+                        <bdi>
+                          {formatMoney(
+                            { amount: line.price.amount * line.quantity, currencyCode: line.price.currencyCode },
+                            locale
+                          )}
+                        </bdi>
                       </span>
                     </div>
                   </div>
                   <button
                     onClick={() => removeItem(line.lineId)}
-                    aria-label={`Retirer ${line.productTitle} du panier`}
+                    aria-label={t("removeItem", { product: line.productTitle })}
                     className="self-start text-xs text-ink/40 hover:text-terracotta"
                   >
                     <CloseIcon small />
@@ -147,38 +159,38 @@ export function CartDrawer() {
         {lines.length > 0 && (
           <div className="border-t border-ink/10 px-5 py-4">
             <label htmlFor="promo-code" className="sr-only">
-              Code promo
+              {t("promoCodeLabel")}
             </label>
             <div className="mb-4 flex gap-2">
               <input
                 id="promo-code"
                 type="text"
-                placeholder="Code promo"
+                placeholder={t("promoCodePlaceholder")}
                 className="flex-1 rounded-full border border-ink/20 px-4 py-2 text-sm focus-visible:outline-2 focus-visible:outline-navy"
               />
               <Button variant="outline" size="sm">
-                Appliquer
+                {t("apply")}
               </Button>
             </div>
             <div className="mb-4 flex items-center justify-between text-sm">
-              <span className="text-ink/60">Sous-total</span>
-              <span className="font-semibold">{formatMoney({ amount: subtotal, currencyCode: "MAD" })}</span>
+              <span className="text-ink/60">{t("subtotal")}</span>
+              <span className="font-semibold">
+                <bdi>{formatMoney({ amount: subtotal, currencyCode: "MAD" }, locale)}</bdi>
+              </span>
             </div>
             {error && (
-              <p className="mb-3 text-center text-xs text-terracotta">{error}</p>
+              <p className="mb-3 text-center text-xs text-terracotta">{t(`errors.${error}`)}</p>
             )}
             {checkoutUrl && !isLoading ? (
               <Button href={checkoutUrl} variant="primary" size="lg" className="w-full">
-                Commander
+                {t("checkout")}
               </Button>
             ) : (
               <Button variant="primary" size="lg" className="w-full" disabled>
-                {isLoading ? "Mise à jour…" : "Commander"}
+                {isLoading ? t("updating") : t("checkout")}
               </Button>
             )}
-            <p className="mt-2 text-center text-[11px] text-ink/50">
-              Taxes et frais de livraison calculés à la commande.
-            </p>
+            <p className="mt-2 text-center text-[11px] text-ink/50">{t("taxesNote")}</p>
           </div>
         )}
       </aside>

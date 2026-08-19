@@ -1,3 +1,4 @@
+import { useTranslations } from "next-intl";
 import { Container } from "@/components/ui/Container";
 import { Heading } from "@/components/ui/Heading";
 
@@ -10,6 +11,8 @@ export function CollectionHeader({
   description?: string;
   count: number;
 }) {
+  const t = useTranslations("collection");
+
   return (
     <div className="bg-pale-yellow py-12 sm:py-16">
       <Container className="flex flex-col items-center gap-3 text-center">
@@ -20,7 +23,7 @@ export function CollectionHeader({
           <p className="max-w-lg text-sm text-ink/70">{description}</p>
         )}
         <span className="text-xs font-medium uppercase tracking-wide text-ink/50">
-          {count} {count === 1 ? "produit" : "produits"}
+          {count} {t("productCount", { count })}
         </span>
       </Container>
     </div>

@@ -1,9 +1,11 @@
 "use client";
 
 import { FormEvent, useState } from "react";
+import { useTranslations } from "next-intl";
 import { Button } from "@/components/ui/Button";
 
 export function NewsletterForm() {
+  const t = useTranslations("forms.newsletter");
   const [submitted, setSubmitted] = useState(false);
 
   function handleSubmit(e: FormEvent<HTMLFormElement>) {
@@ -13,26 +15,24 @@ export function NewsletterForm() {
 
   if (submitted) {
     return (
-      <p className="text-sm font-medium text-lime-dark">
-        Merci pour votre inscription ! Surveillez votre boîte mail.
-      </p>
+      <p className="text-sm font-medium text-lime-dark">{t("success")}</p>
     );
   }
 
   return (
     <form onSubmit={handleSubmit} className="flex w-full max-w-sm gap-2">
       <label htmlFor="newsletter-email" className="sr-only">
-        Adresse email
+        {t("emailLabel")}
       </label>
       <input
         id="newsletter-email"
         type="email"
         required
-        placeholder="Votre adresse email"
+        placeholder={t("placeholder")}
         className="w-full flex-1 rounded-full border border-ink/10 bg-white px-4 py-2.5 text-sm text-ink placeholder:text-ink/40 focus-visible:outline-2 focus-visible:outline-pink"
       />
       <Button type="submit" variant="primary" size="sm" className="bg-pink text-white hover:bg-pink-dark">
-        S&apos;inscrire
+        {t("submit")}
       </Button>
     </form>
   );

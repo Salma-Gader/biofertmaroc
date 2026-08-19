@@ -91,7 +91,7 @@ export interface BlogPost {
 }
 
 export interface NavLink {
-  label: string;
+  key: string;
   href: string;
 }
 
@@ -101,7 +101,7 @@ export interface NavCategory extends NavLink {
 }
 
 export interface MomentTile {
-  label: string;
+  key: string;
   href: string;
   image: string;
 }

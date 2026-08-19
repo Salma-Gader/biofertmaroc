@@ -1,12 +1,7 @@
+import { useTranslations } from "next-intl";
 import { Container } from "@/components/ui/Container";
 
-const badges = [
-  { title: "Livraison 24–48h", body: "Partout au Maroc", icon: <DeliveryIcon className="h-full w-full" /> },
-  { title: "Paiement flexible", body: "À la livraison ou par carte", icon: <PaymentIcon className="h-full w-full" /> },
-  { title: "Satisfait ou remboursé", body: "Garantie de remboursement", icon: <RefundIcon className="h-full w-full" /> },
-  { title: "4,8/5", body: "Plus de 2 000 avis vérifiés", icon: <StarIcon className="h-full w-full" /> },
-  { title: "Certifié GMP", body: "Fabrication aux normes qualité", icon: <CertifiedIcon className="h-full w-full" /> },
-];
+const badgeKeys = ["delivery", "payment", "refund", "rating", "certified"] as const;
 
 function DeliveryIcon({ className }: { className?: string }) {
   return (
@@ -68,19 +63,29 @@ function CertifiedIcon({ className }: { className?: string }) {
   );
 }
 
+const badgeIcons: Record<(typeof badgeKeys)[number], React.ReactNode> = {
+  delivery: <DeliveryIcon className="h-full w-full" />,
+  payment: <PaymentIcon className="h-full w-full" />,
+  refund: <RefundIcon className="h-full w-full" />,
+  rating: <StarIcon className="h-full w-full" />,
+  certified: <CertifiedIcon className="h-full w-full" />,
+};
+
 export function TrustBadges() {
+  const t = useTranslations("home.trustBadges");
+
   return (
     <section className="bg-pink-pale py-10 sm:py-20">
       <Container>
-        <div className="grid grid-cols-1 gap-y-6 sm:flex sm:flex-nowrap sm:items-center sm:gap-0 sm:divide-x sm:divide-ink/10">
-          {badges.map((badge) => (
-            <div key={badge.title} className="flex items-center gap-3 sm:flex-1 sm:justify-center sm:px-4">
+        <div className="grid grid-cols-1 gap-y-6 sm:flex sm:flex-nowrap sm:items-center sm:gap-0 sm:divide-x sm:divide-ink/10 rtl:sm:divide-x-reverse">
+          {badgeKeys.map((key) => (
+            <div key={key} className="flex items-center gap-3 sm:flex-1 sm:justify-center sm:px-4">
               <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full bg-white text-rose">
-                <span className="flex h-6 w-6 items-center justify-center">{badge.icon}</span>
+                <span className="flex h-6 w-6 items-center justify-center">{badgeIcons[key]}</span>
               </div>
               <div>
-                <p className="text-sm font-semibold text-ink">{badge.title}</p>
-                <p className="text-xs text-ink/60">{badge.body}</p>
+                <p className="text-sm font-semibold text-ink">{t(`${key}.title`)}</p>
+                <p className="text-xs text-ink/60">{t(`${key}.body`)}</p>
               </div>
             </div>
           ))}

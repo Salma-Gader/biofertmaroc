@@ -1,9 +1,11 @@
-import Link from "next/link";
+import { useTranslations } from "next-intl";
+import { Link } from "@/i18n/navigation";
 import { Container } from "@/components/ui/Container";
 import { NewsletterForm } from "./NewsletterForm";
 import { footerNav, siteConfig } from "@/lib/site-config";
 import { WhatsAppIcon, FacebookIcon, InstagramIcon } from "@/components/ui/Icons";
 import { PaymentLogos } from "@/components/ui/PaymentLogos";
+import type { NavLink } from "@/lib/types";
 
 const socialLinks = [
   { label: "WhatsApp", href: "https://wa.me/", Icon: WhatsAppIcon },
@@ -14,9 +16,11 @@ const socialLinks = [
 function FooterColumn({
   title,
   links,
+  labels,
 }: {
   title: string;
-  links: { label: string; href: string }[];
+  links: NavLink[];
+  labels: (key: string) => string;
 }) {
   return (
     <div>
@@ -25,12 +29,12 @@ function FooterColumn({
       </h3>
       <ul className="flex flex-col gap-2.5">
         {links.map((link) => (
-          <li key={link.href}>
+          <li key={link.key}>
             <Link
               href={link.href}
               className="text-sm text-ink hover:underline underline-offset-4"
             >
-              {link.label}
+              {labels(link.key)}
             </Link>
           </li>
         ))}
@@ -40,6 +44,12 @@ function FooterColumn({
 }
 
 export function Footer() {
+  const t = useTranslations("footer");
+  const shopLabels = useTranslations("footer.shopLinks");
+  const companyLabels = useTranslations("footer.companyLinks");
+  const helpLabels = useTranslations("footer.helpLinks");
+  const legalLabels = useTranslations("footer.legalLinks");
+
   return (
     <footer className="relative overflow-hidden bg-pink-pale text-ink">
       <Container className="relative z-10 py-14 sm:py-16">
@@ -47,26 +57,24 @@ export function Footer() {
           className="mb-12 flex flex-col items-start gap-6 rounded-3xl bg-pink-light/40 p-6 sm:flex-row sm:items-center sm:justify-between sm:p-10"
         >
           <div>
-            <h2 className="font-display text-2xl font-medium">Rejoignez la newsletter</h2>
-            <p className="mt-1 text-sm text-ink">
-              Des conseils fertilité, pour elle et pour lui, directement dans votre boîte mail.
-            </p>
+            <h2 className="font-display text-2xl font-medium">{t("newsletterTitle")}</h2>
+            <p className="mt-1 text-sm text-ink">{t("newsletterBody")}</p>
           </div>
           <NewsletterForm />
         </div>
 
         <div className="grid grid-cols-2 gap-8 sm:grid-cols-4">
-          <FooterColumn title="Nos Produits" links={footerNav.shop} />
-          <FooterColumn title="À propos" links={footerNav.company} />
-          <FooterColumn title="Aide" links={footerNav.help} />
+          <FooterColumn title={t("columns.shop")} links={footerNav.shop} labels={shopLabels} />
+          <FooterColumn title={t("columns.company")} links={footerNav.company} labels={companyLabels} />
+          <FooterColumn title={t("columns.help")} links={footerNav.help} labels={helpLabels} />
           <div>
             <h3 className="mb-4 text-xs font-semibold uppercase tracking-wide text-ink">
-              Contact
+              {t("columns.contact")}
             </h3>
             <address className="not-italic text-sm leading-relaxed text-ink">
-              123 Avenue Wellness
+              {t("addressLine1")}
               <br />
-              Casablanca, Maroc
+              {t("addressLine2")}
               <br />
               <a href="mailto:hello@biofertmaroc.com" className="hover:underline underline-offset-4">
                 hello@biofertmaroc.com
@@ -93,11 +101,11 @@ export function Footer() {
         <div className="mt-12 flex flex-col gap-4 border-t border-ink/10 pt-6 sm:flex-row sm:items-center sm:justify-between">
           <div className="flex flex-wrap gap-3 text-xs text-ink">
             {footerNav.legal.map((link) => (
-              <Link key={link.href} href={link.href} className="hover:text-ink hover:underline underline-offset-4">
-                {link.label}
+              <Link key={link.key} href={link.href} className="hover:text-ink hover:underline underline-offset-4">
+                {legalLabels(link.key)}
               </Link>
             ))}
-            <span>&copy; {new Date().getFullYear()} {siteConfig.name}. Tous droits réservés.</span>
+            <span>&copy; {new Date().getFullYear()} {siteConfig.name}. {t("rightsReserved")}</span>
           </div>
           <PaymentLogos />
         </div>
@@ -105,7 +113,8 @@ export function Footer() {
 
       <span
         aria-hidden="true"
-        className="pointer-events-none absolute top-10 right-0 select-none whitespace-nowrap text-[28vw] font-semibold leading-none text-ink/5 sm:text-[16rem]"
+        dir="ltr"
+        className="pointer-events-none absolute top-10 end-0 select-none whitespace-nowrap text-[28vw] font-semibold leading-none text-ink/5 sm:text-[16rem]"
         style={{
           fontFamily: "var(--font-logo)",
           fontVariationSettings: '"SOFT" 60, "WONK" 0, "opsz" 144',

@@ -1,6 +1,7 @@
 "use client";
 
-import Link from "next/link";
+import { useTranslations } from "next-intl";
+import { Link } from "@/i18n/navigation";
 import { useState } from "react";
 import { CloseXIcon, ChevronDownIcon } from "@/components/ui/Icons";
 import { Button } from "@/components/ui/Button";
@@ -17,10 +18,15 @@ export function MobileNav({
   isOpen: boolean;
   onClose: () => void;
 }) {
+  const t = useTranslations("header");
+  const navT = useTranslations("mobileNav");
+  const megaMenuT = useTranslations("nav.megaMenu");
+  const momentsT = useTranslations("nav.moments");
+  const resourcesT = useTranslations("nav.resources");
   const [openSection, setOpenSection] = useState<string | null>(null);
 
-  const toggle = (label: string) =>
-    setOpenSection((prev) => (prev === label ? null : label));
+  const toggle = (key: string) =>
+    setOpenSection((prev) => (prev === key ? null : key));
 
   return (
     <>
@@ -34,76 +40,76 @@ export function MobileNav({
       <div
         role="dialog"
         aria-modal="true"
-        aria-label="Navigation du site"
-        className={`fixed left-0 top-0 z-[81] h-full w-full max-w-sm overflow-y-auto bg-white transition-transform duration-300 lg:hidden ${
-          isOpen ? "translate-x-0" : "-translate-x-full"
+        aria-label={navT("ariaLabel")}
+        className={`fixed start-0 top-0 z-[81] h-full w-full max-w-sm overflow-y-auto bg-white transition-transform duration-300 lg:hidden ${
+          isOpen ? "translate-x-0" : "-translate-x-full rtl:translate-x-full"
         }`}
       >
         <div className="flex items-center justify-between border-b border-ink/10 px-5 py-4">
-          <span className="font-display text-lg font-semibold">Menu</span>
-          <button onClick={onClose} aria-label="Fermer le menu" className="rounded-full p-2 hover:bg-cream">
+          <span className="font-display text-lg font-semibold">{navT("title")}</span>
+          <button onClick={onClose} aria-label={t("closeMenu")} className="rounded-full p-2 hover:bg-cream">
             <CloseXIcon />
           </button>
         </div>
 
         <nav className="flex flex-col gap-1 p-5">
           <MobileSection
-            label="Nos Produits"
-            open={openSection === "Nos Produits"}
-            onToggle={() => toggle("Nos Produits")}
+            label={t("nosProduits")}
+            open={openSection === "products"}
+            onToggle={() => toggle("products")}
           >
             {productMegaMenu.map((category) => (
               <Link
-                key={category.href}
+                key={category.key}
                 href={category.href}
                 onClick={onClose}
                 className="block py-2 text-sm text-ink/80"
               >
-                {category.label}
+                {megaMenuT(`${category.key}.label`)}
               </Link>
             ))}
           </MobileSection>
 
           <MobileSection
-            label="Moments de Vie"
-            open={openSection === "Moments de Vie"}
-            onToggle={() => toggle("Moments de Vie")}
+            label={t("momentsDeVie")}
+            open={openSection === "moments"}
+            onToggle={() => toggle("moments")}
           >
             {momentTiles.map((tile) => (
               <Link
-                key={tile.href}
+                key={tile.key}
                 href={tile.href}
                 onClick={onClose}
                 className="block py-2 text-sm text-ink/80"
               >
-                {tile.label}
+                {momentsT(tile.key)}
               </Link>
             ))}
           </MobileSection>
 
           <MobileSection
-            label="Ressources"
-            open={openSection === "Ressources"}
-            onToggle={() => toggle("Ressources")}
+            label={t("ressources")}
+            open={openSection === "resources"}
+            onToggle={() => toggle("resources")}
           >
             {resourcesMenu.map((link) => (
               <Link
-                key={link.href}
+                key={link.key}
                 href={link.href}
                 onClick={onClose}
                 className="block py-2 text-sm text-ink/80"
               >
-                {link.label}
+                {resourcesT(link.key)}
               </Link>
             ))}
           </MobileSection>
 
           <div className="mt-4 flex flex-col gap-3">
             <Button href="/quiz" variant="primary" size="md" onClick={onClose}>
-              Bilan personnalisé
+              {t("bilanPersonnalise")}
             </Button>
             <Button href="/collections/best-sellers" variant="accent" size="md" onClick={onClose}>
-              Promo −50%
+              {t("promo")}
             </Button>
           </div>
         </nav>
@@ -135,7 +141,7 @@ function MobileSection({
           className={`transition-transform duration-200 ${open ? "rotate-180" : ""}`}
         />
       </button>
-      {open && <div className="pb-3 pl-2">{children}</div>}
+      {open && <div className="pb-3 ps-2">{children}</div>}
     </div>
   );
 }

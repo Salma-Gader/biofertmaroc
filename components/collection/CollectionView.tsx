@@ -1,5 +1,6 @@
 "use client";
 
+import { useTranslations } from "next-intl";
 import { useMemo, useState } from "react";
 import { FilterBar } from "./FilterBar";
 import { ProductGrid } from "@/components/product/ProductGrid";
@@ -8,6 +9,7 @@ import type { Product } from "@/lib/types";
 type SortKey = "featured" | "price-asc" | "price-desc" | "rating";
 
 export function CollectionView({ products }: { products: Product[] }) {
+  const t = useTranslations("collection");
   const [activeUseCase, setActiveUseCase] = useState<string | null>(null);
   const [sort, setSort] = useState<SortKey>("featured");
 
@@ -48,7 +50,7 @@ export function CollectionView({ products }: { products: Product[] }) {
           <ProductGrid products={filtered} />
         ) : (
           <p className="py-16 text-center text-sm text-ink/60">
-            Aucun produit ne correspond à ce filtre.
+            {t("noResults")}
           </p>
         )}
       </div>

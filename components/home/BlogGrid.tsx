@@ -1,28 +1,35 @@
 "use client";
 
+import { useLocale, useTranslations } from "next-intl";
 import { useRef } from "react";
 import { Container } from "@/components/ui/Container";
 import { Heading } from "@/components/ui/Heading";
 import { Button } from "@/components/ui/Button";
 import { ArrowIcon } from "@/components/ui/Icons";
 import { BlogPostCard } from "@/components/blog/BlogPostCard";
-import { blogPosts } from "@/lib/mock-data";
+import { getBlogPosts } from "@/lib/mock-data";
+import type { Locale } from "@/i18n/routing";
 
 export function BlogGrid() {
+  const t = useTranslations("home.blogGrid");
+  const locale = useLocale() as Locale;
+  const blogPosts = getBlogPosts(locale);
   const scrollerRef = useRef<HTMLDivElement>(null);
 
-  const scrollBy = (direction: "left" | "right") => {
+  const scrollBy = (direction: "prev" | "next") => {
     const el = scrollerRef.current;
     if (!el) return;
     const amount = el.clientWidth * 0.8;
-    el.scrollBy({ left: direction === "left" ? -amount : amount, behavior: "smooth" });
+    const rtl = getComputedStyle(el).direction === "rtl";
+    const sign = direction === "prev" ? -1 : 1;
+    el.scrollBy({ left: (rtl ? -sign : sign) * amount, behavior: "smooth" });
   };
 
   return (
     <section className="bg-white py-10 sm:py-20">
       <Container>
         <Heading size="section" className="mb-10 text-center">
-          Nos Guides Essentiels
+          {t("title")}
         </Heading>
         <div className="relative">
           <div
@@ -38,26 +45,26 @@ export function BlogGrid() {
 
           <button
             type="button"
-            onClick={() => scrollBy("left")}
-            aria-label="Guides précédents"
-            className="absolute left-0 top-[38%] z-10 hidden -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full border border-ink/10 bg-white shadow-md hover:bg-ink hover:text-cream lg:flex"
+            onClick={() => scrollBy("prev")}
+            aria-label={t("previous")}
+            className="absolute start-0 top-[38%] z-10 hidden -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full border border-ink/10 bg-white shadow-md hover:bg-ink hover:text-cream lg:flex rtl:translate-x-1/2"
             style={{ width: 44, height: 44 }}
           >
-            <ArrowIcon direction="left" />
+            <ArrowIcon direction="prev" />
           </button>
           <button
             type="button"
-            onClick={() => scrollBy("right")}
-            aria-label="Guides suivants"
-            className="absolute right-0 top-[38%] z-10 hidden -translate-y-1/2 translate-x-1/2 items-center justify-center rounded-full border border-ink/10 bg-white shadow-md hover:bg-ink hover:text-cream lg:flex"
+            onClick={() => scrollBy("next")}
+            aria-label={t("next")}
+            className="absolute end-0 top-[38%] z-10 hidden -translate-y-1/2 translate-x-1/2 items-center justify-center rounded-full border border-ink/10 bg-white shadow-md hover:bg-ink hover:text-cream lg:flex rtl:-translate-x-1/2"
             style={{ width: 44, height: 44 }}
           >
-            <ArrowIcon />
+            <ArrowIcon direction="next" />
           </button>
         </div>
         <div className="mt-10 flex justify-center">
           <Button href="/blog" variant="outline">
-            Voir tous les guides
+            {t("viewAll")}
           </Button>
         </div>
       </Container>

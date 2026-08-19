@@ -1,6 +1,7 @@
 export function Logo({ className = "" }: { className?: string }) {
   return (
     <span
+      dir="ltr"
       className={`whitespace-nowrap ${className}`}
       style={{
         fontFamily: "var(--font-logo)",
