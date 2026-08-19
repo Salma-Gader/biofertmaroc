@@ -72,7 +72,7 @@ export function Header({ featuredProducts }: { featuredProducts: Product[] }) {
 
   return (
     <header ref={headerRef} className="sticky top-0 z-50 border-b border-ink/10 bg-white px-4 sm:px-6 md:px-10 lg:px-16 xl:px-24">
-      <div className="relative mx-auto flex w-full max-w-none items-center justify-between gap-4 px-2 py-6 sm:px-3 sm:py-6">
+      <div className="relative mx-auto grid w-full max-w-none grid-cols-[1fr_auto_1fr] items-center gap-2 px-2 py-6 sm:gap-4 sm:px-3 sm:py-6">
         {/* Start cluster */}
         <div className="flex items-center gap-1">
           <button
@@ -119,7 +119,9 @@ export function Header({ featuredProducts }: { featuredProducts: Product[] }) {
           </nav>
         </div>
 
-        {/* Center logo — absolutely centered on the header, independent of left/right content widths */}
+        {/* Center logo — its own grid column, so the side clusters can never
+            overlap it: on narrow screens a wide cluster grows its own
+            track instead of encroaching on the logo's. */}
         <Link
           href="/"
           onClick={(e) => {
@@ -128,13 +130,13 @@ export function Header({ featuredProducts }: { featuredProducts: Product[] }) {
               window.location.reload();
             }
           }}
-          className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2"
+          className="justify-self-center"
         >
-          <Logo className="text-xl sm:text-2xl lg:text-3xl 2xl:text-4xl" />
+          <Logo className="text-base sm:text-xl lg:text-2xl 2xl:text-4xl" />
         </Link>
 
         {/* End cluster */}
-        <div className="flex items-center gap-1 sm:gap-2">
+        <div className="flex items-center justify-end gap-1 sm:gap-2">
           <Suspense fallback={null}>
             <LanguageSwitcher />
           </Suspense>
