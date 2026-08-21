@@ -12,6 +12,9 @@ interface HeroSlide {
   primaryCtaHref: string;
   secondaryCtaHref: string;
   image: string;
+  mobileImage: string;
+  /** Mobile-only text theme, chosen per slide to match how light/dark its mobileImage is. */
+  mobileTextTheme: "dark" | "light";
   badge?: string;
 }
 
@@ -22,6 +25,8 @@ const slides: HeroSlide[] = [
     primaryCtaHref: "/products/bellafert",
     secondaryCtaHref: "/products/fertimen",
     image: "/header/ChatGPT Image 13 أغسطس 2026، 01_35_55 م (3).png",
+    mobileImage: "/placeholders/IMG_6764.PNG",
+    mobileTextTheme: "dark",
     badge: "-50%",
   },
   {
@@ -30,6 +35,8 @@ const slides: HeroSlide[] = [
     primaryCtaHref: "/products/pack-couple",
     secondaryCtaHref: "/products/pack-couple",
     image: "/header/ChatGPT Image 13 أغسطس 2026، 01_47_10 م.png",
+    mobileImage: "/placeholders/IMG_6761 (2).PNG",
+    mobileTextTheme: "light",
   },
 ];
 
@@ -79,13 +86,26 @@ export function Hero() {
     <section className="relative h-[calc(100dvh-7.5rem)] w-full overflow-hidden">
       {slides.map((s, i) => (
         <Image
+          key={`${s.id}-mobile`}
+          src={s.mobileImage}
+          alt=""
+          fill
+          priority={i === 0}
+          sizes="100vw"
+          className={`object-cover transition-opacity duration-700 ease-in-out motion-reduce:transition-none sm:hidden ${
+            i === index ? "opacity-100" : "opacity-0"
+          }`}
+        />
+      ))}
+      {slides.map((s, i) => (
+        <Image
           key={s.id}
           src={s.image}
           alt=""
           fill
           priority={i === 0}
           sizes="100vw"
-          className={`object-cover transition-opacity duration-700 ease-in-out motion-reduce:transition-none ${
+          className={`hidden object-cover transition-opacity duration-700 ease-in-out motion-reduce:transition-none sm:block ${
             i === index ? "opacity-100" : "opacity-0"
           }`}
         />
@@ -112,12 +132,22 @@ export function Hero() {
           row to ltr pins the child to the left unconditionally, matching
           the fixed left/right composition of the source images in every
           locale. */}
-      <div dir="ltr" className="relative flex h-full items-center">
+      <div dir="ltr" className="relative flex h-full items-start pt-24 sm:items-center sm:pt-0">
         <div className="ml-20 mr-5 flex max-w-lg flex-col items-start gap-5 sm:ml-24 sm:mr-10 lg:ml-28 lg:mr-16">
-          <h1 className="font-display text-[2.25rem] font-medium leading-[1.08] text-white sm:text-[3rem] lg:text-[3.5rem]">
+          <h1
+            className={`font-display text-[2.25rem] font-medium leading-[1.08] sm:text-[3rem] sm:text-white lg:text-[3.5rem] ${
+              slide.mobileTextTheme === "dark" ? "text-ink" : "text-white"
+            }`}
+          >
             {t(`${slide.messageKey}.title`)}
           </h1>
-          <p className="text-base text-white/90">{t(`${slide.messageKey}.description`)}</p>
+          <p
+            className={`text-base sm:text-white/90 ${
+              slide.mobileTextTheme === "dark" ? "text-ink/80" : "text-white/90"
+            }`}
+          >
+            {t(`${slide.messageKey}.description`)}
+          </p>
           <div className="flex flex-wrap items-center gap-3">
             <HeroPillButton href={slide.primaryCtaHref} variant="accent">
               {t(`${slide.messageKey}.primaryCta`)}
