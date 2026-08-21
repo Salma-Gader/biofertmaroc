@@ -35,7 +35,7 @@ const slides: HeroSlide[] = [
     primaryCtaHref: "/products/pack-couple",
     secondaryCtaHref: "/products/pack-couple",
     image: "/header/ChatGPT Image 13 أغسطس 2026، 01_47_10 م.png",
-    mobileImage: "/placeholders/IMG_6763 (1).PNG",
+    mobileImage: "/placeholders/IMG_6761 (2).PNG",
     mobileTextTheme: "light",
   },
 ];
