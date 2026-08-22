@@ -158,20 +158,6 @@ export function CartDrawer() {
 
         {lines.length > 0 && (
           <div className="border-t border-ink/10 px-5 py-4">
-            <label htmlFor="promo-code" className="sr-only">
-              {t("promoCodeLabel")}
-            </label>
-            <div className="mb-4 flex gap-2">
-              <input
-                id="promo-code"
-                type="text"
-                placeholder={t("promoCodePlaceholder")}
-                className="flex-1 rounded-full border border-ink/20 px-4 py-2 text-sm focus-visible:outline-2 focus-visible:outline-navy"
-              />
-              <Button variant="outline" size="sm">
-                {t("apply")}
-              </Button>
-            </div>
             <div className="mb-4 flex items-center justify-between text-sm">
               <span className="text-ink/60">{t("subtotal")}</span>
               <span className="font-semibold">
